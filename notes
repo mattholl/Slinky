@@ -1,0 +1,21 @@
+black circles expanding outwards
+
+notes
+put together 
+
+https://github.com/jsantell/dancer.js
+and rings moving out
+
+create a number of beat listeners at range of frequenceies
+when a beat fires it's depth in space  -or from beat on until beat off
+ - use polar coordinate system - radius contantly incresing through time
+ 	mock up a 2d version first
+
+
+_____fluid ripples
+incorporate this
+https://github.com/corbanbrook/dsp.js/
+
+to crate solid ripples over the interacting rings from differnet points
+loci = frequencyies - mapped to 2d x = frequeency, y = amplitude / volume?
+this plane can be move in 3d by the user, use mouse movement delta - touch interface
