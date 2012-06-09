@@ -1,4 +1,5 @@
 http://media.io/
+Note: For Gecko to play audio, the server must serve the file using the correct MIME type.
 black circles expanding outwards
 
 notes
@@ -6,6 +7,14 @@ put together
 
 https://github.com/jsantell/dancer.js
 and rings moving out
+
+create Responder object
+	each beat has a responder object
+	create when beat on
+	draw function increase radius and fill black
+	when beat off (fnarr) fill with white - no need to construct shape cos it'll wipe out others
+	needs to detect if it's off screen and delete
+
 
 create a number of beat listeners at range of frequenceies
 when a beat fires it's depth in space  -or from beat on until beat off
