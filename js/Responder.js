@@ -5,15 +5,19 @@
 	// needs to detect if it's off screen and delete
 	// 
 //params 
-function Responder(freq) {
+function Responder(freq, birth, centre) {
 	//needs drawing functions
 	//needs to know how deep
 	//	difference between radii of two circles
 	//
 	//
-	this.radius = 0;
+	this.outerRadius = 0;
+	this.innerRadius = 0;
 	this.frequency = freq;
-	this.freqInc = 0;
+	this.freqInc = 1;
+	this.onBeatT = birth;
+	this.offBeatT = 0;
+	this.centre = centre;
 }
 
 Responder.prototype.update = function() {
@@ -27,11 +31,33 @@ Responder.prototype.update = function() {
 	//
 	//the rate that the radius increases is proportional to the frequency
 	//also correlate to shade
-	this.radius += 1;
+	this.outerRadius += this.freqInc;
+
+	//var elapsed = this.onBeatT - this.offBeatT;
+	if(this.offBeatT > 0) {
+		this.innerRadius += this.freqInc;
+	}
 }
 
-Responder.prototype.render = function() {
+Responder.prototype.display = function() {
 	//use compoiting methods
 	//https://developer.mozilla.org/en/Canvas_tutorial/Compositing
-	console.log(this.radius)
+	//console.log(this.outerRadius - this.innerRadius);
+	//
+	ctx.save();
+
+	ctx.beginPath();
+	ctx.arc(this.centre.x, this.centre.y, this.outerRadius, 0, 2*Math.PI);
+	ctx.fillStyle = '#d4b3c2';
+	ctx.fill();
+
+	ctx.globalCompositeOperation = 'destination-out';
+
+	ctx.beginPath();
+	ctx.arc(this.centre.x, this.centre.y, this.innerRadius, 0, 2*Math.PI);
+	ctx.fillStyle = '#b64400';
+	ctx.fill();
+
+	ctx.restore();
+	
 }
