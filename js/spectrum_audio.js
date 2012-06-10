@@ -4,7 +4,8 @@ var dancer,
  
 
 
-dancer = new Dancer("http://webdev/canvas/2d/beat_ring_2d/assets//S_P_A_C_E_S_Apologies.ogg");
+//dancer = new Dancer("http://webdev/canvas/2d/beat_ring_2d/assets//S_P_A_C_E_S_Apologies.ogg");
+dancer = new Dancer("http://webdev/canvas/2d/beat_ring_2d/assets/15670Hz.ogg");
 
 dancer.playing = false;
 

@@ -5,14 +5,15 @@
 	// needs to detect if it's off screen and delete
 	// 
 //params 
-function Responder() {
+function Responder(freq) {
 	//needs drawing functions
 	//needs to know how deep
 	//	difference between radii of two circles
 	//
 	//
 	this.radius = 0;
-	
+	this.frequency = freq;
+	this.freqInc = 0;
 }
 
 Responder.prototype.update = function() {
@@ -23,6 +24,9 @@ Responder.prototype.update = function() {
 	//draw in between these
 	//
 	//check if we're still on the screen if not
+	//
+	//the rate that the radius increases is proportional to the frequency
+	//also correlate to shade
 	this.radius += 1;
 }
 

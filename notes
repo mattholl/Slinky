@@ -5,8 +5,31 @@ black circles expanding outwards
 notes
 put together 
 
+email to dave...
+
 https://github.com/jsantell/dancer.js
 and rings moving out
+
+
+spectrum
+freq  - corresonds to 
+20Hz  - 0 (~inaudible)
+70Hz  ~ 1.7
+120Hz - 3
+170Hz - 4 
+220Hz - 5
+270Hz ~ 5.9
+320Hz - 7.5
+370Hz - 9.3
+420Hz ~ 9.9
+
+2070Hz - 48
+15670Hz - 364
+
+
+globalCompositeOperation = type
+destination-out
+https://developer.mozilla.org/samples/canvas-tutorial/6_1_canvas_composite.html
 
 create Responder object
 	each beat has a responder object

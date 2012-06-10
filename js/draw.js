@@ -6,6 +6,13 @@ var canvas,
 	beats = [];
 
 
+
+// var resp = new Responder(6);
+//     console.log(resp);
+
+//     resp.update();
+// 	console.log(resp);
+
 function setup() {
 	//use dom emthods to attach the canvas to the page
 	canvas = document.getElementById("dancer");
@@ -20,22 +27,32 @@ function setup() {
 
     dancer = new Dancer("http://webdev/canvas/2d/beat_ring_2d/assets//S_P_A_C_E_S_Apologies.ogg");
     dancer.playing = false;
+
+
     //each time beat fires we'll need a new responder....
 
 	// frequency the frequency (element of the spectrum) to check for a spike. Can be a single frequency (number) or a range (2 element array) that uses the frequency with highest amplitude. Default: [ 0, 10 ]
+	//	12kHz - 20,000 kHz = human hearing range
 	// threshold the minimum amplitude of the frequency range in order for a beat to occur. Default: 0.3
 	// decay the rate that the previously registered beat's amplitude is reduced by on every frame. Default: 0.02
 	// onBeat the callback to be called when a beat is detected.
 	// offBeat the callback to be called when there is no beat on the current frame.
 
     beats[0] = dancer.createBeat({
-		frequency : [2, 100],
+    	//intro clap 209Hz
+		frequency : [4,5],
+		threshold : 0.1,
 		onBeat : function() {
 			//create new responder give it params
-			responders.push() = new Responder();
+			var responder = new Responder([4,5]);
+			//this.responder = responder;
+			console.log(this);
+
+			responders.push(responder);
 			//do something with this.responder
 			// console.log();
 			//return responder;
+			console.log('clap');
 		},
 		offBeat : function() {
 			//set off on the responder...
@@ -44,12 +61,37 @@ function setup() {
 		}
 	});
 
-    console.log(beats);
+    // beats[0].responder = new Responder([0,2]);
+    // responders.push(new Responder([0,2]));
 
-    console.log(responders);
+
+ //    beats[1] = dancer.createBeat({
+ //    	//main bass kick?
+	// 	frequency : [0,2], //1.7 50Hz
+	// 	threshold : 0.3,
+
+	// 	onBeat : function() {
+	// 		console.log(this);
+	// 		//console.log('kick');
+	// 	},
+	// 	offBeat : function() {
+	// 		//set off on the responder...
+	// 		//no need to destry the responder detroys itself once offscreen after onBeat
+	// 		//and offBeat have given it its start and end points it doesn't need it any more
+	// 	}
+	// });
+
+    // beats[1].responder = new Responder([0,2]);
+    // responders.push(new Responder([0,2]));
+
+    //console.log(beats);
+
+    //console.log(responders);
 
     beats[0].on();
+    // beats[1].on();
 
+    console.log(beats);
     //set up array of frequencies to respond to with respective params
     //loop to create beats array 
     //loop to call on() on every beat
@@ -61,7 +103,7 @@ function setup() {
     draw();
 }
 
-
+//use audacity to calibrate my hearing to the numbers in Hz jHz? 1Hz = 1 cycle per second?
 //http://creativejs.com/resources/requestanimationframe/
 var fps = 15;
 function draw() {
@@ -70,8 +112,12 @@ function draw() {
 
     setTimeout(function() {
         requestAnimationFrame(draw);
-        //beats[0].responder.update();
-		//beats[0].responder.render();
+
+        if(responders[0] === 'undefined') {
+        	responders[0].update();
+			responders[0].render();	
+        }
+        
     }, 1000 / fps);
 }
 
