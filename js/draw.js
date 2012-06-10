@@ -45,38 +45,22 @@ function setup() {
 
 	responders.clapBeat = [];
 
+	//intro clap 209Hz
     beats[0] = dancer.createBeat({
-    	//intro clap 209Hz
 		frequency : [4,5],
 		threshold : 0.1,
 		onBeat : function() {
-			//create new responder give it params
-			//(frequency, open)
+			//create new responder give it params (frequency, time canvas centre)
 			var responder = new Responder([4,5], Date.now(), centre);
 			responders.clapBeat.push(responder);
-
-			//create responder
-			//responder.clapBeat = []
-			//responder.clapBeat.open == true
-
-			//responders.push(responder);
-			//do something with this.responder
-			// console.log();
-			//return responder;
+			//console.log(responder);
 			//console.log('clap');
 			
 		},
 		offBeat : function() {
 			//how do we access the same responder!?!?!!?
-			//
-			//set off on the responder...
-			//no need to destry the responder detroys itself once offscreen after onBeat
-			//and offBeat have given it its start and end points it doesn't need it any more
-			
-			//create some sort of key to the responder - there won't be more than one responder for each beat at a time
-			//the responder draws and fills until it's innerRadius is set
-			//
-			//find responders.clapBeat.open === true - set innerRadius and set open to false
+			//pub/sub pattern to update same responder
+
 			for (var i = responders.clapBeat.length - 1; i >= 0; i--) {
 				if(responders.clapBeat[i].offBeatT === 0) {
 					responders.clapBeat[i].offBeatT = Date.now();
@@ -146,31 +130,42 @@ function draw() {
 
 
         //update each responder
+        // if(responders.clapBeat.length !== 0) {
+        // 	for (var i = responders.clapBeat.length - 1; i >= 0; i--) {
+        // 		responders.clapBeat[i].update();
+        // 		responders.clapBeat[i].display();
+        // 	};
+        // }
+
+
         if(responders.clapBeat.length !== 0) {
-        	for (var i = responders.clapBeat.length - 1; i >= 0; i--) {
+        	for (var i =  0; i < responders.clapBeat.length; i++) {
         		responders.clapBeat[i].update();
-        	};
-        }
-
-        if(responders.bass.length !== 0) {
-        	for (var i = responders.bass.length - 1; i >= 0; i--) {
-        		responders.bass[i].update();
-        	};
-        }
-
-        //display each responder
-        //put into the same loops as above
-        if(responders.clapBeat.length !== 0) {
-        	for (var i = responders.clapBeat.length - 1; i >= 0; i--) {
         		responders.clapBeat[i].display();
         	};
         }
 
+
         if(responders.bass.length !== 0) {
-        	for (var i = responders.bass.length - 1; i >= 0; i--) {
+        	for (var i =  0; i < responders.bass.length; i++) {
+        		responders.bass[i].update();
         		responders.bass[i].display();
         	};
         }
+
+        // //display each responder
+        // //put into the same loops as above
+        // if(responders.clapBeat.length !== 0) {
+        // 	for (var i = responders.clapBeat.length - 1; i >= 0; i--) {
+        		
+        // 	};
+        // }
+
+        // if(responders.bass.length !== 0) {
+        // 	for (var i = responders.bass.length - 1; i >= 0; i--) {
+        		
+        // 	};
+        // }
 
         //check if radius > screen.width / height - whicecher greater
         //if so remove from the array

@@ -17,6 +17,7 @@ function Responder(freq, birth, centre) {
 	this.freqInc = 1;
 	this.onBeatT = birth;
 	this.offBeatT = 0;
+	this.innerRadSet = false;
 	this.centre = centre;
 }
 
@@ -34,8 +35,14 @@ Responder.prototype.update = function() {
 	this.outerRadius += this.freqInc;
 
 	//var elapsed = this.onBeatT - this.offBeatT;
-	if(this.offBeatT > 0) {
+	//gets called every time - only first time needed to set innerRadius
+	if(this.innerRadSet === true) {
 		this.innerRadius += this.freqInc;
+	}
+
+	if(this.offBeatT > 0) {
+		//this.innerRadius = this.offBeatT - this.onBeatT;
+		this.innerRadSet = true;
 	}
 }
 
