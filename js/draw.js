@@ -33,7 +33,7 @@ function setup() {
     dancer = new Dancer("http://webdev/canvas/2d/beat_ring_2d/assets//S_P_A_C_E_S_Apologies.ogg");
     dancer.playing = false;
 
-
+    dancer.responders();
     //each time beat fires we'll need a new responder....
 
 	// frequency the frequency (element of the spectrum) to check for a spike. Can be a single frequency (number) or a range (2 element array) that uses the frequency with highest amplitude. Default: [ 0, 10 ]
@@ -119,6 +119,7 @@ function setup() {
 
     beats[0].on();
     beats[1].on();
+    beats[2].on();
 
     //console.log(responders);
     //set up array of frequencies to respond to with respective params
