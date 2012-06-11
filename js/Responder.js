@@ -14,7 +14,7 @@ function Responder(freq, birth, centre) {
 	this.outerRadius = 0;
 	this.innerRadius = 0;
 	this.frequency = freq;
-	this.freqInc = 1;
+	this.radInc = 10 * 1/this.frequency[1];
 	this.onBeatT = birth;
 	this.offBeatT = 0;
 	this.innerRadSet = false;
@@ -32,12 +32,12 @@ Responder.prototype.update = function() {
 	//
 	//the rate that the radius increases is proportional to the frequency
 	//also correlate to shade
-	this.outerRadius += this.freqInc;
+	this.outerRadius += this.radInc;
 
 	//var elapsed = this.onBeatT - this.offBeatT;
 	//gets called every time - only first time needed to set innerRadius
 	if(this.innerRadSet === true) {
-		this.innerRadius += this.freqInc;
+		this.innerRadius += this.radInc;
 	}
 
 	if(this.offBeatT > 0) {

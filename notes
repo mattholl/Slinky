@@ -1,3 +1,6 @@
+need to refactor to use update function rather than letting the animation loop drive
+
+
 http://media.io/
 Note: For Gecko to play audio, the server must serve the file using the correct MIME type.
 black circles expanding outwards

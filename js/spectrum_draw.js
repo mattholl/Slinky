@@ -1,6 +1,7 @@
 //Globals
 var canvas,
-	ctx;
+	ctx,
+	dancer;
 
 
 function setup() {
@@ -10,11 +11,17 @@ function setup() {
 
 	canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    
-    playButton();
-    dumpSpectrumData();
 
-    draw();
+	dancer = new Dancer("http://webdev/canvas/2d/beat_ring_2d/assets//S_P_A_C_E_S_Apologies.ogg");
+	//dancer = new Dancer("http://webdev/canvas/2d/beat_ring_2d/assets/15670Hz.ogg");
+	dancer.fft(canvas, 2, 1);
+
+	dancer.playing = false;
+
+    playButton();
+    //dumpSpectrumData();
+
+    //draw();
 }
 
 
@@ -49,39 +56,42 @@ function playButton() {
 }
 
 
-function dumpSpectrumData() {
-	var spectrumDump = document.createElement("button");
-	var value = document.createTextNode("dump spectrum");
-	spectrumDump.appendChild(value);
+// function dumpSpectrumData() {
+// 	var spectrumDump = document.createElement("button");
+// 	var value = document.createTextNode("dump spectrum");
+// 	spectrumDump.appendChild(value);
 
-	spectrumDump.style.position = "absolute";
-	spectrumDump.style.top = "0px";
-	spectrumDump.style.left = "100px";
+// 	spectrumDump.style.position = "absolute";
+// 	spectrumDump.style.top = "0px";
+// 	spectrumDump.style.left = "100px";
 
-	spectrumDump.onclick = function() {
-		console.log(dancer.getSpectrum());
-		return false;		
-	}
+// 	spectrumDump.onclick = function() {
+// 		console.log(dancer.getSpectrum());
+// 		return false;		
+// 	}
 
-	document.body.appendChild(spectrumDump);
-}
+// 	document.body.appendChild(spectrumDump);
+// }
 
 
 
 
 	
 	//http://creativejs.com/resources/requestanimationframe/
-var fps = 15;
-function draw() {
+// var fps = 15;
+// function draw() {
 
-	window.addEventListener('resize', setup, false);
+// 	window.addEventListener('resize', setup, false);
 
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
+// 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    setTimeout(function() {
-        requestAnimationFrame(draw);
-        // Drawing code goes here
-    }, 1000 / fps);
-}
+//     setTimeout(function() {
+//         requestAnimationFrame(draw);
+        
+
+
+
+//     }, 1000 / fps);
+// }
 
 window.onload = setup;

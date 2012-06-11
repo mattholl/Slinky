@@ -96,12 +96,26 @@ function setup() {
 		}
 	});
 
-    // beats[1].responder = new Responder([0,2]);
-    // responders.push(new Responder([0,2]));
 
-    //console.log(beats);
+    responders.high = [];
+    
+    beats[2] = dancer.createBeat({
+    	frequency : [10,20],
+    	threshold : 0.3,
 
-    //console.log(responders);
+    	onBeat : function() {
+			var responder = new Responder([0,2], Date.now(), centre);
+			responders.high.push(responder);
+			//console.log('bass');
+		},
+		offBeat : function() {
+			for (var i = responders.high.length - 1; i >= 0; i--) {
+				if(responders.high[i].offBeatT === 0) {
+					responders.high[i].offBeatT = Date.now();
+				}
+			};
+		}
+    });
 
     beats[0].on();
     beats[1].on();
@@ -150,6 +164,13 @@ function draw() {
         	for (var i =  0; i < responders.bass.length; i++) {
         		responders.bass[i].update();
         		responders.bass[i].display();
+        	};
+        }
+
+        if(responders.high.length !== 0) {
+        	for (var i =  0; i < responders.high.length; i++) {
+        		responders.high[i].update();
+        		responders.high[i].display();
         	};
         }
 
