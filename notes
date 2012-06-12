@@ -1,5 +1,15 @@
-need to refactor to use update function rather than letting the animation loop drive
+1. stabilise using update function
+	1. get the right frequencies
+	2. make sure responders are removed
+	3. get the rate of movement right - lower frequencies slower
+2. use three.js - no need to even use 3d... just canvas?
 
+	
+
+
+
+need to refactor to use update function rather than letting the animation loop drive
+should be easy to let three.js handle the canvas drawing and cpu handle calculations
 
 http://media.io/
 Note: For Gecko to play audio, the server must serve the file using the correct MIME type.

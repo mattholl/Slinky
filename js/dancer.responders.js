@@ -8,7 +8,12 @@
   Dancer.addPlugin( 'responders', function() {
    
     this.bind( 'update', function() {
-      console.log('update');
+      if(responders.clapBeat.length !== 0) {
+        	for (var i =  0; i < responders.clapBeat.length; i++) {
+        		responders.clapBeat[i].update();
+        		responders.clapBeat[i].display();
+        	};
+        }
     });
 
     return this;

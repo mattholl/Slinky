@@ -130,38 +130,22 @@ function setup() {
     
 
     playButton();
-    draw();
+    //draw();
 }
 
-//use audacity to calibrate my hearing to the numbers in Hz jHz? 1Hz = 1 cycle per second?
-//http://creativejs.com/resources/requestanimationframe/
-var fps = 15;
-function draw() {
+Dancer.addPlugin( 'responders', function() {
 
-	window.addEventListener('resize', setup, false);
+	this.bind( 'update', function() {
+	    
+	    //update and display
+	    if(responders.clapBeat.length !== 0) {
+	    	for (var i =  0; i < responders.clapBeat.length; i++) {
+	    		responders.clapBeat[i].update();
+	    		responders.clapBeat[i].display();
+	    	};
+	    }
 
-    //setTimeout(function() {
-        requestAnimationFrame(draw);
-
-
-        //update each responder
-        // if(responders.clapBeat.length !== 0) {
-        // 	for (var i = responders.clapBeat.length - 1; i >= 0; i--) {
-        // 		responders.clapBeat[i].update();
-        // 		responders.clapBeat[i].display();
-        // 	};
-        // }
-
-
-        if(responders.clapBeat.length !== 0) {
-        	for (var i =  0; i < responders.clapBeat.length; i++) {
-        		responders.clapBeat[i].update();
-        		responders.clapBeat[i].display();
-        	};
-        }
-
-
-        if(responders.bass.length !== 0) {
+	    if(responders.bass.length !== 0) {
         	for (var i =  0; i < responders.bass.length; i++) {
         		responders.bass[i].update();
         		responders.bass[i].display();
@@ -175,27 +159,11 @@ function draw() {
         	};
         }
 
-        // //display each responder
-        // //put into the same loops as above
-        // if(responders.clapBeat.length !== 0) {
-        // 	for (var i = responders.clapBeat.length - 1; i >= 0; i--) {
-        		
-        // 	};
-        // }
-
-        // if(responders.bass.length !== 0) {
-        // 	for (var i = responders.bass.length - 1; i >= 0; i--) {
-        		
-        // 	};
-        // }
-
-        //check if radius > screen.width / height - whicecher greater
-        //if so remove from the array
+        //remove 
         if(responders.clapBeat.length !== 0) {
 	        for (var i = responders.clapBeat.length-1; i >= 0; i--) {
 	    		if (responders.clapBeat[i].innerRadius > canvas.width) {
 	        		responders.clapBeat.splice(i, 1);
-	        		break;
 	    		}
 	    	}
     	}
@@ -204,24 +172,15 @@ function draw() {
 			for (var i = responders.bass.length-1; i >= 0; i--) {
 	    		if (responders.bass[i].innerRadius > canvas.width) {
 	        		responders.bass.splice(i, 1);
-	        		break;
 	    		}
 	    	} 
-    	}	
-}
+    	}
 
 
-        
+	});
 
-   //      if(responders[0] === 'undefined') {
-   //      	responders[0].update();
-			// responders[0].render();	
-   //      }
 
-        //console.log(beats);
-        
-    //}, 1000 / fps);
-//}
+});
 
 window.onload = setup;
 

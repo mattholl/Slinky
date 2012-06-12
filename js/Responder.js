@@ -4,6 +4,8 @@
 	// when beat off (fnarr) fill with white - no need to construct shape cos it'll wipe out others
 	// needs to detect if it's off screen and delete
 	// 
+	// colour is proportional to frequency
+	// rate of movement is proportional to frequency
 //params 
 function Responder(freq, birth, centre) {
 	//needs drawing functions
@@ -14,7 +16,7 @@ function Responder(freq, birth, centre) {
 	this.outerRadius = 0;
 	this.innerRadius = 0;
 	this.frequency = freq;
-	this.radInc = 10 * 1/this.frequency[1];
+	this.radInc = 2 * this.frequency[1];
 	this.onBeatT = birth;
 	this.offBeatT = 0;
 	this.innerRadSet = false;
