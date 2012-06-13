@@ -51,7 +51,7 @@ function setup() {
 		threshold : 0.1,
 		onBeat : function() {
 			//create new responder give it params (frequency, time canvas centre)
-			var responder = new Responder([4,5], Date.now(), centre);
+			var responder = new Responder(10, [4,5], Date.now(), centre, '#d4b3c2');
 			responders.clapBeat.push(responder);
 			//console.log(responder);
 			//console.log('clap');
@@ -80,10 +80,10 @@ function setup() {
     beats[1] = dancer.createBeat({
     	//main bass kick?
 		frequency : [0,2], //1.7 50Hz
-		threshold : 0.3,
+		threshold : 0.4,
 
 		onBeat : function() {
-			var responder = new Responder([0,2], Date.now(), centre);
+			var responder = new Responder(2, [0,2], Date.now(), centre, '#000000');
 			responders.bass.push(responder);
 			//console.log('bass');
 		},
@@ -97,29 +97,29 @@ function setup() {
 	});
 
 
-    responders.high = [];
+  //   responders.high = [];
     
-    beats[2] = dancer.createBeat({
-    	frequency : [10,20],
-    	threshold : 0.3,
+  //   beats[2] = dancer.createBeat({
+  //   	frequency : [10,20],
+  //   	threshold : 0.3,
 
-    	onBeat : function() {
-			var responder = new Responder([0,2], Date.now(), centre);
-			responders.high.push(responder);
-			//console.log('bass');
-		},
-		offBeat : function() {
-			for (var i = responders.high.length - 1; i >= 0; i--) {
-				if(responders.high[i].offBeatT === 0) {
-					responders.high[i].offBeatT = Date.now();
-				}
-			};
-		}
-    });
+  //   	onBeat : function() {
+		// 	var responder = new Responder([0,2], Date.now(), centre);
+		// 	responders.high.push(responder);
+		// 	//console.log('bass');
+		// },
+		// offBeat : function() {
+		// 	for (var i = responders.high.length - 1; i >= 0; i--) {
+		// 		if(responders.high[i].offBeatT === 0) {
+		// 			responders.high[i].offBeatT = Date.now();
+		// 		}
+		// 	};
+		// }
+  //   });
 
     beats[0].on();
     beats[1].on();
-    beats[2].on();
+//    beats[2].on();
 
     //console.log(responders);
     //set up array of frequencies to respond to with respective params
@@ -152,12 +152,12 @@ Dancer.addPlugin( 'responders', function() {
         	};
         }
 
-        if(responders.high.length !== 0) {
-        	for (var i =  0; i < responders.high.length; i++) {
-        		responders.high[i].update();
-        		responders.high[i].display();
-        	};
-        }
+        // if(responders.high.length !== 0) {
+        // 	for (var i =  0; i < responders.high.length; i++) {
+        // 		responders.high[i].update();
+        // 		responders.high[i].display();
+        // 	};
+        // }
 
         //remove 
         if(responders.clapBeat.length !== 0) {

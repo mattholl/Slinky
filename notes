@@ -5,8 +5,8 @@
 2. use three.js - no need to even use 3d... just canvas?
 
 	
-
-
+http://www.scribd.com/doc/96778128/20120610-A-Movement-in-3-Parts-1-Shock-Awe-2-Algorithm-Critique-3-The-New-Aesthetic-And-Its-Discontents-Marius-Watz-Eyeo-2012
+https://github.com/jsantell/dancer.js
 
 need to refactor to use update function rather than letting the animation loop drive
 should be easy to let three.js handle the canvas drawing and cpu handle calculations

@@ -7,7 +7,7 @@
 	// colour is proportional to frequency
 	// rate of movement is proportional to frequency
 //params 
-function Responder(freq, birth, centre) {
+function Responder(radiusIncrement, freq, birth, centre, colour) {
 	//needs drawing functions
 	//needs to know how deep
 	//	difference between radii of two circles
@@ -16,11 +16,12 @@ function Responder(freq, birth, centre) {
 	this.outerRadius = 0;
 	this.innerRadius = 0;
 	this.frequency = freq;
-	this.radInc = 2 * this.frequency[1];
+	this.radInc = radiusIncrement;
 	this.onBeatT = birth;
 	this.offBeatT = 0;
 	this.innerRadSet = false;
 	this.centre = centre;
+	this.colour = colour;
 }
 
 Responder.prototype.update = function() {
@@ -57,14 +58,14 @@ Responder.prototype.display = function() {
 
 	ctx.beginPath();
 	ctx.arc(this.centre.x, this.centre.y, this.outerRadius, 0, 2*Math.PI);
-	ctx.fillStyle = '#d4b3c2';
+	ctx.fillStyle = this.colour;
 	ctx.fill();
 
 	ctx.globalCompositeOperation = 'destination-out';
 
 	ctx.beginPath();
 	ctx.arc(this.centre.x, this.centre.y, this.innerRadius, 0, 2*Math.PI);
-	ctx.fillStyle = '#b64400';
+	//ctx.fillStyle = '#b64400';
 	ctx.fill();
 
 	ctx.restore();
