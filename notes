@@ -1,8 +1,18 @@
+build mouse rotation around x axis and easing etc.
+csg.js to create ring shape
+create responders objects - create geometry and mesh/material within constructor - same way of looping thru update func?
+
 1. stabilise using update function
 	1. get the right frequencies
 	2. make sure responders are removed
 	3. get the rate of movement right - lower frequencies slower
 2. use three.js - no need to even use 3d... just canvas?
+
+
+use easing equations to accelerate radius towards the edges
+limit mouse movement - easing also to view above and below
+csg.js to create ring shape
+
 
 	
 http://www.scribd.com/doc/96778128/20120610-A-Movement-in-3-Parts-1-Shock-Awe-2-Algorithm-Critique-3-The-New-Aesthetic-And-Its-Discontents-Marius-Watz-Eyeo-2012

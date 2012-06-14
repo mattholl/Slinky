@@ -13,14 +13,18 @@ var canvas,
 //     resp.update();
 // 	console.log(resp);
 
+
 function setup() {
 	//use dom emthods to attach the canvas to the page
-	canvas = document.getElementById("dancer");
-	ctx = canvas.getContext('2d');
+	
+	//canvas = document.getElementById("dancer");
+	//ctx = canvas.getContext('2d');
 
-	canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+	//canvas.width = window.innerWidth;
+    //canvas.height = window.innerHeight;
     
+
+
     var centre = {
     	x : window.innerWidth/2,
     	y : window.innerHeight/2
