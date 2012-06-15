@@ -1,8 +1,12 @@
 set up stats on mttholl.com before emailing the library guy - tweeting etc.
 	need to leave running for a while
+	http://wiki.openwebanalytics.com/index.php?title=Installation
 install node in server lab and snapshot from the control panel
 
 build mouse rotation around x axis and easing etc.
+		if we need to render within the draw loop do it in 
+		a worker so user can still rotate whilst it redraws
+		spawn one worker per cylinder
 	use orthogonal camera?
 	use easing equations to accelerate radius towards the edges
 	limit mouse movement - easing also to view above and below

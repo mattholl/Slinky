@@ -3,18 +3,17 @@ var cylinder,
 	mesh;
 
 function setup() {
-	cylinder = new THREE.CylinderGeometry(100, 100, 20, 20, 20, false );
+	cylinder = new THREE.CylinderGeometry(100, 100, 40, 40, 20, false );
 
 	material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );	
 
 	mesh = new THREE.Mesh( cylinder, material );
 	
 	scene.add( mesh );
-	
-	console.log(cylinder);
 
 	mesh.rotation.x = mesh.rotation.x += Math.PI/2;
 
+	console.log(cylinder);
 	draw();
 
 	//
@@ -23,8 +22,22 @@ function setup() {
 	//document.addEventListener( 'touchmove', onDocumentTouchMove, false );
 }
 
+function render() {
+	//resize the cylinder, add more segments
+	// cylinder = new THREE.CylinderGeometry(100, 100, 20, 20, 20, false );
 
-fps = 30;
+	// material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );	
+
+	// mesh = new THREE.Mesh( cylinder, material );
+	
+	// scene.add( mesh );
+	
+	//scene.add( mesh );
+}
+
+
+
+fps = 12;
 var draw = function() {
 	setTimeout(function() {
 		requestAnimationFrame(draw);
@@ -33,34 +46,37 @@ var draw = function() {
 
 		//mesh.rotation.y = mesh.rotation.y += ( targetRotation - mesh.rotation.y ) * 0.05;
 		mesh.rotation.x = mesh.rotation.x += ( targetRotation - mesh.rotation.x ) * 0.05;
-		//mesh.scale.x = mesh.scale.x += 0.5;
-		//mesh.scale.z = mesh.scale.z += 0.5;
-	//	mesh.scale.y = mesh.scale.y -= 0.1;
+		mesh.scale.x = mesh.scale.x += 0.005;
+		mesh.scale.z = mesh.scale.z += 0.005;
+	  	//mesh.scale.y = mesh.scale.y -= 0.04;
 
-		window.addEventListener('resize', setup, false);
+	  	render();
+		
 
 		renderer.render( scene, camera );
 
 	}, 1000/fps);
 }
 
+window.addEventListener('resize', setup, false);
 window.onload = setup;
 
+
+
 function onDocumentMouseDown( event ) {
-console.log(event);
 		event.preventDefault();
 
 		document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 		document.addEventListener( 'mouseup', onDocumentMouseUp, false );
 		document.addEventListener( 'mouseout', onDocumentMouseOut, false );
 
-		mouseXOnMouseDown = event.clientX - windowHalfX;
+		mouseYOnMouseDown = event.clientY - windowHalfY;
 		targetRotationOnMouseDown = targetRotation;
 	}
 
 	function onDocumentMouseMove( event ) {
-		mouseX = event.clientX - windowHalfX;
-		targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.05;
+		mouseY = event.clientY - windowHalfY;
+		targetRotation = targetRotationOnMouseDown + ( mouseY - mouseYOnMouseDown ) * 0.05;
 	}
 
 	function onDocumentMouseUp( event ) {
