@@ -1,19 +1,37 @@
+set up stats on mttholl.com before emailing the library guy - tweeting etc.
+	need to leave running for a while
+install node in server lab and snapshot from the control panel
+
 build mouse rotation around x axis and easing etc.
-csg.js to create ring shape
-create responders objects - create geometry and mesh/material within constructor - same way of looping thru update func?
+	use orthogonal camera?
+	use easing equations to accelerate radius towards the edges
+	limit mouse movement - easing also to view above and below
+set up beat pulsing rather than continuous rings
+	remember easing again
+	vary pulse rate and fallback rate to frequency ie. bas tones die away slower
 
-1. stabilise using update function
-	1. get the right frequencies
-	2. make sure responders are removed
-	3. get the rate of movement right - lower frequencies slower
-2. use three.js - no need to even use 3d... just canvas?
+layered in y axis different colours
+port this to 2d
 
+upload
 
-use easing equations to accelerate radius towards the edges
-limit mouse movement - easing also to view above and below
-csg.js to create ring shape
+this can make it more general, choose specific frequency ranges rather than tailoring to the track
+intergrate with flash - integrate with soundcloud!
+http://developers.soundcloud.com/docs/custom-player#
 
+...........
 
+get files server side with node - process and send the data to the browser, web workers and Sockets
+of course compare data sizes and transfer rates -automate
+
+another version - instead of expanding the shape beyond the screen - just pulse it to the beat
+decrement the scale continously over time / again easing, faster at first then slower
+ramp up the scale on a beat (eased) - saves destroying and creating lots of objects......
+
+chrome experiements
+github
+
+so in a 2d canvas verions use overlapping different colors
 	
 http://www.scribd.com/doc/96778128/20120610-A-Movement-in-3-Parts-1-Shock-Awe-2-Algorithm-Critique-3-The-New-Aesthetic-And-Its-Discontents-Marius-Watz-Eyeo-2012
 https://github.com/jsantell/dancer.js
@@ -75,3 +93,9 @@ https://github.com/corbanbrook/dsp.js/
 to crate solid ripples over the interacting rings from differnet points
 loci = frequencyies - mapped to 2d x = frequeency, y = amplitude / volume?
 this plane can be move in 3d by the user, use mouse movement delta - touch interface
+
+analysing visual layout of code - visual semantics - double space blocks, comment length and position
+keep all dom calls in one file, keep all server interaction in another - set up filesysstem connections, use local file storage in the browser
+
+deliver chunks of data - sections of the track, packets a 32 bit float array indexes 0 to 20,
+cut copy deliver, store to send again if required, trigger an event to the browser -listner in the browser responds by getting ready to receive the data, setting up the required data structures
