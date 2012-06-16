@@ -32,6 +32,7 @@ function setup() {
 	// onBeat the callback to be called when a beat is detected.
 	// offBeat the callback to be called when there is no beat on the current frame.
 
+	//so pass in here values that we're going to use to increase scale when beat fires and rate at which to shrink it
 	responders.clap = new Responder();
 
 	//intro clap 209Hz
@@ -39,39 +40,29 @@ function setup() {
 		frequency : [4,5],
 		threshold : 0.1,
 		onBeat : function() {
-			
-			//start increasing the scale transform on the Responder object
+			//start increasing the scale transform on the Responder object for this beat frequency
 			responders.clap.scale = true;
-			
 		},
 		offBeat : function() {
-			//stop incrasing scale
+			//stop increasing scale, allow damping to take effect
 			responders.clap.scale = false;
 		}
 	});
 	
-
     beats.clap.on();
-
 }
 
 Dancer.addPlugin( 'render', function() {
 
 	this.bind( 'update', function() {
 	    
-	    //cylinders created in setup
-	    //
-	    //here we need to do drawing?
-	    
-	    //loop through responders and call update func to keep scaling
+	    //do the scaling update for each responder - takes care of the values set by the beat
 	    responders.clap.update();
 
+	    //use mouse / touch rotation around axis
 	    container.rotation.x = container.rotation.x += ( targetRotation - container.rotation.x ) * 0.05;
 		renderer.render( scene, camera );
-
-
 	});
-
 
 });
 

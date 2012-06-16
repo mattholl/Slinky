@@ -6,24 +6,30 @@ install node in server lab and snapshot from the control panel
 build mouse rotation around x axis and easing etc.
 		put dancer in a worker?
 		spawn one worker per cylinder?
-	use easing equations to accelerate radius towards the edges
-	limit mouse movement - easing also to view above and below
-
+	
+	
 set up beat pulsing rather than continuous rings
-	remember easing again
-	so scale factor needs to be increased and fall away to -ve val
 	vary pulse rate and fallback rate to frequency ie. bas tones die away slower
 
 pause stops music but not render loop
 	means having an anim loop not tied to Dancer update callback
 
+put update into request animframe - but needs to run to keep to music
+
 layered in y axis different colours
+solid rather than just wireframe
 
 upload
 
 this can make it more general, choose specific frequency ranges rather than tailoring to the track
 intergrate with flash - integrate with soundcloud!
 http://developers.soundcloud.com/docs/custom-player#
+
+deliver chunks of data - sections of the track, packets a 32 bit float array indexes 0 to 20,
+cut copy deliver, store to send again if required, trigger an event to the browser -listner in the browser responds by getting ready to receive the data, setting up the required data structures
+
+chrome experiements
+github
 
 ...........
 
@@ -34,33 +40,15 @@ https://github.com/ofmlabs/aurora.js/wiki/Getting-Started
 get files server side with node - process and send the data to the browser, web workers and Sockets
 of course compare data sizes and transfer rates -automate
 
-another version - instead of expanding the shape beyond the screen - just pulse it to the beat
-decrement the scale continously over time / again easing, faster at first then slower
-ramp up the scale on a beat (eased) - saves destroying and creating lots of objects......
-
-chrome experiements
-github
-
-so in a 2d canvas verions use overlapping different colors
 	
 http://www.scribd.com/doc/96778128/20120610-A-Movement-in-3-Parts-1-Shock-Awe-2-Algorithm-Critique-3-The-New-Aesthetic-And-Its-Discontents-Marius-Watz-Eyeo-2012
 https://github.com/jsantell/dancer.js
-
-need to refactor to use update function rather than letting the animation loop drive
-should be easy to let three.js handle the canvas drawing and cpu handle calculations
 
 http://media.io/
 Note: For Gecko to play audio, the server must serve the file using the correct MIME type.
 black circles expanding outwards
 
-notes
-put together 
-
-email to dave...
-
 https://github.com/jsantell/dancer.js
-and rings moving out
-
 
 spectrum
 freq  - corresonds to 
@@ -77,23 +65,6 @@ freq  - corresonds to
 2070Hz - 48
 15670Hz - 364
 
-
-globalCompositeOperation = type
-destination-out
-https://developer.mozilla.org/samples/canvas-tutorial/6_1_canvas_composite.html
-
-create Responder object
-	each beat has a responder object
-	create when beat on
-	draw function increase radius and fill black
-	when beat off (fnarr) fill with white - no need to construct shape cos it'll wipe out others
-	needs to detect if it's off screen and delete
-
-
-create a number of beat listeners at range of frequenceies
-when a beat fires it's depth in space  -or from beat on until beat off
- - use polar coordinate system - radius contantly incresing through time
- 	mock up a 2d version first
 
 
 _____fluid ripples
@@ -118,9 +89,7 @@ run animate loop - call render()
 	change camera position - move mesh around
 	tell the renderer to render the changes - the function render is called in the anim loop
 	
-incorporate this
-https://github.com/corbanbrook/dsp.js/
-
+__________
 to crate solid ripples over the interacting rings from differnet points
 loci = frequencyies - mapped to 2d x = frequeency, y = amplitude / volume?
 this plane can be move in 3d by the user, use mouse movement delta - touch interface
@@ -128,5 +97,3 @@ this plane can be move in 3d by the user, use mouse movement delta - touch inter
 analysing visual layout of code - visual semantics - double space blocks, comment length and position
 keep all dom calls in one file, keep all server interaction in another - set up filesysstem connections, use local file storage in the browser
 
-deliver chunks of data - sections of the track, packets a 32 bit float array indexes 0 to 20,
-cut copy deliver, store to send again if required, trigger an event to the browser -listner in the browser responds by getting ready to receive the data, setting up the required data structures
