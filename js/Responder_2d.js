@@ -7,8 +7,12 @@
 	// colour is proportional to frequency
 	// rate of movement is proportional to frequency
 //params 
-function Responder(radiusIncrement, freq, birth, colour) {
-
+function Responder(radiusIncrement, freq, birth, centre, colour) {
+	//needs drawing functions
+	//needs to know how deep
+	//	difference between radii of two circles
+	//
+	//
 	this.outerRadius = 0;
 	this.innerRadius = 0;
 	this.frequency = freq;
@@ -16,14 +20,8 @@ function Responder(radiusIncrement, freq, birth, colour) {
 	this.onBeatT = birth;
 	this.offBeatT = 0;
 	this.innerRadSet = false;
-	this.centre = {
-		x : windowHalfX,
-		y : windowHalfY
-	};
+	this.centre = centre;
 	this.colour = colour;
-
-	//needs
-	//to create mesh / geometry etc.
 }
 
 Responder.prototype.update = function() {

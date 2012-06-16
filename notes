@@ -4,14 +4,14 @@ set up stats on mttholl.com before emailing the library guy - tweeting etc.
 install node in server lab and snapshot from the control panel
 
 build mouse rotation around x axis and easing etc.
-		if we need to render within the draw loop do it in 
-		a worker so user can still rotate whilst it redraws
-		spawn one worker per cylinder
-	use orthogonal camera?
+		put dancer in a worker?
+		spawn one worker per cylinder?
 	use easing equations to accelerate radius towards the edges
 	limit mouse movement - easing also to view above and below
+
 set up beat pulsing rather than continuous rings
 	remember easing again
+	so scale factor needs to be increased and fall away to -ve val
 	vary pulse rate and fallback rate to frequency ie. bas tones die away slower
 
 layered in y axis different colours
