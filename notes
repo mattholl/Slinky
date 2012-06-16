@@ -25,6 +25,10 @@ http://developers.soundcloud.com/docs/custom-player#
 
 ...........
 
+http://creativejs.com/resources/web-audio-api-getting-started/
+http://labs.official.fm/articles/2012/06/15/flac-and-aurora/
+https://github.com/ofmlabs/aurora.js/wiki/Getting-Started
+
 get files server side with node - process and send the data to the browser, web workers and Sockets
 of course compare data sizes and transfer rates -automate
 
