@@ -1,4 +1,6 @@
-//Globals
+/**
+ * all sorts of bits munged together by @mttholl
+ */
 var container,
 	dancer,
 	beats = {},
