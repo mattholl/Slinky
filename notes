@@ -14,8 +14,10 @@ set up beat pulsing rather than continuous rings
 	so scale factor needs to be increased and fall away to -ve val
 	vary pulse rate and fallback rate to frequency ie. bas tones die away slower
 
+pause stops music but not render loop
+	means having an anim loop not tied to Dancer update callback
+
 layered in y axis different colours
-port this to 2d
 
 upload
 

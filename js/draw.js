@@ -39,15 +39,14 @@ function setup() {
 		frequency : [4,5],
 		threshold : 0.1,
 		onBeat : function() {
-			//create new responder give it params (frequency, time canvas centre)
-			//var responder = new Responder(10, [4,5], Date.now(), '#d4b3c2');
-			//console.log('beat');
-			responders.clap.update();	
+			
 			//start increasing the scale transform on the Responder object
+			responders.clap.scale = true;
+			
 		},
 		offBeat : function() {
 			//stop incrasing scale
-
+			responders.clap.scale = false;
 		}
 	});
 	
@@ -64,6 +63,9 @@ Dancer.addPlugin( 'render', function() {
 	    //
 	    //here we need to do drawing?
 	    
+	    //loop through responders and call update func to keep scaling
+	    responders.clap.update();
+
 	    container.rotation.x = container.rotation.x += ( targetRotation - container.rotation.x ) * 0.05;
 		renderer.render( scene, camera );
 
