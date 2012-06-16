@@ -95,6 +95,27 @@ when a beat fires it's depth in space  -or from beat on until beat off
 
 
 _____fluid ripples
+1. create flat doughnut torus
+	
+
+init funtion flow
+
+create scene
+create camera
+add camera to scene
+
+create geometry for shape
+create material for the shape - texture?
+create a mesh from the geometry and the material
+add the mesh to the scene
+
+create a renderer
+add the renderer to the document
+
+run animate loop - call render()
+	change camera position - move mesh around
+	tell the renderer to render the changes - the function render is called in the anim loop
+	
 incorporate this
 https://github.com/corbanbrook/dsp.js/
 
