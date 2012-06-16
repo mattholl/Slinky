@@ -5,13 +5,11 @@ install node in server lab and snapshot from the control panel
 do backup
 install node local
 
-add stats
-
-build mouse rotation around x axis and easing etc.
-		put dancer in a worker?
-		spawn one worker per cylinder?
+add stats to update
+set up owa
 	
 set up beat pulsing rather than continuous rings
+	add other frequencies
 	vary pulse rate and fallback rate to frequency ie. bas tones die away slower
 
 pause stops music but not render loop
