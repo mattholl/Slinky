@@ -1,8 +1,7 @@
 function Responder() {
 
-	this.scale = false;
-	this.scaleVal = 0.05;
-	
+	this.doScale = false;
+	this.scaleVal = 0;
 
 	/**
 	 * create mesh and add to render
@@ -14,19 +13,12 @@ function Responder() {
 	this.mesh = new THREE.Mesh( this.geometry, this.material );
 
 	container.add(this.mesh);
-
-
-	//needs
-	//to create mesh / geometry etc.
-	//func to update scaling - whilst beat is on
-	//func to do scale back over time
-	//
 }
 
 Responder.prototype.update = function() {
 	
 	//scale constantly reducing on update - pass factor to scale scale by in to constructor - ie lower for lower freq
-	if(this.scale) {
+	if(this.doScale === true) {
 		//set scaleVal once to greater than 
 		this.incScale();
 	}
@@ -39,16 +31,11 @@ Responder.prototype.update = function() {
 }
 
 Responder.prototype.incScale = function() {
-	//this.scaleVal = this.scaleVal += ( 0 + this.scaleVal ) * 0.5;
 	this.scaleVal = this.scaleVal += 1.5;
-	
 }
 
 Responder.prototype.dampScale = function () {
-	//the greater scaleVal is the quicker we need to fall back
-	//this.scaleVal = this.scaleVal += ( 0 - this.scaleVal ) * 0.5;
-	// this.scaleVal = this.scaleVal -= 0.01;
-	//
+	//return the scale values for the mesh to 1 - rate varies depending on frequency
 	this.mesh.scale.x = this.mesh.scale.x += ( 1 - this.mesh.scale.x ) * 0.05;
 	this.mesh.scale.z = this.mesh.scale.z += ( 1 - this.mesh.scale.z ) * 0.05;
 	this.scaleVal = 0;

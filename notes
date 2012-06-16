@@ -7,7 +7,6 @@ build mouse rotation around x axis and easing etc.
 		put dancer in a worker?
 		spawn one worker per cylinder?
 	
-	
 set up beat pulsing rather than continuous rings
 	vary pulse rate and fallback rate to frequency ie. bas tones die away slower
 

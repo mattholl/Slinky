@@ -41,11 +41,11 @@ function setup() {
 		threshold : 0.1,
 		onBeat : function() {
 			//start increasing the scale transform on the Responder object for this beat frequency
-			responders.clap.scale = true;
+			responders.clap.doScale = true;
 		},
 		offBeat : function() {
 			//stop increasing scale, allow damping to take effect
-			responders.clap.scale = false;
+			responders.clap.doScale = false;
 		}
 	});
 	
