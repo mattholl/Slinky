@@ -6,27 +6,36 @@
 	// 
 	// colour is proportional to frequency
 	// rate of movement is proportional to frequency
-//params 
-function Responder(radiusIncrement, freq, birth, colour) {
+//old params: radiusIncrement, freq, birth, colour
+function Responder() {
 
-	this.outerRadius = 0;
-	this.innerRadius = 0;
-	this.frequency = freq;
-	this.radInc = radiusIncrement;
-	this.onBeatT = birth;
-	this.offBeatT = 0;
-	this.innerRadSet = false;
-	this.centre = {
-		x : windowHalfX,
-		y : windowHalfY
-	};
-	this.colour = colour;
+	//new THREE.CylinderGeometry(radiusTop, radiusBottom, segmentsRadius, segmentsHeight, openEnded)
+	this.geometry = new THREE.CylinderGeometry(100, 100, 10, 40, false );
+	this.material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );	
+
+	this.mesh = new THREE.Mesh( this.geometry, this.material );
+
+	container.add(this.mesh);
+	// this.outerRadius = 0;
+	// this.innerRadius = 0;
+	// this.frequency = freq;
+	// this.radInc = radiusIncrement;
+	// this.onBeatT = birth;
+	// this.offBeatT = 0;
+	// this.innerRadSet = false;
+	// this.centre = {
+	// 	x : windowHalfX,
+	// 	y : windowHalfY
+	// };
+	// this.colour = colour;
 
 	//needs
 	//to create mesh / geometry etc.
 }
 
 Responder.prototype.update = function() {
+	console.log('update');
+
 	//as we tick through animate keep the circle growing outwards
 	//it's depth based on how long between beat fireing and stopping
 	//radius of first circle - increment in this function - stared when beat fires
@@ -37,18 +46,19 @@ Responder.prototype.update = function() {
 	//
 	//the rate that the radius increases is proportional to the frequency
 	//also correlate to shade
-	this.outerRadius += this.radInc;
+	
+	//this.outerRadius += this.radInc;
 
 	//var elapsed = this.onBeatT - this.offBeatT;
 	//gets called every time - only first time needed to set innerRadius
-	if(this.innerRadSet === true) {
-		this.innerRadius += this.radInc;
-	}
+	// if(this.innerRadSet === true) {
+	// 	this.innerRadius += this.radInc;
+	// }
 
-	if(this.offBeatT > 0) {
-		//this.innerRadius = this.offBeatT - this.onBeatT;
-		this.innerRadSet = true;
-	}
+	// if(this.offBeatT > 0) {
+	// 	//this.innerRadius = this.offBeatT - this.onBeatT;
+	// 	this.innerRadSet = true;
+	// }
 }
 
 Responder.prototype.display = function() {

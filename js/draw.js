@@ -1,11 +1,24 @@
 //Globals
-var canvas,
-	ctx,
+var container,
 	dancer,
-	beats = {};
+	beats = {},
+	responders = {};
 
 function setup() {
+	/**
+	 * THREE.js 
+	 */
+	
+	//dummy container to add the beat responders to 
+	container = new THREE.Object3D();
+	scene.add(container);
+	
+	//start it off with a little rotation - implies interaction to viewer
+	container.rotation.x = container.rotation.x += Math.PI/2;
 
+	/**
+	 * Dancer setup
+	 */
     dancer = new Dancer("http://webdev/canvas/2d/beat_ring_2d/assets//S_P_A_C_E_S_Apologies.ogg");
     dancer.playing = false;
 
@@ -19,6 +32,7 @@ function setup() {
 	// onBeat the callback to be called when a beat is detected.
 	// offBeat the callback to be called when there is no beat on the current frame.
 
+	responders.clap = new Responder();
 
 	//intro clap 209Hz
     beats.clap = dancer.createBeat({
@@ -27,7 +41,8 @@ function setup() {
 		onBeat : function() {
 			//create new responder give it params (frequency, time canvas centre)
 			//var responder = new Responder(10, [4,5], Date.now(), '#d4b3c2');
-			console.log('beat');		
+			//console.log('beat');
+			responders.clap.update();	
 			//start increasing the scale transform on the Responder object
 		},
 		offBeat : function() {
@@ -48,7 +63,8 @@ Dancer.addPlugin( 'render', function() {
 	    //cylinders created in setup
 	    //
 	    //here we need to do drawing?
-	    //dummy.rotation.x = dummy.rotation.x += ( targetRotation - dummy.rotation.x ) * 0.05;
+	    
+	    container.rotation.x = container.rotation.x += ( targetRotation - container.rotation.x ) * 0.05;
 		renderer.render( scene, camera );
 
 
