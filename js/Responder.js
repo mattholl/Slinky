@@ -1,7 +1,7 @@
 function Responder() {
 
 	this.scale = false;
-	this.scaleVal = 0;
+	this.scaleVal = 0.05;
 	
 
 	/**
@@ -27,23 +27,31 @@ Responder.prototype.update = function() {
 	
 	//scale constantly reducing on update - pass factor to scale scale by in to constructor - ie lower for lower freq
 	if(this.scale) {
+		//set scaleVal once to greater than 
 		this.incScale();
 	}
-	this.dampScale();
+	
 	//do the mesh scaling
-	this.mesh.scale.x = this.mesh.scale.x += this.scale;
-	this.mesh.scale.z = this.mesh.scale.z += this.scale;
+	this.mesh.scale.x = this.mesh.scale.x += this.scaleVal;
+	this.mesh.scale.z = this.mesh.scale.z += this.scaleVal;
 
+	this.dampScale();
 }
 
 Responder.prototype.incScale = function() {
-	
-	this.scaleVal += 0.1;
+	//this.scaleVal = this.scaleVal += ( 0 + this.scaleVal ) * 0.5;
+	this.scaleVal = this.scaleVal += 1.5;
 	
 }
 
 Responder.prototype.dampScale = function () {
-	this.scaleVal = this.scaleVal *= 0.5;
+	//the greater scaleVal is the quicker we need to fall back
+	//this.scaleVal = this.scaleVal += ( 0 - this.scaleVal ) * 0.5;
+	// this.scaleVal = this.scaleVal -= 0.01;
+	//
+	this.mesh.scale.x = this.mesh.scale.x += ( 1 - this.mesh.scale.x ) * 0.05;
+	this.mesh.scale.z = this.mesh.scale.z += ( 1 - this.mesh.scale.z ) * 0.05;
+	this.scaleVal = 0;
 }
 
 
