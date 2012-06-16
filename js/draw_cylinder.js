@@ -16,48 +16,25 @@ function setup() {
 	material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );	
 	mesh = new THREE.Mesh( cylinder, material );
 	
-	//mesh.matrix.translate(new THREE.Vector3(200, 20, 20));
-  	//console.log(mesh);
-  	//THREE.GeometryUtils.center( cylinder2 );
 	//https://github.com/mrdoob/three.js/issues/1593
+  	//a container object
   	dummy = new THREE.Object3D();
-	console.log(dummy);
 	scene.add(dummy);
 	
-
 	mesh2 = new THREE.Mesh( cylinder2, material );
+	//set position relative to dummy container
 	mesh2.position.setY(50);
 
-	//mesh2.position.set( -10,-22,-30 );
 	dummy.add( mesh2 );
-
-
-	//mesh2.geometry.applyMatrix( new THREE.Matrix4().translate( 0, 60, 0 ) );
-	//
-	//console.log(cylinder2);
-
-	
-	//mesh2.matrix.translate( new THREE.Vector3( 0, 2, 0 ) );
-	//mesh2.matrix.scale( new THREE.Vector3( 1, 1, 0.5 ) );
-	//mesh2.matrix.rotateX( 0.1 );
-	//mesh2.matrixAutoUpdate = false;
-	//mesh2.matrix.translate( new THREE.Vector3( 0, 60, 0 ) );
-	
-
-
-	
 
 	//mesh.rotation.x = mesh.rotation.x += Math.PI/2;
 	//mesh2.rotation.x = mesh2.rotation.x += Math.PI/2;
+	dummy.rotation.x = dummy.rotation.x += Math.PI/2;
 
 	//mesh2.position.x = mesh2.position.x += 100;
 	//mesh2.position.z = mesh2.position.z += 100;
 	
-
-	//mesh2.translate(1,0,0);
-	
-	console.log(new THREE.Matrix4());
-	scene.add( mesh );
+	dummy.add( mesh );
 	//scene.add(mesh2);
 	draw();
 
@@ -67,40 +44,19 @@ function setup() {
 	//document.addEventListener( 'touchmove', onDocumentTouchMove, false );
 }
 
-fps = 12;
+fps = 30;
 var draw = function() {
 	setTimeout(function() {
 		requestAnimationFrame(draw);
 		
-		
-
-		//mesh.rotation.y = mesh.rotation.y += ( targetRotation - mesh.rotation.y ) * 0.05;
-		mesh.rotation.x = mesh.rotation.x += ( targetRotation - mesh.rotation.x ) * 0.05;
-		
-
-		//need to scale by a vector rather than a float
-		
-		// mesh.scale.x = mesh.scale.x += 0.005;
-		// mesh.scale.z = mesh.scale.z += 0.005;
+		//mesh.scale.x = mesh.scale.x += 0.005;
+		//mesh.scale.z = mesh.scale.z += 0.005;
 	  	//mesh.scale.y = mesh.scale.y -= 0.04;
-	  	//setRotationFromEuler
-	  	//
-	  	//mesh2.position.setY(50);
-	  	//mesh2.matrix.rotateX( 0.1 );
 	  	
-	  	//mesh2.updateMatrix()
-	  	//need matrix transformation to rotate around world 0,0,0 rather than object centre...
+	  	//mesh2.scale.x = mesh2.scale.x += 0.005;
+		//mesh2.scale.z = mesh2.scale.z += 0.005;
 	  	
-	  	// var rotMatrix = new THREE.Matrix4();
-	  	// rotMatrix.makeRotationAxis
-
-	  	//mesh2.rotation.x = mesh2.rotation.x += ( targetRotation - mesh2.rotation.x ) * 0.05;
-		
 	  	dummy.rotation.x = dummy.rotation.x += ( targetRotation - dummy.rotation.x ) * 0.05;
-
-		// mesh2.scale.x = mesh2.scale.x += 0.005;
-		// mesh2.scale.z = mesh2.scale.z += 0.005;
-
 
 		renderer.render( scene, camera );
 
@@ -108,16 +64,7 @@ var draw = function() {
 }
 
 window.addEventListener('resize', setup, false);
-
-// window.addEventListener('keydown', functon(e) {
-
-// 		setup();
-
-// }, false);
-
 window.onload = setup;
-
-
 
 function onDocumentMouseDown( event ) {
 		event.preventDefault();
