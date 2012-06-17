@@ -7,14 +7,36 @@ function Responder(yPos) {
 	 * create mesh and add to render
 	 */
 	//new THREE.CylinderGeometry(radiusTop, radiusBottom, segmentsRadius, segmentsHeight, openEnded)
-	this.geometry = new THREE.CylinderGeometry(100, 100, 10, 40, false );
-	this.material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );	
+	//this.geometry = new THREE.CylinderGeometry(100, 100, 10, 40, false );
+	
+	//circle geometry
+	this.geometry = this.createCircle();
 
-	this.mesh = new THREE.Mesh( this.geometry, this.material );
+	//this.material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );	
+	this.material = new THREE.LineBasicMaterial({color: 0x0000ff});
 
+	//this.mesh = new THREE.Mesh( this.geometry, this.material );
+	this.line = new THREE.Line(this.geometry, this.material);
+	
 	//this.y = ;
-	this.mesh.position.y = 0 || yPos;
-	container.add(this.mesh);
+	this.line.position.z = 0 || yPos;
+	container.add(this.line);
+}
+
+Responder.prototype.createCircle = function() {
+	var radius = 100,
+		angleInc = 0.3,
+		geometry = new THREE.Geometry();
+
+	for(var angle = 0.0; angle < 2*Math.PI; angle += angleInc) {
+		geometry.vertices.push(new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius));
+	}
+
+	//geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
+	//geometry.computeFaceNormals();
+
+	return geometry;
+
 }
 
 Responder.prototype.update = function() {
@@ -25,8 +47,8 @@ Responder.prototype.update = function() {
 	}
 	
 	//do the mesh scaling
-	this.mesh.scale.x = this.mesh.scale.x += this.scaleVal;
-	this.mesh.scale.z = this.mesh.scale.z += this.scaleVal;
+	this.line.scale.x = this.line.scale.x += this.scaleVal;
+	this.line.scale.z = this.line.scale.z += this.scaleVal;
 
 	this.dampScale();
 }
@@ -37,8 +59,8 @@ Responder.prototype.incScale = function() {
 
 Responder.prototype.dampScale = function () {
 	//return the scale values for the mesh to 1 - rate varies depending on frequency
-	this.mesh.scale.x = this.mesh.scale.x += ( 1 - this.mesh.scale.x ) * 0.05;
-	this.mesh.scale.z = this.mesh.scale.z += ( 1 - this.mesh.scale.z ) * 0.05;
+	this.line.scale.x = this.line.scale.x += ( 1 - this.line.scale.x ) * 0.05;
+	this.line.scale.z = this.line.scale.z += ( 1 - this.line.scale.z ) * 0.05;
 	this.scaleVal = 0;
 }
 

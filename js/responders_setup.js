@@ -27,7 +27,7 @@ function createResponders () {
 	beats[0].on();
 
 	//70Hz
-	responders[1] = new Responder(10);
+	responders[1] = new Responder(20);
 
 	beats[1] = dancer.createBeat({
 		frequency : [1,2],
@@ -46,7 +46,7 @@ function createResponders () {
 	beats[1].on();
 
 	//120Hz
-	responders[2] = new Responder(20);
+	responders[2] = new Responder(40);
 
 	beats[2] = dancer.createBeat({
 		frequency : [2,3],
@@ -65,7 +65,7 @@ function createResponders () {
 	beats[2].on();
 
 	//170Hz
-	responders[3] = new Responder(30);
+	responders[3] = new Responder(60);
 
 	beats[3] = dancer.createBeat({
 		frequency : [3,4],
@@ -84,7 +84,7 @@ function createResponders () {
 	beats[3].on();
 
 	//220Hz
-	responders[4] = new Responder(40);
+	responders[4] = new Responder(80);
 
 	beats[4] = dancer.createBeat({
 		frequency : [4,5],
@@ -103,7 +103,7 @@ function createResponders () {
 	beats[4].on();
 
 	//270Hz
-	responders[5] = new Responder(50);
+	responders[5] = new Responder(1000);
 
 	beats[5] = dancer.createBeat({
 		frequency : [5,6],

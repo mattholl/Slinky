@@ -1,7 +1,14 @@
 	
+trying to change geometry to cirlces
+	try rotating camera around meshes rather than rotate meshes
+	or use a cirlce of particles
+
+first and last vertices not joined
+
 set up beat pulsing rather than continuous rings
 	add other frequencies
 	vary pulse rate and fallback rate to frequency ie. bas tones die away slower
+	use plane rather than cylinder
 
 pause stops music but not render loop
 	means having an anim loop not tied to Dancer update callback
