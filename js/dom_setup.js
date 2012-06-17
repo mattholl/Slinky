@@ -10,12 +10,12 @@ var camera,
 (function () {
 	scene = new THREE.Scene();
 
-	camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 10000 );
+	camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, 1, 10000 );
 	//camera = new THREE.OrthographicCamera( 0, 0, 0, 1, 10000 );
 	
 	//camera = new THREE.OrthographicCamera( SCREEN_WIDTH / - 2, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, SCREEN_HEIGHT / - 2, -10000, 10000 );
 
-	camera.position.z = 500;
+	camera.position.z = 700;
 	//camera.position.y = 200;
 	
 	scene.add( camera );

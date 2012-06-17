@@ -4,7 +4,9 @@
 var container,
 	dancer,
 	beats = {},
-	responders = {};
+	responders = {},
+
+	stats;
 
 function setup() {
 	/**
@@ -52,11 +54,25 @@ function setup() {
 	});
 	
     beats.clap.on();
+
+    /**
+     * set up stats
+     */
+    
+    stats = new Stats();
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.top = '0px';
+    stats.domElement.style.left = '300px';
+	document.body.appendChild( stats.domElement );
+	console.log(stats.domElement);
+	stats.setMode(2);
 }
 
 Dancer.addPlugin( 'render', function() {
 
 	this.bind( 'update', function() {
+	    
+	    stats.begin();
 	    
 	    //do the scaling update for each responder - takes care of the values set by the beat
 	    responders.clap.update();
@@ -64,6 +80,8 @@ Dancer.addPlugin( 'render', function() {
 	    //use mouse / touch rotation around axis
 	    container.rotation.x = container.rotation.x += ( targetRotation - container.rotation.x ) * 0.05;
 		renderer.render( scene, camera );
+
+		stats.end();
 	});
 
 });

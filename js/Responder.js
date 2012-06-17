@@ -11,7 +11,6 @@ function Responder() {
 	this.material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );	
 
 	this.mesh = new THREE.Mesh( this.geometry, this.material );
-
 	container.add(this.mesh);
 }
 
