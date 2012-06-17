@@ -26,6 +26,7 @@ function setup() {
 
     createResponders();
 
+
     //call dancer plugin function to render three.js renderer and deal with mouse rotation of the dummy container
     dancer.render();
 
@@ -60,8 +61,12 @@ Dancer.addPlugin( 'render', function() {
 	    
 	    //do the scaling update for each responder - takes care of the values set by the beat
 	    
-	    for(var freq in responders) {
-	    	responders[freq].update();
+	    // for(var freq in responders) {
+	    // 	responders[freq].update();
+	    // }
+	    // 
+	    for(var i = 0; i < responders.length; i++) {
+	    	responders[i].update();
 	    }
 
 	    //use mouse / touch rotation around axis

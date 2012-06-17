@@ -18,7 +18,6 @@ function Responder(yPos) {
 }
 
 Responder.prototype.update = function() {
-	
 	//scale constantly reducing on update - pass factor to scale scale by in to constructor - ie lower for lower freq
 	if(this.doScale === true) {
 		//set scaleVal once to greater than 
