@@ -28,9 +28,11 @@ Responder.prototype.createCircle = function() {
 		angleInc = 0.3,
 		geometry = new THREE.Geometry();
 
+	
 	for(var angle = 0.0; angle < 2*Math.PI; angle += angleInc) {
 		geometry.vertices.push(new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius));
 	}
+	geometry.vertices.push(new THREE.Vector3(Math.cos(0.0) * radius, Math.sin(0.0) * radius));
 
 	//geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );
 	//geometry.computeFaceNormals();
