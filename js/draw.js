@@ -59,8 +59,10 @@ Dancer.addPlugin( 'render', function() {
 	    stats.begin();
 	    
 	    //do the scaling update for each responder - takes care of the values set by the beat
-	    responders.clap.update();
-	    responders.bass.update();
+	    
+	    for(var freq in responders) {
+	    	responders[freq].update();
+	    }
 
 	    //use mouse / touch rotation around axis
 	    container.rotation.x = container.rotation.x += ( targetRotation - container.rotation.x ) * 0.05;
