@@ -1,12 +1,3 @@
-set up stats on mttholl.com before emailing the library guy - tweeting etc.
-	need to leave running for a while
-	http://wiki.openwebanalytics.com/index.php?title=Installation
-
-install node local
-
-add stats to update
-
-set up owa
 	
 set up beat pulsing rather than continuous rings
 	add other frequencies
@@ -14,6 +5,8 @@ set up beat pulsing rather than continuous rings
 
 pause stops music but not render loop
 	means having an anim loop not tied to Dancer update callback
+
+responder_setup into require callbacks
 
 put update into request animframe - but needs to run to keep to music
 

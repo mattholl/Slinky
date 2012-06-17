@@ -1,10 +1,8 @@
 /**
- * all sorts of bits munged together by @mttholl
+ * cobbled together by @mttholl
  */
 var container,
 	dancer,
-	beats = {},
-	responders = {},
 
 	stats;
 
@@ -26,6 +24,8 @@ function setup() {
     dancer = new Dancer("http://webdev/canvas/2d/beat_ring_2d/assets//S_P_A_C_E_S_Apologies.ogg");
     dancer.playing = false;
 
+    createResponders();
+
     //call dancer plugin function to render three.js renderer and deal with mouse rotation of the dummy container
     dancer.render();
 
@@ -37,23 +37,8 @@ function setup() {
 	// offBeat the callback to be called when there is no beat on the current frame.
 
 	//so pass in here values that we're going to use to increase scale when beat fires and rate at which to shrink it
-	responders.clap = new Responder();
 
-	//intro clap 209Hz
-    beats.clap = dancer.createBeat({
-		frequency : [4,5],
-		threshold : 0.1,
-		onBeat : function() {
-			//start increasing the scale transform on the Responder object for this beat frequency
-			responders.clap.doScale = true;
-		},
-		offBeat : function() {
-			//stop increasing scale, allow damping to take effect
-			responders.clap.doScale = false;
-		}
-	});
 	
-    beats.clap.on();
 
     /**
      * set up stats
@@ -64,7 +49,6 @@ function setup() {
     stats.domElement.style.top = '0px';
     stats.domElement.style.left = '300px';
 	document.body.appendChild( stats.domElement );
-	console.log(stats.domElement);
 	stats.setMode(2);
 }
 
@@ -76,6 +60,7 @@ Dancer.addPlugin( 'render', function() {
 	    
 	    //do the scaling update for each responder - takes care of the values set by the beat
 	    responders.clap.update();
+	    responders.bass.update();
 
 	    //use mouse / touch rotation around axis
 	    container.rotation.x = container.rotation.x += ( targetRotation - container.rotation.x ) * 0.05;

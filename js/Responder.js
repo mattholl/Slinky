@@ -1,4 +1,4 @@
-function Responder() {
+function Responder(yPos) {
 
 	this.doScale = false;
 	this.scaleVal = 0;
@@ -11,6 +11,9 @@ function Responder() {
 	this.material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true } );	
 
 	this.mesh = new THREE.Mesh( this.geometry, this.material );
+
+	//this.y = ;
+	this.mesh.position.y = 0 || yPos;
 	container.add(this.mesh);
 }
 
