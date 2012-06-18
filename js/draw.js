@@ -24,34 +24,14 @@ function setup() {
 	/**
 	 * Dancer setup
 	 */
-    dancer = new Dancer("http://webdev/canvas/2d/beat_ring_2d/assets//S_P_A_C_E_S_Apologies.ogg");
+    //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets//S_P_A_C_E_S_Apologies.ogg");
+    //dancer = new Dancer("http://webdev/canvas/2d/beat_ring_2d/assets/gidi-move.ogg");
+    dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/milkmaid.ogg");
+    //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/tones/6070Hz.ogg");
+
     dancer.playing = false;
 
-    //
-    for(var i = 0; i < 60; i++) {
-		(function(i) {
-			var startY = -300;
-			responders[i] = new Responder(startY + i*10);
-
-			beats[i] = dancer.createBeat({
-				frequency : [i,i+1],
-				threshold : 0.1,
-				onBeat : function() {
-					//start increasing the scale transform on the Responder object for this beat frequency
-					responders[i].doScale = true;
-					
-				},
-				offBeat : function() {
-					//stop increasing scale, allow damping to take effect
-					responders[i].doScale = false;
-				}
-			});
-
-			beats[i].on();
-
-		})(i)
-		
-	}
+   
 
     //call dancer plugin function to render three.js renderer and deal with mouse rotation of the dummy container
     dancer.render();
@@ -64,7 +44,9 @@ function setup() {
 	// offBeat the callback to be called when there is no beat on the current frame.
 
 	//so pass in here values that we're going to use to increase scale when beat fires and rate at which to shrink it
-
+	createLowResponders();
+	createMidResponders();
+	createHighResponders();
 	
 
     /**

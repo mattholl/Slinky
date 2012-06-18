@@ -4,149 +4,116 @@
  */
 //new Responder(y-position, )
 
+function createLowResponders() {
+	//roughly 0 - 2000Hz
+    var startY = -300,
+		yInc = 0;
+		freqLow = 0,
+		freqHigh = 1;
 
-// function createResponders (responders, beats) {
 
-	
+    for(var i = 0; i < 20; i++) {
 
-// 	}
-// }
-	//20Hz
-// 	responders[0] = new Responder(0);
-
-// 	beats[0] = dancer.createBeat({
-// 		frequency : [0,1],
-// 		threshold : 0.1,
-// 		onBeat : function() {
-// 			//start increasing the scale transform on the Responder object for this beat frequency
-// 			responders[0].doScale = true;
+		(function(i) {
 			
-// 		},
-// 		offBeat : function() {
-// 			//stop increasing scale, allow damping to take effect
-// 			responders[0].doScale = false;
-// 		}
-// 	});
+			responders[i] = new Responder(startY + yInc*10);
 
-// 	beats[0].on();
+			beats[i] = dancer.createBeat({
+				frequency : [freqLow, freqHigh],
+				threshold : 0.08,
+				onBeat : function() {
+					//start increasing the scale transform on the Responder object for this beat frequency
+					responders[i].doScale = true;
+				},
+				offBeat : function() {
+					//stop increasing scale, allow damping to take effect
+					responders[i].doScale = false;
+				}
+			});
 
-// 	//70Hz
-// 	responders[1] = new Responder(20);
+			beats[i].on();
 
-// 	beats[1] = dancer.createBeat({
-// 		frequency : [1,2],
-// 		threshold : 0.1,
-// 		onBeat : function() {
-// 			//start increasing the scale transform on the Responder object for this beat frequency
-// 			responders[1].doScale = true;
+		})(i)
+		
+		freqLow += 2;
+		freqHigh += 2;
+		yInc += 1;
+	}
+}
+
+
+function createMidResponders() {
+	//to centre to column around zero and allow setting freq bins other than incremnting with i
+    var startY = -100,
+		yInc = 0;
+		freqLow = 42,
+		freqHigh = 44;
+
+
+    for(var i = 20; i < 40; i++) {
+
+		(function(i) {
 			
-// 		},
-// 		offBeat : function() {
-// 			//stop increasing scale, allow damping to take effect
-// 			responders[1].doScale = false;
-// 		}
-// 	});
+			responders[i] = new Responder(startY + yInc*10);
 
-// 	beats[1].on();
+			beats[i] = dancer.createBeat({
+				frequency : [freqLow, freqHigh],
+				threshold : 0.05,
+				onBeat : function() {
+					//start increasing the scale transform on the Responder object for this beat frequency
+					responders[i].doScale = true;
+					
+				},
+				offBeat : function() {
+					//stop increasing scale, allow damping to take effect
+					responders[i].doScale = false;
+				}
+			});
 
-// 	//120Hz
-// 	responders[2] = new Responder(40);
+			beats[i].on();
 
-// 	beats[2] = dancer.createBeat({
-// 		frequency : [2,3],
-// 		threshold : 0.1,
-// 		onBeat : function() {
-// 			//start increasing the scale transform on the Responder object for this beat frequency
-// 			responders[2].doScale = true;
+		})(i)
+		
+		freqLow += 3;
+		freqHigh += 3;
+		yInc += 1;
+	}
+}
+
+function createHighResponders() {
+		//to centre to column around zero and allow setting freq bins other than incremnting with i
+    var startY = 90,
+    	yInc = 0;
+		freqLow = 102,
+		freqHigh = 103;
+
+    for(var i = 40; i < 80; i++) {
+
+		(function(i) {
 			
-// 		},
-// 		offBeat : function() {
-// 			//stop increasing scale, allow damping to take effect
-// 			responders[2].doScale = false;
-// 		}
-// 	});
+			responders[i] = new Responder(startY + yInc*10);
 
-// 	beats[2].on();
+			beats[i] = dancer.createBeat({
+				frequency : [freqLow, freqHigh],
+				threshold : 0.05,
+				onBeat : function() {
+					//start increasing the scale transform on the Responder object for this beat frequency
+					responders[i].doScale = true;
+					
+				},
+				offBeat : function() {
+					//stop increasing scale, allow damping to take effect
+					responders[i].doScale = false;
+				}
+			});
 
-// 	//170Hz
-// 	responders[3] = new Responder(60);
+			beats[i].on();
 
-// 	beats[3] = dancer.createBeat({
-// 		frequency : [3,4],
-// 		threshold : 0.1,
-// 		onBeat : function() {
-// 			//start increasing the scale transform on the Responder object for this beat frequency
-// 			responders[3].doScale = true;
-			
-// 		},
-// 		offBeat : function() {
-// 			//stop increasing scale, allow damping to take effect
-// 			responders[3].doScale = false;
-// 		}
-// 	});
-
-// 	beats[3].on();
-
-// 	//220Hz
-// 	responders[4] = new Responder(80);
-
-// 	beats[4] = dancer.createBeat({
-// 		frequency : [4,5],
-// 		threshold : 0.1,
-// 		onBeat : function() {
-// 			//start increasing the scale transform on the Responder object for this beat frequency
-// 			responders[4].doScale = true;
-			
-// 		},
-// 		offBeat : function() {
-// 			//stop increasing scale, allow damping to take effect
-// 			responders[4].doScale = false;
-// 		}
-// 	});
-
-// 	beats[4].on();
-
-// 	//270Hz
-// 	responders[5] = new Responder(1000);
-
-// 	beats[5] = dancer.createBeat({
-// 		frequency : [5,6],
-// 		threshold : 0.1,
-// 		onBeat : function() {
-// 			//start increasing the scale transform on the Responder object for this beat frequency
-// 			responders[5].doScale = true;
-			
-// 		},
-// 		offBeat : function() {
-// 			//stop increasing scale, allow damping to take effect
-// 			responders[5].doScale = false;
-// 		}
-// 	});
-
-// 	beats[5].on();
-
-// 	//320Hz
-	
-// 	responders[6] = new Responder(60);
-
-// 	beats[6] = dancer.createBeat({
-// 		frequency : [7,7],
-// 		threshold : 0.1,
-// 		onBeat : function() {
-// 			//start increasing the scale transform on the Responder object for this beat frequency
-// 			responders[6].doScale = true;
-			
-// 		},
-// 		offBeat : function() {
-// 			//stop increasing scale, allow damping to take effect
-// 			responders[6].doScale = false;
-// 		}
-// 	});
-
-// 	beats[6].on();
-// 	// responders[7] = new Responder(70);
-// 	// responders[8] = new Responder(80);
-// 	// responders[9] = new Responder(90);
-// 	// responders[10] = new Responder(100);
-// 	//might want to set threshold manually..	
-// }
+		})(i)
+		
+		freqLow += 2;
+		freqHigh += 2;
+		yInc += 1;
+	}
+}
+ 

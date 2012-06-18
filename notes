@@ -1,9 +1,7 @@
 	
 
-set up beat pulsing rather than continuous rings
-	add other frequencies - 
-	vary pulse rate and fallback rate to frequency ie. bas tones die away slower
-	use plane rather than cylinder
+set up frequency ranges - 1 distance on bass, midrange, and more 
+	
 
 pause stops music but not render loop
 	means having an anim loop not tied to Dancer update callback
