@@ -4,6 +4,9 @@
 var container,
 	dancer,
 
+	beats = [],
+	responders = [],
+
 	stats;
 
 function setup() {
@@ -24,8 +27,31 @@ function setup() {
     dancer = new Dancer("http://webdev/canvas/2d/beat_ring_2d/assets//S_P_A_C_E_S_Apologies.ogg");
     dancer.playing = false;
 
-    createResponders();
+    //
+    for(var i = 0; i < 60; i++) {
+		(function(i) {
+			var startY = -300;
+			responders[i] = new Responder(startY + i*10);
 
+			beats[i] = dancer.createBeat({
+				frequency : [i,i+1],
+				threshold : 0.1,
+				onBeat : function() {
+					//start increasing the scale transform on the Responder object for this beat frequency
+					responders[i].doScale = true;
+					
+				},
+				offBeat : function() {
+					//stop increasing scale, allow damping to take effect
+					responders[i].doScale = false;
+				}
+			});
+
+			beats[i].on();
+
+		})(i)
+		
+	}
 
     //call dancer plugin function to render three.js renderer and deal with mouse rotation of the dummy container
     dancer.render();
