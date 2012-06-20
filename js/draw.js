@@ -28,6 +28,13 @@ function setup() {
     //dancer = new Dancer("http://webdev/canvas/2d/beat_ring_2d/assets/gidi-move.ogg");
     //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/milkmaid.ogg");
     //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/tones/6070Hz.ogg");
+    //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/tones/9070Hz.ogg");
+    //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/bach.mp3");
+    //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/astroblaster.mp3");
+    //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/Clayhill-Dub.mp3");
+    //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/air.mp3");
+    //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/lets-stay-together.mp3");
+
 
     dancer.playing = false;
 
@@ -45,8 +52,8 @@ function setup() {
 
 	//so pass in here values that we're going to use to increase scale when beat fires and rate at which to shrink it
 	createLowResponders();
-	//createMidResponders();
-	//createHighResponders();
+	createMidResponders();
+	createHighResponders();
 	
 
     /**
