@@ -19,7 +19,7 @@ function Responder(yPos) {
 	this.line = new THREE.Line(this.geometry, this.material);
 	
 	//this.y = ;
-	this.line.position.z = 0 || yPos;
+	this.line.position.y = 0 || yPos;
 	container.add(this.line);
 }
 
@@ -30,9 +30,9 @@ Responder.prototype.createCircle = function() {
 
 	
 	for(var angle = 0.0; angle < 2*Math.PI; angle += angleInc) {
-		geometry.vertices.push(new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius));
+		geometry.vertices.push(new THREE.Vector3(Math.cos(angle) * radius, 0, Math.sin(angle) * radius));
 	}
-	geometry.vertices.push(new THREE.Vector3(Math.cos(0.0) * radius, Math.sin(0.0) * radius));
+	geometry.vertices.push(new THREE.Vector3(Math.cos(0.0) * radius, 0, Math.sin(0.0) * radius));
 	return geometry;
 }
 
@@ -44,6 +44,7 @@ Responder.prototype.update = function() {
 	}
 	
 	//do the mesh scaling
+	//TODO scale z not workin
 	this.line.scale.x = this.line.scale.x += this.scaleVal;
 	this.line.scale.z = this.line.scale.z += this.scaleVal;
 
