@@ -1,18 +1,27 @@
-need 240 ish on the feq bin	
-
-set up frequency ranges - 1 distance on bass, midrange, and more 
-
+	
 pause stops music but not render loop
 	means having an anim loop not tied to Dancer update callback
+	put update into request animframe - but needs to run to keep to music
 
-responder_setup into require callbacks
+responder_setup into require callbacks...
 
-put update into request animframe - but needs to run to keep to music
+put self organising voronoi online - 
+	title: Self-organising Vornoi Cells - email andy re. grammar
+	desc: An animation which branched from the Voronoi animations below. A balance of the minumum distance required between the points and thir repulsion from one another, varying the number of points produces different tesselations - dat.gui?? to allow user to vary the number of points - call setup on change of this value - jQuery stle slider and massive numebers. 
 
-layered in y axis different colours
-solid rather than just wireframe
+if can't connect to soundcloud offer a choice of local oggs - email the artists?
+	email to dancer author to see if he'll help?
 
-upload
+tidy
+add details - links etc.
+upload w. basic auth
+
+work on my website - responsive stuff
+
+get ppl to test
+
+email spaces
+email dancer author
 
 this can make it more general, choose specific frequency ranges rather than tailoring to the track
 intergrate with flash - integrate with soundcloud!

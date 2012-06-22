@@ -24,14 +24,14 @@ function setup() {
 	/**
 	 * Dancer setup
 	 */
-    dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets//S_P_A_C_E_S_Apologies.ogg");
+    //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets//S_P_A_C_E_S_Apologies.ogg");
     //dancer = new Dancer("http://webdev/canvas/2d/beat_ring_2d/assets/gidi-move.ogg");
     //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/milkmaid.ogg");
     //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/tones/6070Hz.ogg");
     //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/tones/9070Hz.ogg");
     //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/bach.mp3");
     //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/astroblaster.mp3");
-    //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/Clayhill-Dub.mp3");
+    dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/Clayhill-Dub.mp3");
     //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/air.mp3");
     //dancer = new Dancer("http://webdev/three.js/dancer_pulse/assets/lets-stay-together.mp3");
 
