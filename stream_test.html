@@ -19,7 +19,9 @@ var track_url = "http://soundcloud.com/s_p_a_c_e_s/wireless";
 var sc_stream = "http://api.soundcloud.com/tracks/38551748/?client_id=86961c923d1a04425a46ac1a4a19c675";
 
 //errors on Dancer
+
 var sc_stream_ID = "http://api.soundcloud.com/tracks/38551748/stream?client_id=86961c923d1a04425a46ac1a4a19c675";
+var resolved_uri = "http://ec-media.soundcloud.com/aJTfLYiG5JV8.128.mp3?ff61182e3c2ecefa438cd02102d0e385713f0c1faf3b0339595667fa0b0deb16b1751ab3b2d961347c48cd54ffa73a55be9513adc4916f55411c1d265571dad80242e93671&AWSAccessKeyId=AKIAJBHW5FB4ERKUQUOQ&Expires=1340480281&Signature=doArLvlZUX5%2BKUM1K2femzvqgzE%3D";
 var sc_stream_noID = "http://api.soundcloud.com/tracks/38551748/stream";
 var local_ogg = "assets/S_P_A_C_E_S-Wireless.ogg";
 var local_mp3 = "assets/S_P_A_C_E_S-Wireless.mp3";
@@ -50,7 +52,7 @@ var dancer;
 
 //dancer = new Dancer(sc_stream);
 /* type is also audio/mpeg...*/
-dancer = new Dancer(sc_stream_ID);
+dancer = new Dancer(resolved_uri);
 //dancer.play();
 
 
