@@ -6,7 +6,8 @@
 <body>
 
 <script src="js/dancer.mod.js"></script>
-<script src="http://connect.soundcloud.com/sdk.js"></script>
+<!-- <script src="http://connect.soundcloud.com/sdk.js"></script> -->
+<script src="http://connect.soundcloud.com/2/latest.min.js"></script>
 <script>
 SC.initialize({
   client_id: "86961c923d1a04425a46ac1a4a19c675"
@@ -23,8 +24,10 @@ SC.get('/resolve', {url : track_url}, function(track) {
 	stream_url = track.stream_url;
 
 	SC.stream(track.stream_url, function(track) {
-		
-    var dancer = new Dancer(track, 'mp3');
+		console.log(track);
+    track.play();
+
+    //var dancer = new Dancer(track, 'mp3');
 	});
 });
 
