@@ -1,3 +1,11 @@
+play / stop button
+add links
+	"Built with three.js and Dancer.js. Music: "Apologies" by S_P_A_C_E_S_"
+remove fps
+
+once tidied clone into three.js_dancer to make node app
+
+
 	
 pause stops music but not render loop
 	means having an anim loop not tied to Dancer update callback
@@ -8,9 +16,6 @@ responder_setup into require callbacks...
 put self organising voronoi online - 
 	title: Self-organising Vornoi Cells - email andy re. grammar
 	desc: An animation which branched from the Voronoi animations below. A balance of the minumum distance required between the points and thir repulsion from one another, varying the number of points produces different tesselations - dat.gui?? to allow user to vary the number of points - call setup on change of this value - jQuery stle slider and massive numebers. 
-
-if can't connect to soundcloud offer a choice of local oggs - email the artists?
-	email to dancer author to see if he'll help?
 
 tidy
 add details - links etc.
