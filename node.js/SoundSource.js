@@ -18,6 +18,12 @@ SoundSource.prototype.load = function(url, onLoad, onError) {
 SoundSource.prototype.onLoad = function(onLoad, onError) {
     var audioData = this.xhr.response;
 	this.audioGraph(audioData);
+
+
+	// this.context.decodeAudioData(this.xhr.response, function(buffer) {
+ //        this.onDecode(buffer);
+ //        onLoad();
+ //    }.bind(this), onError);
 };
 
 SoundSource.prototype.onError = function(e) {

@@ -39,8 +39,30 @@ var Player = function(app) {
     //
     //
     this.player = new SoundSource();
+
+    //set up form handling
     
-}
+    this.trackForm = document.getElementById('track-form');
+    this.trackForm.addEventListener('submit', function(e) {
+		var trackUrl = (this.elements['track-url'].value);
+
+		//if not http add it?
+		app.player.getTrackFromURL(trackUrl);
+		e.preventDefault();
+    })
+
+    // this.trackForm.onsubmit(function() {
+    // 	//this.getNewTrack.bind(this));
+  		// console.log(this.trackForm);  
+    // });
+
+    	
+};
+
+
+Player.prototype.getNewTrack = function() {
+	console.log('newTrack');
+};
 
 
 /**
@@ -78,24 +100,11 @@ Player.prototype.play = function(track) {
         // SoundCloud because of
         // http://code.google.com/p/chromium/issues/detail?id=96136
         var url = '/proxy?url=' + this.track.track.stream_url;
-
-        //called in SC? - WebKitBufferPlayer - will need to integrate with dancer here?
-        //this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
-
-        //remember to bind callbacks back in
-        //this.player is now basic audio SoundSource
+        
         this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
 
-        //console.log('track');
-        //this.track = track;
-        //this.playlist = this.app.currentPlaylist;
         this.loading = true;
 
-
-
-        // Update the track view
-        //this.app.trackView.setNowPlaying();
-        //this.app.trackView.setLoading();
     }
     else {
         // Track is not streamable, so just skip to the next one
@@ -103,16 +112,6 @@ Player.prototype.play = function(track) {
     }
 };
 
-
-/**
- * Called when we submit the "Add Track" form.  Tries to get the track data
- * from SoundCloud, and adds it to the playlist.
- */
-// TrackView.prototype.onNewTrackSubmit = function() {
-//     this.app.currentPlaylist.addTrackFromURL($('#new-track input').val());
-//     this.hideTrackInput();
-//     return false;
-// };
 
 Player.prototype.onLoad = function() {
     //this.app.trackView.unsetLoading();
@@ -131,7 +130,7 @@ window.onload = function() {
 
 	//bind to submit
 	//app.player.getTrackFromURL('http://soundcloud.com/rob_booth/milanese-espantoso-freebie');
-	app.player.getTrackFromURL('http://soundcloud.com/s_p_a_c_e_s/wireless');
+	//app.player.getTrackFromURL('http://soundcloud.com/s_p_a_c_e_s/wireless');
 	
 }
 
