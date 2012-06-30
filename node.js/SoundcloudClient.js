@@ -38,7 +38,19 @@ var Player = function(app) {
     //this.player.connect(this.audiolet.output);
     //
     //
-    this.player = new SoundSource();
+    //this.player = new SoundSource();
+
+    //url is passed in line 106
+    //this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
+    //should just load the url - same code on my SoundSource.js
+    //so calling play again will rebiuild the dancer beat and objects
+    //will need to rewrite how I interface with the player - instance of dancer becomes app.player?
+    //app.player.play(), app.player.stop()
+    //need to pass the call back events through to dancer...
+    //
+    //this.player = new Dancer();
+    
+
 
     //set up form handling
     
@@ -100,8 +112,9 @@ Player.prototype.play = function(track) {
         // SoundCloud because of
         // http://code.google.com/p/chromium/issues/detail?id=96136
         var url = '/proxy?url=' + this.track.track.stream_url;
-        
-        this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
+        this.player = new Dancer(url);
+        //this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
+        //this.player(url);
 
         this.loading = true;
 
