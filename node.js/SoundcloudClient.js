@@ -60,6 +60,18 @@ var Player = function(app) {
 
 		//if not http add it?
 		app.player.getTrackFromURL(trackUrl);
+		
+		// app.player.dancer.createBeat({
+		// 	frequency : [2,4],
+		// 	theshold : 0.8,
+		// 	onBeat : function() {
+		// 		console.log('beat on');
+		// 	},
+		// 	offBeat : function() {
+		// 		console.log('beat off');
+		// 	}
+		// });
+		
 		e.preventDefault();
     })
 
@@ -135,6 +147,10 @@ Player.prototype.onLoad = function() {
 Player.prototype.onError = function() {
     //console.log('error');
 };
+
+
+
+
 
 
 window.onload = function() {
