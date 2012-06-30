@@ -70,13 +70,13 @@ Player.prototype.play = function(track) {
         //called in SC? - WebKitBufferPlayer - will need to integrate with dancer here?
         this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
 
-        console.log('track');
+        //console.log('track');
         //this.track = track;
         //this.playlist = this.app.currentPlaylist;
         this.loading = true;
 
 
-        
+
         // Update the track view
         //this.app.trackView.setNowPlaying();
         //this.app.trackView.setLoading();
@@ -105,7 +105,7 @@ Player.prototype.onLoad = function() {
 };
 
 Player.prototype.onError = function() {
-    console.log('error');
+    //console.log('error');
 };
 
 
@@ -114,6 +114,8 @@ window.onload = function() {
 	//console.log(window.app);
 
 	//bind to submit
-	app.player.getTrackFromURL('http://soundcloud.com/rob_booth/milanese-espantoso-freebie');
+	//app.player.getTrackFromURL('http://soundcloud.com/rob_booth/milanese-espantoso-freebie');
+	app.player.getTrackFromURL('http://soundcloud.com/s_p_a_c_e_s/wireless');
+	
 }
 

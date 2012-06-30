@@ -10,7 +10,7 @@ var http = require('http'),
 	// fileSystem = require('fs'),
 	// path = require('path'),
 	// util = require('util'),
-	client_id = '86961c923d1a04425a46ac1a4a19c675',
+	client_id = '86961c923d1a04425a46ac1a4a19c675';
 	//track_url = 'http://soundcloud.com/rob_booth/milanese-espantoso-freebie';
 
 //http://api.soundcloud.com/resolve.json?url=http://soundcloud.com/rob_booth/milanese-espantoso-freebie&client_id=86961c923d1a04425a46ac1a4a19c675
@@ -43,19 +43,25 @@ var app = http.createServer(function(requestToNode, responseToClient) {
 		var scURL = parsed.query.url;
 		var parsedSCURL = url.parse(scURL);
 
-		var requestOpts = {
-			host : parsedSCURL.host,
+		var requestOptions = {
+			host : parsedSCURL.host, //'api.soundcloud.com'
 			port : 80,
-			path : parsedSCURL.pathname + '?client_id' + client_id
+			path : parsedSCURL.pathname + '.json?client_id=' + client_id //'/tracks/49593184/stream?client_id86961c923d1a04425a46ac1a4a19c675'
 		};
 
 		//get media url from sc
-		var requestToSC = http.get(options, function(responseFromSC) {
+		var requestToSC = http.get(requestOptions, function(responseFromSC) {
 			if(responseFromSC.statusCode = 302) {
+				
 				var mediaLocation = responseFromSC.headers.location;
 
+				//console.log(responseFromSC);
+
 				//parse media url and compile options for another request
+				//TypeError: Parameter 'url' must be a string, not undefined //mediaLocation is undefined
 				var parsedMediaURL = url.parse(mediaLocation);
+
+
 				var options = {
 					host : parsedMediaURL.host,
 					port : 80,
