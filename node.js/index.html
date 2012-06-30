@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+<style>
+#track input[type=text] {
+	width: 400px;
+}
+</style>
+
+<script src="http://connect.soundcloud.com/sdk.js"></script>
+
+
+<script src="Audiolet.js"></script>
+
+<script src="track.js"></script>
+<script src="SoundcloudClient.js"></script>
+
+
+</head>
+<body>
+<div id="track">
+	<form action="#" method="post">
+		<input type="text" placeholder="http://soundcloud.com/artist/track" name="track-url" />
+		<input type="submit" />
+	</form>
+</div>
+http://soundcloud.com/rob_booth/milanese-espantoso-freebie
+<button id="play" onclick="console.log(app.player.play());">Play</button>
+</body>
+</html>
