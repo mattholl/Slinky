@@ -1,4 +1,7 @@
-//soundcloud client is dealing with the form input
+/**
+ * //ripped from https://github.com/oampo/AmbientCloud
+ * 
+ */
 
 var SoundcloudClient  = function() {
 	this.clientID = '86961c923d1a04425a46ac1a4a19c675';
@@ -127,8 +130,8 @@ window.onload = function() {
 	//console.log(window.app);
 
 	//bind to submit
-	app.player.getTrackFromURL('http://soundcloud.com/rob_booth/milanese-espantoso-freebie');
-	//app.player.getTrackFromURL('http://soundcloud.com/s_p_a_c_e_s/wireless');
+	//app.player.getTrackFromURL('http://soundcloud.com/rob_booth/milanese-espantoso-freebie');
+	app.player.getTrackFromURL('http://soundcloud.com/s_p_a_c_e_s/wireless');
 	
 }
 
