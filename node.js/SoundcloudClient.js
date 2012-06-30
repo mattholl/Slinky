@@ -23,9 +23,20 @@ var Player = function(app) {
 	this.track = null;
 	this.loading = false;
 
-	this.audiolet = new Audiolet();
+	//this.audiolet = new Audiolet();
     //this.player = new WebKitBufferPlayer(this.audiolet, this.next.bind(this));
-    this.player = new WebKitBufferPlayer(this.audiolet);
+    //this.player = new WebKitBufferPlayer(this.audiolet);
+    //this.delay = new FeedbackDelay(this.audiolet, 5, 0.9);
+    //this.limiter = new Limiter(this.audiolet);
+    //this.reverb = new Reverb(this.audiolet, 1, 0.9, 0.1);
+    //this.player.connect(this.delay);
+    //this.delay.connect(this.limiter);
+    //this.limiter.connect(this.reverb);
+    //this.player.connect(this.audiolet.output);
+    //
+    //
+    this.player = new SoundSource();
+    
 }
 
 
@@ -65,9 +76,11 @@ Player.prototype.play = function(track) {
         // http://code.google.com/p/chromium/issues/detail?id=96136
         var url = '/proxy?url=' + this.track.track.stream_url;
 
-        
-
         //called in SC? - WebKitBufferPlayer - will need to integrate with dancer here?
+        //this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
+
+        //remember to bind callbacks back in
+        //this.player is now basic audio SoundSource
         this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
 
         //console.log('track');
@@ -114,8 +127,8 @@ window.onload = function() {
 	//console.log(window.app);
 
 	//bind to submit
-	//app.player.getTrackFromURL('http://soundcloud.com/rob_booth/milanese-espantoso-freebie');
-	app.player.getTrackFromURL('http://soundcloud.com/s_p_a_c_e_s/wireless');
+	app.player.getTrackFromURL('http://soundcloud.com/rob_booth/milanese-espantoso-freebie');
+	//app.player.getTrackFromURL('http://soundcloud.com/s_p_a_c_e_s/wireless');
 	
 }
 

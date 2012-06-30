@@ -54,20 +54,18 @@ var app = http.createServer(function(requestToNode, responseToClient) {
 			if(responseFromSC.statusCode = 302) {
 				
 				var mediaLocation = responseFromSC.headers.location;
-
-				//console.log(responseFromSC);
-
+				
 				//parse media url and compile options for another request
 				//TypeError: Parameter 'url' must be a string, not undefined //mediaLocation is undefined
 				var parsedMediaURL = url.parse(mediaLocation);
-
+				//console.log(parsedMediaURL);
 
 				var options = {
 					host : parsedMediaURL.host,
 					port : 80,
-					path : parsedMediaURL.pathName + parsedMediaURL.search
+					path : parsedMediaURL.pathname + parsedMediaURL.search
 				};
-
+				
 				//do the media request
 				var requestForMedia = http.get(options, function(responseFromMedia) {
 					//stream it back to the client
