@@ -60,6 +60,7 @@ var Player = function(app) {
 
 		//if not http add it?
 		app.player.getTrackFromURL(trackUrl);
+        //app.player.load();
 		
 		// app.player.dancer.createBeat({
 		// 	frequency : [2,4],
@@ -105,15 +106,14 @@ Player.prototype.getTrackFromURL = function(url, position) {
         else {
             this.addTrack(track);
         }
-    }.bind(this));
-    //calls SC.get and puts what it returns into the track object on player
-    //track object contains all info
-    //this = player
+    }.bind(this)); //binds Player to the value of this within the SC.get call
 };
 
 
 Player.prototype.addTrack = function(track) {
 	this.track = new Track(this.app, track);
+    //need to call laod once track is created
+    //need to listen to dancer to laded event
 }
 
 
@@ -126,7 +126,12 @@ Player.prototype.load = function(track) {
         var url = '/proxy?url=' + this.track.track.stream_url;
         this.dancer = new Dancer(url);
         //this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
-        //this.player(url);
+        
+
+        this.dancer.bind('loaded', function() {  
+            console.log('laoded');
+        });
+
 
         this.loading = true;
 
