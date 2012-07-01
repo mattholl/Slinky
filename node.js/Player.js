@@ -1,18 +1,3 @@
-/**
- * //ripped from https://github.com/oampo/AmbientCloud
- * 
- */
-
-var SoundcloudClient  = function() {
-	this.clientID = '86961c923d1a04425a46ac1a4a19c675';
-	SC.initialize({
-		client_id : this.clientID,
-	});
-
-	this.player = new Player(this);
-}
-
-
 
 
 //call player.play on submit - or when loaded
@@ -58,22 +43,20 @@ var Player = function(app) {
     this.trackForm.addEventListener('submit', function(e) {
 		var trackUrl = (this.elements['track-url'].value);
 
-		//if not http add it?
 		app.player.getTrackFromURL(trackUrl);
-        //app.player.load();
-		
-		// app.player.dancer.createBeat({
-		// 	frequency : [2,4],
-		// 	theshold : 0.8,
-		// 	onBeat : function() {
-		// 		console.log('beat on');
-		// 	},
-		// 	offBeat : function() {
-		// 		console.log('beat off');
-		// 	}
-		// });
-		
+
 		e.preventDefault();
+    });
+
+
+    this.playButton = document.getElementById('play');
+    this.playButton.addEventListener('click', function(e) {
+        app.player.dancer.play();
+    });
+
+    this.stopButton = document.getElementById('stop');
+    this.stopButton.addEventListener('click', function(e) {
+        app.player.dancer.stop();
     })
 
     //app.player.load() //takes this.track - pass it in to be sure - this.track created in getTRackFromURL
@@ -105,16 +88,18 @@ Player.prototype.getTrackFromURL = function(url, position) {
         }
         else {
             this.addTrack(track);
+            this.load(); //this = player
         }
     }.bind(this)); //binds Player to the value of this within the SC.get call
 };
 
 
 Player.prototype.addTrack = function(track) {
+    //pulls json returned from sc api to use in ui
 	this.track = new Track(this.app, track);
     //need to call laod once track is created
     //need to listen to dancer to laded event
-}
+};
 
 
 
@@ -126,14 +111,17 @@ Player.prototype.load = function(track) {
         var url = '/proxy?url=' + this.track.track.stream_url;
         this.dancer = new Dancer(url);
         //this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
-        
+        this.loading = true;
 
         this.dancer.bind('loaded', function() {
+            
             console.log('laoded');
+            app.player.onLoad();//too tightly coupled to app structure??
+            //console.log(this); = Dancer
+            //
+           
+            
         });
-
-
-        this.loading = true;
 
     }
     else {
@@ -148,7 +136,17 @@ Player.prototype.onLoad = function() {
     //in here - ensures that the dancer object is available
     //this.app.trackView.unsetLoading();
     this.loading = false;
-    //console.log(this.loading);
+    //pub / sub to subscribe creating dancer beats to player.onLoad firing
+    console.log('player.onload fired');
+    
+    console.log(this.app);
+    this.app.createBeat();
+    //
+    //this.dancer.bind('playing', function() {
+    //    console.log('playing?');
+    //});
+    
+    
 };
 
 Player.prototype.onError = function() {
@@ -161,12 +159,12 @@ Player.prototype.onError = function() {
 
 
 window.onload = function() {
-	window.app = new SoundcloudClient();
+	window.app = new Slinky();
 	//console.log(window.app);
 
 	//bind to submit
 	//app.player.getTrackFromURL('http://soundcloud.com/rob_booth/milanese-espantoso-freebie');
 	//app.player.getTrackFromURL('http://soundcloud.com/s_p_a_c_e_s/wireless');
 	
-}
+};
 
