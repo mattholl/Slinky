@@ -1,9 +1,7 @@
-
-
-//call player.play on submit - or when loaded
 /**
- * Attempt to load a track and play it.  Updates the track view with loading
- * and playing indicators.
+ * https://github.com/oampo/AmbientCloud
+ * Player connects to the 
+ * 
  */
 
 var Player = function(app) {
@@ -154,17 +152,4 @@ Player.prototype.onError = function() {
 };
 
 
-
-
-
-
-window.onload = function() {
-	window.app = new Slinky();
-	//console.log(window.app);
-
-	//bind to submit
-	//app.player.getTrackFromURL('http://soundcloud.com/rob_booth/milanese-espantoso-freebie');
-	//app.player.getTrackFromURL('http://soundcloud.com/s_p_a_c_e_s/wireless');
-	
-};
 
