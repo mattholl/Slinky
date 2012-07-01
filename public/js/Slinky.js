@@ -1,6 +1,6 @@
 /**
  * from https://github.com/oampo/AmbientCloudsetTimeout
- * init the connection to the soundcloud api 
+ * init the connection to the soundcloud api
  * create the player and provide the function to create beats on various threshold
  * will need to pass the variables into each create beat from UI
  * so call this on change - will need to rebuild the Responder objects but reload the player and dancer objects..?
@@ -15,6 +15,7 @@ var Slinky  = function() {
 
 	this.player = new Player(this);
     this.beats = [];
+    this.responders = [];
 };
 
 //called from the onLoad function in Player
