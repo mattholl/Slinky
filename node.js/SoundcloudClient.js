@@ -128,7 +128,7 @@ Player.prototype.load = function(track) {
         //this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
         
 
-        this.dancer.bind('loaded', function() {  
+        this.dancer.bind('loaded', function() {
             console.log('laoded');
         });
 
