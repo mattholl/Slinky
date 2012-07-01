@@ -75,17 +75,16 @@ var Player = function(app) {
 		e.preventDefault();
     })
 
+    //app.player.load() //takes this.track - pass it in to be sure - this.track created in getTRackFromURL
+    //  create the dancer object
+    //app.player.dancer.play();
+    
     // this.trackForm.onsubmit(function() {
     // 	//this.getNewTrack.bind(this));
   		// console.log(this.trackForm);  
     // });
 
     	
-};
-
-
-Player.prototype.getNewTrack = function() {
-	console.log('newTrack');
 };
 
 
@@ -112,19 +111,20 @@ Player.prototype.getTrackFromURL = function(url, position) {
     //this = player
 };
 
+
 Player.prototype.addTrack = function(track) {
 	this.track = new Track(this.app, track);
 }
 
 
 
-Player.prototype.play = function(track) {
+Player.prototype.load = function(track) {
     if (this.track.track.stream_url) {
         // Load the track from our Node.js proxy, rather than straight from
         // SoundCloud because of
         // http://code.google.com/p/chromium/issues/detail?id=96136
         var url = '/proxy?url=' + this.track.track.stream_url;
-        this.player = new Dancer(url);
+        this.dancer = new Dancer(url);
         //this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
         //this.player(url);
 
@@ -139,9 +139,11 @@ Player.prototype.play = function(track) {
 
 
 Player.prototype.onLoad = function() {
+    //need on load to fire and call //app.player.load(this.track);
+    //in here - ensures that the dancer object is available
     //this.app.trackView.unsetLoading();
     this.loading = false;
-    console.log(this.loading);
+    //console.log(this.loading);
 };
 
 Player.prototype.onError = function() {
