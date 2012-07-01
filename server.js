@@ -20,7 +20,7 @@ var http = require('http'),
 //on client
 
 
-var file = new static.Server('.');
+var file = new static.Server('./public');
 
 
 //this will get the track metadata
