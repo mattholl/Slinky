@@ -28,36 +28,25 @@ var Slinky  = function() {
     this.renderer.setSize( window.innerWidth, window.innerHeight );
 
     document.body.appendChild( this.renderer.domElement );
-    document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+    
 
     this.container = new THREE.Object3D();
     this.scene.add(this.container);
 
     this.container.rotation.x = this.container.rotation.x += Math.PI/2;
 
-    //to pass ref to app in to responder creating functions
-    //this.app = this;
+    this.windowHalfX = window.innerWidth / 2;
+    this.windowHalfY = window.innerHeight / 2;
 
-    
+    this.targetRotation = 0;
+    this.targetRotationOnMouseDown = 0;
+    this.mouseYOnMouseDown = 0;
+    this.mouseY = 0;
+    document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 };
 
 //called from the onLoad function in Player
 //TODO: make sure that the UI doesn't allow playing until all is loaded
-Slinky.prototype.createBeat = function() {
-    console.log('create beat');
-    this.beats[0] = this.player.dancer.createBeat({
-        frequency : [2,4],
-        theshold : 0.1,
-        onBeat : function() {
-            console.log('beat on');
-        },
-        offBeat : function() {
-            //console.log('beat off');
-        }
-    });
-    this.beats[0].on();
-};
-
 
 Slinky.prototype.createLowResponders = function() {
     //roughly 0 - 2000Hz
@@ -66,13 +55,9 @@ Slinky.prototype.createLowResponders = function() {
         freqLow = 0,
         freqHigh = 2;
 
-
     for(var i = 0; i < 15; i++) {
-
         (function(i) {
-            
             app.responders[i] = new Responder(startY + yInc*10);
-
             app.beats[i] = app.player.dancer.createBeat({
                 frequency : [freqLow, freqHigh],
                 threshold : 0.08,
@@ -85,9 +70,7 @@ Slinky.prototype.createLowResponders = function() {
                     app.responders[i].doScale = false;
                 }
             });
-
             app.beats[i].on();
-
         }(i));
         
         freqLow += 3;
@@ -96,7 +79,6 @@ Slinky.prototype.createLowResponders = function() {
     }
 };
 
-
 Slinky.prototype.createMidResponders = function() {
     //to centre to column around zero and allow setting freq bins other than incremnting with i
     var startY = -170,
@@ -104,29 +86,22 @@ Slinky.prototype.createMidResponders = function() {
         freqLow = 45,
         freqHigh = 48;
 
-
     for(var i = 15; i < 30; i++) {
-
         (function(i) {
-            
             app.responders[i] = new Responder(startY + yInc*10);
-
             app.beats[i] = app.player.dancer.createBeat({
                 frequency : [freqLow, freqHigh],
                 threshold : 0.015,
                 onBeat : function() {
                     //start increasing the scale transform on the Responder object for this beat frequency
                     app.responders[i].doScale = true;
-                    
                 },
                 offBeat : function() {
                     //stop increasing scale, allow damping to take effect
                     app.responders[i].doScale = false;
                 }
             });
-
             app.beats[i].on();
-
         }(i));
         
         freqLow += 5;
@@ -143,27 +118,21 @@ Slinky.prototype.createHighResponders = function() {
         freqHigh = 122;
 
     for(var i = 30; i < 45; i++) {
-
         (function(i) {
-            
             app.responders[i] = new Responder(startY + yInc*10);
-
             app.beats[i] = app.player.dancer.createBeat({
                 frequency : [freqLow, freqHigh],
                 threshold : 0.009,
                 onBeat : function() {
                     //start increasing the scale transform on the Responder object for this beat frequency
                     app.responders[i].doScale = true;
-                    
                 },
                 offBeat : function() {
                     //stop increasing scale, allow damping to take effect
                     app.responders[i].doScale = false;
                 }
             });
-
             app.beats[i].on();
-
         }(i));
         
         freqLow += 3;
@@ -172,38 +141,23 @@ Slinky.prototype.createHighResponders = function() {
     }
 };
 
-
+//fire it up
 window.onload = function() {
     window.app = new Slinky();
-    //bind to submit
-    //app.player.getTrackFromURL('http://soundcloud.com/rob_booth/milanese-espantoso-freebie');
-    //app.player.getTrackFromURL('http://soundcloud.com/s_p_a_c_e_s/wireless');
-    
 };
 
 
 Dancer.addPlugin( 'render', function() {
-
     this.bind( 'update', function() {
-    
         for(var i = 0; i < app.responders.length; i++) {
             app.responders[i].update();
         }
-
         //use mouse / touch rotation around axis
-        app.container.rotation.x = app.container.rotation.x += ( targetRotation - app.container.rotation.x ) * 0.05;
+        app.container.rotation.x = app.container.rotation.x += ( app.targetRotation - app.container.rotation.x ) * 0.05;
         app.renderer.render( app.scene, app.camera );
     });
-
 });
 
-
-
-windowHalfX = window.innerWidth / 2;
-windowHalfY = window.innerHeight / 2;
-
-targetRotation = 0;
-targetRotationOnMouseDown = 0;
 
 function onDocumentMouseDown( event ) {
     event.preventDefault();
@@ -212,24 +166,22 @@ function onDocumentMouseDown( event ) {
     document.addEventListener( 'mouseup', onDocumentMouseUp, false );
     document.addEventListener( 'mouseout', onDocumentMouseOut, false );
 
-    mouseYOnMouseDown = event.clientY - windowHalfY;
-    targetRotationOnMouseDown = targetRotation;
+    app.mouseYOnMouseDown = event.clientY - app.windowHalfY;
+    app.targetRotationOnMouseDown = app.targetRotation;
 }
 
 function onDocumentMouseMove( event ) {
-    mouseY = event.clientY - windowHalfY;
-    targetRotation = targetRotationOnMouseDown + ( mouseY - mouseYOnMouseDown ) * 0.05;
+    app.mouseY = event.clientY - app.windowHalfY;
+    app.targetRotation = app.targetRotationOnMouseDown + ( app.mouseY - app.mouseYOnMouseDown ) * 0.05;
 }
 
 function onDocumentMouseUp( event ) {
-
     document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
     document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
     document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
 }
 
 function onDocumentMouseOut( event ) {
-
     document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
     document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
     document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
