@@ -20,7 +20,9 @@ function Responder(yPos) {
 	
 	//this.y = ;
 	this.line.position.y = 0 || yPos;
-	container.add(this.line);
+	
+	//referencing the global app object need to decouple
+	app.container.add(this.line);
 }
 
 Responder.prototype.createCircle = function() {

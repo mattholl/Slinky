@@ -10,7 +10,8 @@
 
 <script src="http://connect.soundcloud.com/sdk.js"></script>
 
-<script src="js/Responders.js"></script>
+<script src="js/Responder.js"></script>
+<script src="js/Three.js"></script>
 
 
 <script src="js/Track.js"></script>
@@ -20,13 +21,14 @@
 
 </head>
 <body>
-<div id="track-form-container">
+<div id="track-form-container" style="position: absolute; z-index: 100">
 	<form action="#" method="post" id="track-form">
 		<input type="text" placeholder="http://soundcloud.com/artist/track" name="track-url" />
 		<input type="submit" />
 	</form>
-</div>
 http://soundcloud.com/rob_booth/milanese-espantoso-freebie
+</div>
+
 <button id="play" >Play</button>
 <button id="stop" >Stop</button>
 

@@ -5,9 +5,9 @@
  */
 
 var Player = function(app) {
-	this.app = app;
-	this.track = null;
-	this.loading = false;
+    this.app = app;
+    this.track = null;
+    this.loading = false;
 
     //url is passed in line 106
     //this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
@@ -25,11 +25,11 @@ var Player = function(app) {
     
     this.trackForm = document.getElementById('track-form');
     this.trackForm.addEventListener('submit', function(e) {
-		var trackUrl = (this.elements['track-url'].value);
+        var trackUrl = (this.elements['track-url'].value);
 
-		app.player.getTrackFromURL(trackUrl);
+        app.player.getTrackFromURL(trackUrl);
 
-		e.preventDefault();
+        e.preventDefault();
     });
 
 
@@ -41,18 +41,16 @@ var Player = function(app) {
     this.stopButton = document.getElementById('stop');
     this.stopButton.addEventListener('click', function(e) {
         app.player.dancer.stop();
-    })
+    });
 
     //app.player.load() //takes this.track - pass it in to be sure - this.track created in getTRackFromURL
     //  create the dancer object
     //app.player.dancer.play();
     
     // this.trackForm.onsubmit(function() {
-    // 	//this.getNewTrack.bind(this));
-  		// console.log(this.trackForm);  
+    //  //this.getNewTrack.bind(this));
+        // console.log(this.trackForm);
     // });
-
-    	
 };
 
 
@@ -67,9 +65,9 @@ Player.prototype.getTrackFromURL = function(url, position) {
             return;
         }
 
-        if (position !== null) {
-            this.setTrack(track, position);
-        }
+        // if (position !== null) {
+        //     this.setTrack(track, position);
+        // }
         else {
             this.addTrack(track);
             this.load(); //this = player
@@ -80,7 +78,7 @@ Player.prototype.getTrackFromURL = function(url, position) {
 
 Player.prototype.addTrack = function(track) {
     //pulls json returned from sc api to use in ui
-	this.track = new Track(this.app, track);
+    this.track = new Track(this.app, track);
     //need to call laod once track is created
     //need to listen to dancer to laded event
 };
@@ -124,12 +122,15 @@ Player.prototype.onLoad = function() {
     console.log('player.onload fired');
     
     console.log(this.app);
-    this.app.createBeat();
+    app.createLowResponders();
+    app.createMidResponders();
+    app.createHighResponders();
+    
     //
     //this.dancer.bind('playing', function() {
     //    console.log('playing?');
     //});
-    
+    this.dancer.render();
     
 };
 

@@ -16,6 +16,29 @@ var Slinky  = function() {
 	this.player = new Player(this);
     this.beats = [];
     this.responders = [];
+
+    //setup three.js
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 10000 );
+    this.camera.position.z = 1000;
+    
+    this.scene.add( this.camera );
+    
+    this.renderer = new THREE.CanvasRenderer();
+    this.renderer.setSize( window.innerWidth, window.innerHeight );
+
+    document.body.appendChild( this.renderer.domElement );
+    document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+
+    this.container = new THREE.Object3D();
+    this.scene.add(this.container);
+
+    this.container.rotation.x = this.container.rotation.x += Math.PI/2;
+
+    //to pass ref to app in to responder creating functions
+    //this.app = this;
+
+    
 };
 
 //called from the onLoad function in Player
@@ -48,22 +71,22 @@ Slinky.prototype.createLowResponders = function() {
 
         (function(i) {
             
-            responders[i] = new Responder(startY + yInc*10);
+            app.responders[i] = new Responder(startY + yInc*10);
 
-            beats[i] = dancer.createBeat({
+            app.beats[i] = app.player.dancer.createBeat({
                 frequency : [freqLow, freqHigh],
                 threshold : 0.08,
                 onBeat : function() {
                     //start increasing the scale transform on the Responder object for this beat frequency
-                    responders[i].doScale = true;
+                    app.responders[i].doScale = true;
                 },
                 offBeat : function() {
                     //stop increasing scale, allow damping to take effect
-                    responders[i].doScale = false;
+                    app.responders[i].doScale = false;
                 }
             });
 
-            beats[i].on();
+            app.beats[i].on();
 
         }(i));
         
@@ -86,23 +109,23 @@ Slinky.prototype.createMidResponders = function() {
 
         (function(i) {
             
-            responders[i] = new Responder(startY + yInc*10);
+            app.responders[i] = new Responder(startY + yInc*10);
 
-            beats[i] = dancer.createBeat({
+            app.beats[i] = app.player.dancer.createBeat({
                 frequency : [freqLow, freqHigh],
                 threshold : 0.015,
                 onBeat : function() {
                     //start increasing the scale transform on the Responder object for this beat frequency
-                    responders[i].doScale = true;
+                    app.responders[i].doScale = true;
                     
                 },
                 offBeat : function() {
                     //stop increasing scale, allow damping to take effect
-                    responders[i].doScale = false;
+                    app.responders[i].doScale = false;
                 }
             });
 
-            beats[i].on();
+            app.beats[i].on();
 
         }(i));
         
@@ -123,23 +146,23 @@ Slinky.prototype.createHighResponders = function() {
 
         (function(i) {
             
-            responders[i] = new Responder(startY + yInc*10);
+            app.responders[i] = new Responder(startY + yInc*10);
 
-            beats[i] = dancer.createBeat({
+            app.beats[i] = app.player.dancer.createBeat({
                 frequency : [freqLow, freqHigh],
                 threshold : 0.009,
                 onBeat : function() {
                     //start increasing the scale transform on the Responder object for this beat frequency
-                    responders[i].doScale = true;
+                    app.responders[i].doScale = true;
                     
                 },
                 offBeat : function() {
                     //stop increasing scale, allow damping to take effect
-                    responders[i].doScale = false;
+                    app.responders[i].doScale = false;
                 }
             });
 
-            beats[i].on();
+            app.beats[i].on();
 
         }(i));
         
@@ -157,3 +180,57 @@ window.onload = function() {
     //app.player.getTrackFromURL('http://soundcloud.com/s_p_a_c_e_s/wireless');
     
 };
+
+
+Dancer.addPlugin( 'render', function() {
+
+    this.bind( 'update', function() {
+    
+        for(var i = 0; i < app.responders.length; i++) {
+            app.responders[i].update();
+        }
+
+        //use mouse / touch rotation around axis
+        app.container.rotation.x = app.container.rotation.x += ( targetRotation - app.container.rotation.x ) * 0.05;
+        app.renderer.render( app.scene, app.camera );
+    });
+
+});
+
+
+
+windowHalfX = window.innerWidth / 2;
+windowHalfY = window.innerHeight / 2;
+
+targetRotation = 0;
+targetRotationOnMouseDown = 0;
+
+function onDocumentMouseDown( event ) {
+    event.preventDefault();
+
+    document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+    document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+    document.addEventListener( 'mouseout', onDocumentMouseOut, false );
+
+    mouseYOnMouseDown = event.clientY - windowHalfY;
+    targetRotationOnMouseDown = targetRotation;
+}
+
+function onDocumentMouseMove( event ) {
+    mouseY = event.clientY - windowHalfY;
+    targetRotation = targetRotationOnMouseDown + ( mouseY - mouseYOnMouseDown ) * 0.05;
+}
+
+function onDocumentMouseUp( event ) {
+
+    document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+    document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+    document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+}
+
+function onDocumentMouseOut( event ) {
+
+    document.removeEventListener( 'mousemove', onDocumentMouseMove, false );
+    document.removeEventListener( 'mouseup', onDocumentMouseUp, false );
+    document.removeEventListener( 'mouseout', onDocumentMouseOut, false );
+}
