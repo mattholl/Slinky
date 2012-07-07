@@ -12,14 +12,18 @@ var UI = function(player, track) {
         app.player.dancer.stop();
     });
     
-    document.getElementById('track-form').addEventListener('submit', function(e) {
-        
-        var trackUrl = (this.elements['track-url'].value);
+    $('#track-form').on('submit', function(e) {
+    	var trackUrl = (this.elements['track-url'].value);
 
         player.getTrackFromURL(trackUrl);
 
         e.preventDefault();
-    });
+    })
+
+    // document.getElementById('track-form').addEventListener('submit', function(e) {
+        
+        
+    // });
 };
 
 UI.prototype.updateInfo = function(track) {
