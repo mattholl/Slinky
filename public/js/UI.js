@@ -32,5 +32,11 @@ UI.prototype.updateInfo = function(track) {
 	//javascript is like weaving simultaneous actions and reactions together - creating a web
 	//javascript apps - sitting between the server and the browser
 	//console.log(player.track);
+	var info = {
+		title : track.title,
+	};
+
+	$('header').render(info);
+
 	console.log(track.title);
 }

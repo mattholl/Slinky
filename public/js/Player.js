@@ -20,20 +20,9 @@ var Player = function(app) {
     //this.player = new Dancer();
 
     //set up form handling
-    
-    
 
     //User interface
     this.UI = new UI(this, this.track);
-
-    //app.player.load() //takes this.track - pass it in to be sure - this.track created in getTRackFromURL
-    //  create the dancer object
-    //app.player.dancer.play();
-    
-    // this.trackForm.onsubmit(function() {
-    //  //this.getNewTrack.bind(this));
-        // console.log(this.trackForm);
-    // });
 };
 
 
@@ -54,25 +43,12 @@ Player.prototype.getTrackFromURL = function(url, position) {
         //     this.setTrack(track, position);
         // }
         else {
-            //console.log(this);
-            //this.addTrack(track);
-            
             this.track = track;
             this.UI.updateInfo(this.track);
             this.load(this.track); //this = player
         }
     }.bind(this)); //binds Player to the value of this within the SC.get call
 };
-
-
-// Player.prototype.addTrack = function(track) {
-//     //pulls json returned from sc api to use in ui
-//     //this.track = new Track(this.app, track);
-//     //
-//     this.UI.updateInfo(this,track);
-// };
-
-
 
 Player.prototype.load = function(track) {
     
