@@ -21,7 +21,7 @@
 
 </head>
 <body>
-<header>
+<header class="open">
 	
 	<div id="track-info-container">
 		<div id="stats">
@@ -36,7 +36,7 @@
 			</a>
 		
 			<a id="user-info" class="user-url" href="/">
-				<h2 data-bind="user">User</h2>
+				<h2 data-bind="user">Username</h2>
 			</a>
 		</div>
 		
@@ -47,6 +47,7 @@
 			<p class="url">http://soundcloud.com/rob_booth/milanese-espantoso-freebie</p>
 			<p class="url">http://soundcloud.com/das-boy/aphex-twin-in-store-ambients-1995-sire-records</p>
 		</div>
+		http://soundcloud.com/artist/track
 		-->
 
 
@@ -54,7 +55,7 @@
 
 	<div id="track-form-container">
 		<form id="track-form" action="#" method="post">
-			<input name="track-url" type="text" placeholder="http://soundcloud.com/artist/track"/>
+			<input name="track-url" type="text" placeholder="http://soundcloud.com/artist/track" value="http://soundcloud.com/rob_booth/milanese-espantoso-freebie"/>
 			<input type="submit" />
 		</form>
 		
@@ -65,6 +66,6 @@
 		pulldown button
 	</div>
 </header>
-	
+
 </body>
 </html>

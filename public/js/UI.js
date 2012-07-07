@@ -18,7 +18,7 @@ var UI = function(player, track) {
         player.getTrackFromURL(trackUrl);
 
         e.preventDefault();
-    })
+    });
 
     // $('#pulldown-button').on('click', function(e) {
     // 	$('header').css('top', '0');
@@ -34,10 +34,9 @@ var UI = function(player, track) {
     // 	console.log('slide up');
     // 	e.preventDefault();
     // })
+	
 
-    $('#pulldown-button').live('click', function() {
-    	console.log('click');
-    });
+    $('header').on('click', '#pulldown-button', this.toggleHeader);
 
     // document.getElementById('track-form').addEventListener('submit', function(e) {
         
@@ -63,3 +62,16 @@ UI.prototype.updateInfo = function(track) {
 	$('#track-url').attr('href', track.permalink_url);
 	$('.user-url').attr('href', track.user.permalink_url);
 };
+
+UI.prototype.toggleHeader = function() {
+	var elHeader = $('header');
+
+	if(elHeader.hasClass('open')) {
+		elHeader.css('top', '-100px');
+	} else {
+		elHeader.css('top', '0px');
+	}
+
+	elHeader.toggleClass('open closed');
+
+}
