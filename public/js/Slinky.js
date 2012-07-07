@@ -13,11 +13,13 @@ var Slinky  = function() {
 		client_id : this.clientID
 	});
 
-	this.player = new Player(this);
+    //Player + Dancer
+    //TODO : should Dancer be on the app rather than the player?
+	this.player = new Player(this, this.ui);
     this.beats = [];
     this.responders = [];
 
-    //setup three.js
+    //Three.js
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 10000 );
     this.camera.position.z = 1000;
@@ -29,7 +31,6 @@ var Slinky  = function() {
 
     document.body.appendChild( this.renderer.domElement );
     
-
     this.container = new THREE.Object3D();
     this.scene.add(this.container);
 
@@ -42,7 +43,8 @@ var Slinky  = function() {
     this.targetRotationOnMouseDown = 0;
     this.mouseYOnMouseDown = 0;
     this.mouseY = 0;
-    document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+    
+    this.renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
 };
 
 //called from the onLoad function in Player

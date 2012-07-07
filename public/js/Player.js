@@ -18,8 +18,6 @@ var Player = function(app) {
     //need to pass the call back events through to dancer...
     //
     //this.player = new Dancer();
-    
-
 
     //set up form handling
     
@@ -31,6 +29,9 @@ var Player = function(app) {
 
         e.preventDefault();
     });
+
+    //User interface
+    this.UI = new UI(this, this.track);
 
 
     this.playButton = document.getElementById('play');
@@ -60,6 +61,8 @@ var Player = function(app) {
  */
 Player.prototype.getTrackFromURL = function(url, position) {
     SC.get('/resolve', {url: url}, function(track, error) {
+        //look at track and chck size etc.
+
         if (error) {
             console.error(error.message);
             return;
@@ -79,8 +82,9 @@ Player.prototype.getTrackFromURL = function(url, position) {
 Player.prototype.addTrack = function(track) {
     //pulls json returned from sc api to use in ui
     this.track = new Track(this.app, track);
-    //need to call laod once track is created
-    //need to listen to dancer to laded event
+    //
+    
+    
 };
 
 
