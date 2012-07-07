@@ -1,16 +1,6 @@
 var UI = function(player, track) {
 	this.player = player;
 	this.track = track;
-
-    this.playButton = document.getElementById('play');
-    this.playButton.addEventListener('click', function(e) {
-        app.player.dancer.play();
-    });
-
-    this.stopButton = document.getElementById('stop');
-    this.stopButton.addEventListener('click', function(e) {
-        app.player.dancer.stop();
-    });
     
     $('#track-form').on('submit', function(e) {
     	var trackUrl = (this.elements['track-url'].value);
@@ -36,7 +26,7 @@ var UI = function(player, track) {
     // })
 	
 
-    $('header').on('click', '#pulldown-button', this.toggleHeader);
+    $('header').on('click', '.pulldown-triangle', this.toggleHeader);
 
     // document.getElementById('track-form').addEventListener('submit', function(e) {
         
@@ -64,14 +54,20 @@ UI.prototype.updateInfo = function(track) {
 };
 
 UI.prototype.toggleHeader = function() {
+	//easeInExpo
+	//http://matthewlein.com/ceaser/
+
 	var elHeader = $('header');
 
 	if(elHeader.hasClass('open')) {
-		elHeader.css('top', '-100px');
+		$(elHeader).transition({ y: '-100px' }, 200, 'snap');
+
+	} else if(elHeader.hasClass('closed')) {
+		$(elHeader).transition({ y: '0' }, 300, 'cubic-bezier(0.460, 0.045, 0.750, 0.150)' );
+
 	} else {
-		elHeader.css('top', '0px');
+		return;
 	}
 
 	elHeader.toggleClass('open closed');
-
-}
+};
