@@ -21,28 +21,10 @@ var Player = function(app) {
 
     //set up form handling
     
-    this.trackForm = document.getElementById('track-form');
-    this.trackForm.addEventListener('submit', function(e) {
-        var trackUrl = (this.elements['track-url'].value);
-
-        app.player.getTrackFromURL(trackUrl);
-
-        e.preventDefault();
-    });
+    
 
     //User interface
     this.UI = new UI(this, this.track);
-
-
-    this.playButton = document.getElementById('play');
-    this.playButton.addEventListener('click', function(e) {
-        app.player.dancer.play();
-    });
-
-    this.stopButton = document.getElementById('stop');
-    this.stopButton.addEventListener('click', function(e) {
-        app.player.dancer.stop();
-    });
 
     //app.player.load() //takes this.track - pass it in to be sure - this.track created in getTRackFromURL
     //  create the dancer object
@@ -72,29 +54,33 @@ Player.prototype.getTrackFromURL = function(url, position) {
         //     this.setTrack(track, position);
         // }
         else {
-            this.addTrack(track);
-            this.load(); //this = player
+            //console.log(this);
+            //this.addTrack(track);
+            
+            this.track = track;
+            this.UI.updateInfo(this.track);
+            this.load(this.track); //this = player
         }
     }.bind(this)); //binds Player to the value of this within the SC.get call
 };
 
 
-Player.prototype.addTrack = function(track) {
-    //pulls json returned from sc api to use in ui
-    this.track = new Track(this.app, track);
-    //
-    
-    
-};
+// Player.prototype.addTrack = function(track) {
+//     //pulls json returned from sc api to use in ui
+//     //this.track = new Track(this.app, track);
+//     //
+//     this.UI.updateInfo(this,track);
+// };
 
 
 
 Player.prototype.load = function(track) {
-    if (this.track.track.stream_url) {
+    
+    if (track.stream_url) {
         // Load the track from our Node.js proxy, rather than straight from
         // SoundCloud because of
         // http://code.google.com/p/chromium/issues/detail?id=96136
-        var url = '/proxy?url=' + this.track.track.stream_url;
+        var url = '/proxy?url=' + this.track.stream_url;
         this.dancer = new Dancer(url);
         //this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
         this.loading = true;
