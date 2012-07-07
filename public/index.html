@@ -13,8 +13,6 @@
 <script src="js/Responder.js"></script>
 <script src="js/Three.js"></script>
 
-<script src=""
-
 <!-- <script src="js/Track.js"></script> -->
 <script src="js/UI.js"></script>
 <script src="js/dancer.js"></script>
@@ -25,21 +23,48 @@
 <body>
 <header>
 	
-	<h1 data-bind="title">Track</h1>
-	<form action="#" method="post" id="track-form">
-		//seaching with ajax? - post messages on socket 
-		<input type="text" placeholder="http://soundcloud.com/artist/track" name="track-url" />
-		<input type="submit" />
-	</form>
-	<div id="suggestions">Or try these:
-		<p class="url">http://soundcloud.com/rob_booth/milanese-espantoso-freebie</p>
-		<p class="url">http://soundcloud.com/das-boy/aphex-twin-in-store-ambients-1995-sire-records</p>
-	</div>
-	<button id="play" >Play</button>
-	<button id="stop" >Stop</button>
-	
-</header>
-test
+	<div id="track-info-container">
+		<div id="stats">
+			Fps indicator
+		</div>
+		<a id="track-image" class="user-url" href="/">
+			<img width="50px" height="50px" src="img/sc-logo-large.png" />
+		</a>
+		<div id="track-info">
+			<a id="track-url" href="/">
+				<h1 data-bind="title">Track</h1>
+			</a>
+		
+			<a id="user-info" class="user-url" href="/">
+				<h2 data-bind="user">User</h2>
+			</a>
+		</div>
+		
+		<!-- little i in a circle for info
+		lightbox - same as for when it;s a person or a track set
+		info on libs used
+		<div id="suggestions">Or try these:
+			<p class="url">http://soundcloud.com/rob_booth/milanese-espantoso-freebie</p>
+			<p class="url">http://soundcloud.com/das-boy/aphex-twin-in-store-ambients-1995-sire-records</p>
+		</div>
+		-->
 
+
+	</div>
+
+	<div id="track-form-container">
+		<form id="track-form" action="#" method="post">
+			<input name="track-url" type="text" placeholder="http://soundcloud.com/artist/track"/>
+			<input type="submit" />
+		</form>
+		
+		<button id="play" >Play</button>
+		<button id="stop" >Stop</button>
+	</div>
+	<div id="pulldown-button">
+		pulldown button
+	</div>
+</header>
+	
 </body>
 </html>

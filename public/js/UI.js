@@ -20,6 +20,19 @@ var UI = function(player, track) {
         e.preventDefault();
     })
 
+    // $('#pulldown-button').on('click', function(e) {
+    // 	$('header').css('top', '0');
+    // });
+    
+    $('#pulldown-button').toggle(function(e) {
+    	$('header').css('top', '0');
+    	e.preventDefault();
+    }, function(e) {
+    	$('header').css('top', '-100px');
+    	e.preventDefault();
+    })
+
+
     // document.getElementById('track-form').addEventListener('submit', function(e) {
         
         
@@ -31,12 +44,16 @@ UI.prototype.updateInfo = function(track) {
 	//variables should be in player.track
 	//javascript is like weaving simultaneous actions and reactions together - creating a web
 	//javascript apps - sitting between the server and the browser
-	//console.log(player.track);
+	console.log(track.user);
+	
 	var info = {
 		title : track.title,
+		user : track.user.username
 	};
 
 	$('header').render(info);
 
-	console.log(track.title);
-}
+	$('#track-image img').attr('src', track.artwork_url);
+	$('#track-url').attr('href', track.permalink_url);
+	$('.user-url').attr('href', track.user.permalink_url);
+};
