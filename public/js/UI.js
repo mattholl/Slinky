@@ -24,14 +24,20 @@ var UI = function(player, track) {
     // 	$('header').css('top', '0');
     // });
     
-    $('#pulldown-button').toggle(function(e) {
-    	$('header').css('top', '0');
-    	e.preventDefault();
-    }, function(e) {
-    	$('header').css('top', '-100px');
-    	e.preventDefault();
-    })
+    // $('#pulldown-button').toggle(function(e) {
+    // 	$('header').css('top', '0');
+    // 	console.log('slide down');
+    // 	e.preventDefault();
+    	
+    // }, function(e) {
+    // 	$('header').css('top', '-100px');
+    // 	console.log('slide up');
+    // 	e.preventDefault();
+    // })
 
+    $('#pulldown-button').live('click', function() {
+    	console.log('click');
+    });
 
     // document.getElementById('track-form').addEventListener('submit', function(e) {
         

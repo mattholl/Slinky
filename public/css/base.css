@@ -24,7 +24,7 @@ canvas {
 header {
 	background: #4d4d4d;
 	position: absolute;
-	top: -100px;
+	/*top: -100px;*/
 	/*height: 100%;*/
 	width: 100%;
 	border-bottom: 1px solid black;
