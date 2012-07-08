@@ -25,6 +25,10 @@ header {
 	background: #4d4d4d;
 	position: absolute;
 	/*top: -100px;*/
+    -webkit-transform: translateZ(0);
+    -webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden; 
+    -webkit-transform: translateY(-100px);
 	height: 105px;
 	width: 100%;
 	border-bottom: 1px solid black;
@@ -111,31 +115,118 @@ header {
 
 .pulldown-triangle {
 	position: absolute;
-	bottom: -40px;
+	bottom: -30px;
 	left: 80%;
 	/*background: #4d4d4d;*/
 	cursor: pointer;
 
     width: 0; 
     height: 0;
-    border-top: 40px solid #4d4d4d;
-    border-left: 40px solid transparent; 
-    border-right: 40px solid transparent; 
-
+    border-top: 30px solid #4d4d4d;
+    border-left: 30px solid transparent; 
+    border-right: 30px solid transparent; 
 }
 
-#dropdown-circle {
+.pulldown-rectangle {
     position: absolute;
-    left: -12px;
-    top: -42px;
+    bottom: -30px;
+    left: 80%;
+    /*background: #4d4d4d;*/
+    cursor: pointer;
+    background: #4d4d4d;
+    width: 60px; 
+    height: 30px;
+    /*border-top: 40px solid #4d4d4d;
+    border-left: 40px solid transparent; 
+    border-right: 40px solid transparent;*/
+}
+
+.ui-closed {
+    position: absolute;
+    left: -9px;
+    top: -30px;
     
-    width:20px;
-    height:20px;
-    border:2px solid green ;/*#e00000;*/
+    width:15px;
+    height:15px;
+    border:2px solid #e00000 ;/*#e00000;*/
     -moz-border-radius:20px;
     -webkit-border-radius:20px;
     border-radius:20px;
 }
+
+.ui-open {
+    position: relative;
+    left: 20px;
+    top: 0px;
+
+    width:18px;
+    height:18px;
+    background: #e00000;
+}
+
+#dropdown-cross {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+
+    width: 18px;
+    height: 18px;
+
+    display: none;
+}
+
+#dropdown-cross #top-triangle {
+    position:relative;
+    top: 1px;
+    left: 2px;
+
+    width: 0;
+    height: 0;
+    border-top: 7px solid #4d4d4d;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+}
+
+#dropdown-cross #right-triangle {
+    position:relative;
+    top: -5px;
+    left: 10px;
+
+    width: 0;
+    height: 0;
+    border-bottom: 7px solid transparent;
+    border-top: 7px solid transparent;
+    border-right: 7px solid #4d4d4d;
+    /*border-right: 7px solid transparent;*/
+}
+
+
+#dropdown-cross #bottom-triangle {
+    position:relative;
+    top: -11px;
+    left: 2px;
+
+    width: 0;
+    height: 0;
+    border-bottom: 7px solid #4d4d4d;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+}
+
+#dropdown-cross #left-triangle {
+    position:relative;
+    top: -26px;
+    left: 1px;
+
+    width: 0;
+    height: 0;
+    border-bottom: 7px solid transparent;
+    border-top: 7px solid transparent;
+    border-left: 7px solid #4d4d4d;
+    /*border-right: 7px solid transparent;*/
+}
+
+
 
 
 /**
@@ -144,49 +235,45 @@ header {
 /* http://cssload.net/ */
 
 #bowlG{
+position:relative;
+width:15px;
+height:15px;
 
-    position:relative;
-    left: -12px;
-    top: -42px;
+left: -8px;
+top: -29px;
 
-    width:20px;
-    height:20px;
 }
 
 #bowl_ringG{
-    position:absolute;
-
-    /*left: -12px;
-    top: -40px;*/
-
-    width:20px;
-    height:20px;
-    border:2px solid #e00000;
-    -moz-border-radius:20px;
-    -webkit-border-radius:20px;
-    border-radius:20px;
+position:absolute;
+width:15px;
+height:15px;
+border:1px solid #e00000;
+-moz-border-radius:15px;
+-webkit-border-radius:15px;
+border-radius:15px;
 }
 
 .ball_holderG{
 position:absolute;
-width:5px;
-height:20px;
-left:7px;
+width:4px;
+height:15px;
+left:6px;
 top:0px;
 -webkit-animation-name:ball_moveG;
--webkit-animation-duration:0.6s;
+-webkit-animation-duration:0.7s;
 -webkit-animation-iteration-count:infinite;
 -webkit-animation-timing-function:linear;
 -moz-animation-name:ball_moveG;
--moz-animation-duration:0.6s;
+-moz-animation-duration:0.7s;
 -moz-animation-iteration-count:infinite;
 -moz-animation-timing-function:linear;
 -o-animation-name:ball_moveG;
--o-animation-duration:0.6s;
+-o-animation-duration:0.7s;
 -o-animation-iteration-count:infinite;
 -o-animation-timing-function:linear;
 -ms-animation-name:ball_moveG;
--ms-animation-duration:0.6s;
+-ms-animation-duration:0.7s;
 -ms-animation-iteration-count:infinite;
 -ms-animation-timing-function:linear;
 }
@@ -194,13 +281,13 @@ top:0px;
 .ballG{
 position:absolute;
 left:0px;
-top:-5px;
-width:8px;
-height:8px;
+top:-4px;
+width:6px;
+height:6px;
 background:#e00000;
--moz-border-radius:7px;
--webkit-border-radius:7px;
-border-radius:7px;
+-moz-border-radius:5px;
+-webkit-border-radius:5px;
+border-radius:5px;
 }
 
 @-webkit-keyframes ball_moveG{
