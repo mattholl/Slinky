@@ -46,25 +46,35 @@ header {
 	/*height: 100%;*/
 }
 
-#stats {
-	margin-top: 20px;
-	margin-left: 20px;
-	float: left;
-}
-
-#track-image {
+a#track-image {
 	margin-top: 10px;
-	margin-left: 20px;
+	width: 6%;
 	float: left;
 	
 }
 
 #track-info {
 	float: left;
+    width: 80%;
+    position: relative;
+    left: 50%;
+    margin-left: -400px;
 }
 
 #track-info a {
 	display :block;
+}
+
+a#track-url {
+    float: left;
+    width: 90%;
+    overflow: hidden;   
+}
+
+a#user-info {
+    float: left;
+    width: 90%;
+    overflow: hidden;
 }
 
 #track-url:link,
@@ -74,9 +84,7 @@ header {
 #user-info:link,
 #user-info:visited,
 #user-info:active {
-	/*float: left;*/
 	color: #ababab;
-	margin-left: 20px;
 	text-decoration: none;
 }
 
@@ -84,9 +92,7 @@ header {
 #user-info:hover {
 	text-decoration: underline;
 }
-#track-url {
-	
-}
+
 #track-url h1 {
 	font-size: 20px;
 	margin-bottom: 0;
@@ -108,10 +114,76 @@ header {
 	clear: left;
 }
 
-#track-form-container input[type=text] {
-	width: 400px;
+
+/**
+ *
+ *
+ * track form
+ * 
+ */
+
+#track-form-container form {
+    position: relative;
+    width: 620px;
+    left: 50%;
+    margin-left: -400px;
+    float: left;
 }
 
+#track-form-container input[type=text] {
+    border: 1px solid #cccccc;
+    padding: 6px 4px;
+    outline: none;
+    -webkit-border-radius: 2px;
+    width: 600px;
+    color: #555555;
+
+    margin-top: 6px;
+    /*position: relative;
+    left: 50%;
+    margin-left: -400px;*/
+}
+
+
+#success-image {
+    width: 20px;
+    height: 20px;
+    float: left;
+    position: relative;
+    left: 50%;
+
+    background: green;
+}
+
+#play-stop-button {
+    width: 20px;
+    height: 20px;
+    float: left;
+    position: relative;
+    left: 50%;
+
+    background: red;
+}
+
+/**
+ *
+ * stats
+ * 
+ */
+
+#stats {
+    margin-top: 20px;
+    position: absolute;
+    right: 0;
+    float: left;
+}
+
+/**
+ *
+ *
+ * UI pulldown
+ * 
+ */
 
 .pulldown-triangle {
 	position: absolute;
@@ -233,7 +305,7 @@ header {
  * loading animation
  */
 /* http://cssload.net/ */
-
+/*
 #bowlG{
 position:relative;
 width:15px;
@@ -324,4 +396,4 @@ border-radius:5px;
 100%{
 -ms-transform:rotate(360deg)}
 
-}
+}*/
