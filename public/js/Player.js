@@ -33,7 +33,7 @@ var Player = function(app) {
 Player.prototype.getTrackFromURL = function(url, position) {
     SC.get('/resolve', {url: url}, function(track, error) {
         //look at track and chck size etc.
-
+        console.log(track);
         if (error) {
             console.error(error.message);
             return;
@@ -63,7 +63,6 @@ Player.prototype.load = function(track) {
 
         this.dancer.bind('loaded', function() {
             
-            console.log('laoded');
             app.player.onLoad();//too tightly coupled to app structure??
             //console.log(this); = Dancer
             //
@@ -75,6 +74,7 @@ Player.prototype.load = function(track) {
     else {
         // Track is not streamable, so just skip to the next one
         //this.next();
+        this.UI.trackWarning();
     }
 };
 
@@ -87,17 +87,12 @@ Player.prototype.onLoad = function() {
     //pub / sub to subscribe creating dancer beats to player.onLoad firing
     console.log('player.onload fired');
     
-    console.log(this.app);
     app.createLowResponders();
     app.createMidResponders();
     app.createHighResponders();
     
-    //
-    //this.dancer.bind('playing', function() {
-    //    console.log('playing?');
-    //});
+    //fire the plugin set up in slinky
     this.dancer.render();
-    
 };
 
 Player.prototype.onError = function() {

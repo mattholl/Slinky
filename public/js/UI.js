@@ -1,14 +1,8 @@
 var UI = function(player, track) {
 	this.player = player;
-	this.track = track;
+	//this.track = track;
     
-    $('#track-form').on('submit', function(e) {
-    	var trackUrl = (this.elements['track-url'].value);
-
-        player.getTrackFromURL(trackUrl);
-
-        e.preventDefault();
-    });
+    
 
     // $('#pulldown-button').on('click', function(e) {
     // 	$('header').css('top', '0');
@@ -26,13 +20,52 @@ var UI = function(player, track) {
     // })
 	
 
-    $('header').on('click', '#ui-pulldown', this.toggleHeader);
+    
 
     // document.getElementById('track-form').addEventListener('submit', function(e) {
         
         
     // });
+    this.attachEvents(this.player);
 };
+
+UI.prototype.attachEvents = function(player) {
+	//pulldown form
+	$('header').on('click', '#ui-pulldown', this.toggleHeader);
+
+	//form sumission
+	$('#track-form').on('submit', function(e) {
+    	var trackUrl = (this.elements['track-url'].value);
+
+        player.getTrackFromURL(trackUrl);
+
+        e.preventDefault();
+    });
+
+
+
+	$('#track-form').on('keyup', function(e) {
+    	var trackUrl = (this.elements['track-url'].value);
+    	
+        player.getTrackFromURL(trackUrl);
+
+        e.preventDefault();
+    });
+
+
+    $('#success-image').on('click', function(e) {
+    	$('#track-form').trigger('submit');
+    });
+
+
+	$('#play-stop-button').live('click', function(e) {
+		var player = window.app.player;
+		player.dancer.play();
+	});
+
+
+};
+
 
 UI.prototype.updateInfo = function(track) {
 	//get dom elements
@@ -70,7 +103,7 @@ UI.prototype.toggleHeader = function() {
 
 		$('#dropdown-cross').css('display', 'none');
 
-		$(elHeader).find('#ui-pulldown').css({
+		elHeader.find('#ui-pulldown').css({
 			'border-top' : '30px solid #4d4d4d',
 			'border-left' : '30px solid transparent',
 			'border-right' : '30px solid transparent',
@@ -101,9 +134,19 @@ UI.prototype.toggleHeader = function() {
 			'background' : '#4d4d4d'
 		});
 
-	} else {
-		return;
 	}
 
 	elHeader.toggleClass('open closed');
+};
+
+UI.prototype.trackWarning = function() {
+	//post warning
+	$('header').render({
+		title : "Looks like that's a link to a user page or a set",
+		user : "It needs to be a track url."
+	});
+};
+
+UI.prototype.URLresolved = function() {
+	//change the background colour of the button
 };

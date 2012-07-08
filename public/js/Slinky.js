@@ -146,8 +146,12 @@ Slinky.prototype.createHighResponders = function() {
 //fire it up
 window.onload = function() {
     window.app = new Slinky();
+    window.app.player.UI.toggleHeader();
 };
 
+/*
+ * Plug in to the dancer objects update function
+ */
 
 Dancer.addPlugin( 'render', function() {
     this.bind( 'update', function() {

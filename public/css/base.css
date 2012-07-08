@@ -38,6 +38,16 @@ header {
 	/*height: 200px;*/
 }
 
+#app-info {
+    width: 20px;
+    height: 20px;
+
+    position: relative;
+    float: left;
+    left: 2px;
+    top: 3px;
+}
+
 #track-info-container {
 	background: #000000;
 	color: #ffffff;
