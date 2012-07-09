@@ -32,17 +32,13 @@ var Player = function(app) {
  */
 Player.prototype.getTrackFromURL = function(url, position) {
     SC.get('/resolve', {url: url}, function(track, error) {
-        //look at track and chck size etc.
-        console.log(track);
+        
+        //TODO: look at track and chck size etc.
         if (error) {
-            console.error(error.message);
+            //track info not found
+            this.UI.trackWarning();
             return;
-        }
-
-        // if (position !== null) {
-        //     this.setTrack(track, position);
-        // }
-        else {
+        } else {
             this.track = track;
             this.UI.updateInfo(this.track);
             this.load(this.track); //this = player
@@ -61,19 +57,15 @@ Player.prototype.load = function(track) {
         //this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
         this.loading = true;
 
+        this.UI.loadingIndicator();
+
         this.dancer.bind('loaded', function() {
-            
             app.player.onLoad();//too tightly coupled to app structure??
-            //console.log(this); = Dancer
-            //
-           
-            
         });
 
     }
     else {
-        // Track is not streamable, so just skip to the next one
-        //this.next();
+        //there's no stream url
         this.UI.trackWarning();
     }
 };
@@ -85,8 +77,13 @@ Player.prototype.onLoad = function() {
     //this.app.trackView.unsetLoading();
     this.loading = false;
     //pub / sub to subscribe creating dancer beats to player.onLoad firing
+    
+
     console.log('player.onload fired');
     
+    //all ok so allow play
+    this.UI.playReady();
+
     app.createLowResponders();
     app.createMidResponders();
     app.createHighResponders();

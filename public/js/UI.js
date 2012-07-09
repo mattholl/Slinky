@@ -34,31 +34,26 @@ UI.prototype.attachEvents = function(player) {
 	$('header').on('click', '#ui-pulldown', this.toggleHeader);
 
 	//form sumission
-	$('#track-form').on('submit', function(e) {
+	$('header').on('submit keyup', '#track-form', function(e) {
     	var trackUrl = (this.elements['track-url'].value);
 
         player.getTrackFromURL(trackUrl);
 
         e.preventDefault();
+        
     });
 
-
-
-	$('#track-form').on('keyup', function(e) {
-    	var trackUrl = (this.elements['track-url'].value);
+	//TODO - put this into timeout
+	// $('header').on('keyup', '#track-form', function(e) {
+ //    	var trackUrl = (this.elements['track-url'].value);
     	
-        player.getTrackFromURL(trackUrl);
+ //        player.getTrackFromURL(trackUrl);
 
-        e.preventDefault();
-    });
-
-
-    $('#success-image').on('click', function(e) {
-    	$('#track-form').trigger('submit');
-    });
+ //        e.preventDefault();
+ //    });
 
 
-	$('#play-stop-button').live('click', function(e) {
+	$('header').on('click', '#play-stop-button', function(e) {
 		var player = window.app.player;
 		player.dancer.play();
 	});
@@ -66,13 +61,26 @@ UI.prototype.attachEvents = function(player) {
 
 };
 
+UI.prototype.loadingIndicator = function() {
+	//so adda throbber
+	console.log('throbber added');
+
+}
+
+UI.prototype.playReady = function() {
+	//attach play / stop events
+	//need to reset dancer after stop?
+	//or reset everything when a new track is searched for
+	//remove throbber from play button....
+	console.log('throbber removed');
+	console.log('play ready');
+};
 
 UI.prototype.updateInfo = function(track) {
 	//get dom elements
 	//variables should be in player.track
 	//javascript is like weaving simultaneous actions and reactions together - creating a web
 	//javascript apps - sitting between the server and the browser
-	console.log(track.user);
 	
 	var info = {
 		title : track.title,
@@ -84,6 +92,8 @@ UI.prototype.updateInfo = function(track) {
 	$('#track-image img').attr('src', track.artwork_url);
 	$('#track-url').attr('href', track.permalink_url);
 	$('.user-url').attr('href', track.user.permalink_url);
+
+	//make the success tick not opaque
 };
 
 UI.prototype.toggleHeader = function() {
