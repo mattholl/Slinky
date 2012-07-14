@@ -22,7 +22,7 @@ var Player = function(app) {
     //set up form handling
 
     //User interface
-    this.UI = new UI(this, this.track);
+    this.UI = new UI(this, this.track, this.app);
 
     this._this = this;
 };

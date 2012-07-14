@@ -1,5 +1,6 @@
-var UI = function(player, track) {
+var UI = function(player, track, app) {
 	this.player = player;
+	this.app = app;
 	this._this = this;
 	//this.track = track;
     
@@ -54,8 +55,6 @@ UI.prototype.attachEvents = function(UI, player) {
 UI.prototype.loadingIndicator = function() {
 	//so adda throbber
 	console.log('throbber added');
-
-	//cmd.js - include throbber.js
 	cmd("js/throbber.js", function(loaded) {
 		
 		console.log('success: ' + loaded);
@@ -65,7 +64,7 @@ UI.prototype.loadingIndicator = function() {
 			//although it returns true even if throbber.js 404s
 			console.log('loaded from cmd.js callback');
 			
-			console.log(this); //this = window
+			//console.log(this); //this = window
 
 			var throb = new Throbber({
 					color: 'yellow',
@@ -81,45 +80,41 @@ UI.prototype.loadingIndicator = function() {
 				'left' : '5px',
 			});
 
-
-			//throb.appendTo(document.getElementById('track-image'));
-
-
-				//canvas needs
-				//display: block;
-					// position: absolute;
-					// top: 15px;
-					// left: 5px;
-
-
-				//$('#track-image').append(throb);
 			throb.start();
 
-			console.log(throb);
-			console.log(throb.elem);
-
-				//.appendTo( trackImage ).start();
-
-				//trackImage.append(throb);
-
-				// document.getElementById('b3').onclick = function() {
-				// 	throb.toggle();
-				// };
-
-				//trackImage.append(canvas);
-
-				//console.log(canvas);
+			console.log('throb started');
 		}
-		
 	});
-
 }
 
-UI.prototype.killLoadingIndicator = function() {
-	//remove dom element
-	//kill canvas animation
-	$('#track-image canvas').remove();
-}
+
+
+UI.prototype.playButtonHover = function() {
+	$('#play-stop-button-wrapper').toggleClass('play-button-hover');
+	$('#play-stop-button').toggleClass('play-button-hover');
+};
+
+UI.prototype.playButtonClick = function() {
+	//e.stopPropagation();
+	//this depresses the button on click
+	//need to change to a stop symbol - toggle header up and start dancer playing
+	//attach an event so that the next click stop dancer?
+	//on stop we need to clear the currently rendered canvas as dancer restarts when play is called again
+	$('#play-stop-button-wrapper').toggleClass('play-button-click play-button-hover');
+	$('#play-stop-button').toggleClass('play-button-click play-button-hover');
+
+
+	//if ui visisble && if dancer is playing
+	var elHeader = $('header');
+	if(elHeader.hasClass('open')) {
+		app.player.UI.toggleHeader();	
+	};
+
+	app.player.dancer.play();
+	console.log('dancer played ');
+	
+};
+
 
 UI.prototype.playReady = function(player) {
 	//attach play / stop events
@@ -127,24 +122,34 @@ UI.prototype.playReady = function(player) {
 	//or reset everything when a new track is searched for
 	//remove throbber from play button....
 	console.log('throbber removed');
-	this.killLoadingIndicator();
-
+	$('#track-image canvas').remove();
+	//turn up opacity on green ready indicator
+	$('#success-image').removeClass('success-waiting').addClass('success-ready');
+	
 	//////
 	console.log('play ready');
 	//now add
 	////TODO
 	//add click listener to play-stop-button
 	//add hover events as well
-	//change opacity
-	$('header').on('hover', '#play-stop-button-wrapper', function(e) {
-		//e.preventDefault();
-		//console.log(this);
-		$('#play-stop-button-wrapper').toggleClass('play-button-hover');
-		$('#play-stop-button').toggleClass('play-button-hover');
-		e.stopPropagation();
-		
-	});
-	$('#success-image').removeClass('success-waiting').addClass('success-ready');
+	//change opacity on play
+	//
+	//TODO make this work with bubbling - not working as i'm expecting
+	//although won't work in this way when it is bound direct to object, shld be somthing like:
+	//$('#play-stop-button-wrapper').on('#play-stop-button', 'hover', this.playButtonHover);
+	//something in using height = 0 to get the triangle would a height other then 0 fix it?
+	//
+	//
+	//
+	//assign events - remove with .off() when form get focus again?
+	//
+	//
+
+	$('#play-stop-button-wrapper').on('hover', this.playButtonHover);
+	$('#play-stop-button-wrapper').on('click', this.playButtonClick);
+
+	$('#play-stop-button-wrapper').removeClass('play-stop-button-wrapper-waiting').addClass('play-stop-button-wrapper-ready');
+
 
 	// $('header').on('hover', '#play-stop-button', function(e) {
 	// 	//e.preventDefault();
@@ -154,38 +159,11 @@ UI.prototype.playReady = function(player) {
 	// 	e.stopPropagation();
 	// });
 
+	$('#play-stop-button').on('hover', this.playButtonHover);
+	$('#play-stop-button').on('click', this.playButtonClick);
 
-	$('header').on('click', '#play-stop-button', function(e) {
-		
-		//this depresses the button on click
-		//need to change to a stop symbol - toggle header up and start dancer playing
-		//attach an event so that the next click stop dancer?
-		
-		//on stop we need to clear the currently rendered canvas as dancer restarts when play is called again
-		$('#play-stop-button-wrapper').toggleClass('play-button-click play-button-hover');
-		$('#play-stop-button').toggleClass('play-button-click play-button-hover');
+	$('#play-stop-button').removeClass('play-stop-button-waiting').addClass('play-stop-button-ready');
 
-
-		//if ui visisble && if dancer is playing
-		var elHeader = $('header');
-		if(elHeader.hasClass('open')) {
-			app.player.UI.toggleHeader();	
-		};
-
-		//app.player.dancer.play();
-		console.log('dancer played ');
-		console.log('we bubbled');
-	});
-
-	// $('header').on('click', '#play-stop-button-wrapper', function(e) {
-		
-	// 	$('#play-stop-button-wrapper').toggleClass('play-button-click play-button-hover');
-	// 	$('#play-stop-button').toggleClass('play-button-click play-button-hover');
-
-	// 	//var player = window.app.player;
-	// 	//player.dancer.play();
-	// 	console.log('we bubbled');
-	// });
 };
 
 UI.prototype.updateInfo = function(track) {
