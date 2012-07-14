@@ -153,8 +153,11 @@ window.onload = function() {
  * Plug in to the dancer objects update function
  */
 
-Dancer.addPlugin( 'render', function() {
+Dancer.addPlugin( 'ready', function() {
     this.bind( 'update', function() {
+        //TODO
+        //put raf in here
+        //same as putting in a timeut with set framerate
         for(var i = 0; i < app.responders.length; i++) {
             app.responders[i].update();
         }

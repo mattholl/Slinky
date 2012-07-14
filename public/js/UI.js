@@ -1,5 +1,6 @@
 var UI = function(player, track) {
 	this.player = player;
+	this._this = this;
 	//this.track = track;
     
     
@@ -26,54 +27,165 @@ var UI = function(player, track) {
         
         
     // });
-    this.attachEvents(this.player);
+    this.attachEvents(this._this, this.player);
+    
 };
 
-UI.prototype.attachEvents = function(player) {
+UI.prototype.attachEvents = function(UI, player) {
 	//pulldown form
 	$('header').on('click', '#ui-pulldown', this.toggleHeader);
 
 	//form sumission
 	$('header').on('submit keyup', '#track-form', function(e) {
+    	e.preventDefault();
+
+    	console.log('attach events called in UI');
+    	console.log(UI);
+    	
+    	//this = form
     	var trackUrl = (this.elements['track-url'].value);
-
         player.getTrackFromURL(trackUrl);
-
-        e.preventDefault();
-        
     });
 
-	//TODO - put this into timeout
-	// $('header').on('keyup', '#track-form', function(e) {
- //    	var trackUrl = (this.elements['track-url'].value);
-    	
- //        player.getTrackFromURL(trackUrl);
-
- //        e.preventDefault();
- //    });
-
-
-	$('header').on('click', '#play-stop-button', function(e) {
-		var player = window.app.player;
-		player.dancer.play();
-	});
-
-
 };
+
+
 
 UI.prototype.loadingIndicator = function() {
 	//so adda throbber
 	console.log('throbber added');
 
+	//cmd.js - include throbber.js
+	cmd("js/throbber.js", function(loaded) {
+		
+		console.log('success: ' + loaded);
+		
+		if(loaded === true) {
+			//hmmmm need UI to be available here so the throb object is available to call stop on... - or just kill the dom element
+			//although it returns true even if throbber.js 404s
+			console.log('loaded from cmd.js callback');
+			
+			console.log(this); //this = window
+
+			var throb = new Throbber({
+					color: 'yellow',
+					padding: 30,
+					size: 40,
+					fade: 200,
+					clockwise: false
+				}).appendTo(document.getElementById('track-image'));
+
+			$(throb.elem).css({
+				'position' : 'absolute',
+				'top' : '15px',
+				'left' : '5px',
+			});
+
+
+			//throb.appendTo(document.getElementById('track-image'));
+
+
+				//canvas needs
+				//display: block;
+					// position: absolute;
+					// top: 15px;
+					// left: 5px;
+
+
+				//$('#track-image').append(throb);
+			throb.start();
+
+			console.log(throb);
+			console.log(throb.elem);
+
+				//.appendTo( trackImage ).start();
+
+				//trackImage.append(throb);
+
+				// document.getElementById('b3').onclick = function() {
+				// 	throb.toggle();
+				// };
+
+				//trackImage.append(canvas);
+
+				//console.log(canvas);
+		}
+		
+	});
+
 }
 
-UI.prototype.playReady = function() {
+UI.prototype.killLoadingIndicator = function() {
+	//remove dom element
+	//kill canvas animation
+	$('#track-image canvas').remove();
+}
+
+UI.prototype.playReady = function(player) {
 	//attach play / stop events
 	//need to reset dancer after stop?
 	//or reset everything when a new track is searched for
 	//remove throbber from play button....
 	console.log('throbber removed');
+	this.killLoadingIndicator();
+
+	//////
 	console.log('play ready');
+	//now add
+	////TODO
+	//add click listener to play-stop-button
+	//add hover events as well
+	//change opacity
+	$('header').on('hover', '#play-stop-button-wrapper', function(e) {
+		//e.preventDefault();
+		//console.log(this);
+		$('#play-stop-button-wrapper').toggleClass('play-button-hover');
+		$('#play-stop-button').toggleClass('play-button-hover');
+		e.stopPropagation();
+		
+	});
+	$('#success-image').removeClass('success-waiting').addClass('success-ready');
+
+	// $('header').on('hover', '#play-stop-button', function(e) {
+	// 	//e.preventDefault();
+	// 	//console.log(this);
+	// 	$('#play-stop-button-wrapper').toggleClass('play-button-hover');
+	// 	$('#play-stop-button').toggleClass('play-button-hover');
+	// 	e.stopPropagation();
+	// });
+
+
+	$('header').on('click', '#play-stop-button', function(e) {
+		
+		//this depresses the button on click
+		//need to change to a stop symbol - toggle header up and start dancer playing
+		//attach an event so that the next click stop dancer?
+		
+		//on stop we need to clear the currently rendered canvas as dancer restarts when play is called again
+		$('#play-stop-button-wrapper').toggleClass('play-button-click play-button-hover');
+		$('#play-stop-button').toggleClass('play-button-click play-button-hover');
+
+
+		//if ui visisble && if dancer is playing
+		var elHeader = $('header');
+		if(elHeader.hasClass('open')) {
+			app.player.UI.toggleHeader();	
+		};
+
+		//app.player.dancer.play();
+		console.log('dancer played ');
+		console.log('we bubbled');
+	});
+
+	// $('header').on('click', '#play-stop-button-wrapper', function(e) {
+		
+	// 	$('#play-stop-button-wrapper').toggleClass('play-button-click play-button-hover');
+	// 	$('#play-stop-button').toggleClass('play-button-click play-button-hover');
+
+	// 	//var player = window.app.player;
+	// 	//player.dancer.play();
+	// 	console.log('we bubbled');
+	// });
 };
 
 UI.prototype.updateInfo = function(track) {
@@ -160,3 +272,6 @@ UI.prototype.trackWarning = function() {
 UI.prototype.URLresolved = function() {
 	//change the background colour of the button
 };
+
+
+

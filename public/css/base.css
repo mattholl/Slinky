@@ -1,41 +1,41 @@
 @import url(http://fonts.googleapis.com/css?family=Oswald:400,300);
 
 /** {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }*/
 
 html, body {
-	width:100%;
-	height:100%;
-	padding: 0;
-	margin: 0;
+    width:100%;
+    height:100%;
+    padding: 0;
+    margin: 0;
 } /* just to be sure these are full screen */
 
 body {
-	font-family: 'Oswald', arial, sans-serif;
+    font-family: 'Oswald', arial, sans-serif;
 }
 
 canvas {
-	display: block;
-	z-index: 0;
+    display: block;
+    z-index: 0;
 }
 
 header {
-	background: #4d4d4d;
-	position: absolute;
-	/*top: -100px;*/
+    background: #4d4d4d;
+    position: absolute;
+    /*top: -100px;*/
     -webkit-transform: translateZ(0);
     -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden; 
     -webkit-transform: translateY(-100px);
-	height: 105px;
-	width: 100%;
-	border-bottom: 1px solid black;
-	margin: 0;
-	padding: 0;
-	z-index: 100;
-	/*height: 200px;*/
+    height: 105px;
+    width: 100%;
+    border-bottom: 1px solid black;
+    margin: 0;
+    padding: 0;
+    z-index: 100;
+    /*height: 200px;*/
 }
 
 #app-info {
@@ -49,22 +49,22 @@ header {
 }
 
 #track-info-container {
-	background: #000000;
-	color: #ffffff;
-	float: left;
-	width: 100%;
-	/*height: 100%;*/
+    background: #000000;
+    color: #ffffff;
+    float: left;
+    width: 100%;
+    /*height: 100%;*/
 }
 
 a#track-image {
-	margin-top: 10px;
-	width: 6%;
-	float: left;
-	
+    margin-top: 10px;
+    width: 6%;
+    float: left;
+    
 }
 
 #track-info {
-	float: left;
+    float: left;
     width: 80%;
     position: relative;
     left: 50%;
@@ -72,7 +72,7 @@ a#track-image {
 }
 
 #track-info a {
-	display :block;
+    display :block;
 }
 
 a#track-url {
@@ -94,34 +94,34 @@ a#user-info {
 #user-info:link,
 #user-info:visited,
 #user-info:active {
-	color: #ababab;
-	text-decoration: none;
+    color: #ababab;
+    text-decoration: none;
 }
 
 #track-url:hover,
 #user-info:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 #track-url h1 {
-	font-size: 20px;
-	margin-bottom: 0;
-	margin-top: 8px;
+    font-size: 20px;
+    margin-bottom: 0;
+    margin-top: 8px;
 }
 
 #user-info {
-	
-	/*float: left;*/
+    
+    /*float: left;*/
 }
 
 #user-info h2 {
-	font-size: 10px;
-	margin-top: 5px;
+    font-size: 10px;
+    margin-top: 5px;
 }
 
 #track-form-container {
-	background: #4d4d4d;
-	clear: left;
+    background: #4d4d4d;
+    clear: left;
 }
 
 
@@ -129,6 +129,23 @@ a#user-info {
  *
  *
  * track form
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  * 
  */
 
@@ -155,29 +172,25 @@ a#user-info {
 }
 
 
-#success-image {
-    width: 20px;
-    height: 20px;
-    float: left;
-    position: relative;
-    left: 50%;
 
-    background: green;
-}
-
-#play-stop-button {
-    width: 20px;
-    height: 20px;
-    float: left;
-    position: relative;
-    left: 50%;
-
-    background: red;
-}
 
 /**
  *
  * stats
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  * 
  */
 
@@ -192,15 +205,25 @@ a#user-info {
  *
  *
  * UI pulldown
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
  * 
  */
 
 .pulldown-triangle {
-	position: absolute;
-	bottom: -30px;
-	left: 80%;
-	/*background: #4d4d4d;*/
-	cursor: pointer;
+    position: absolute;
+    bottom: -30px;
+    left: 80%;
+    /*background: #4d4d4d;*/
+    cursor: pointer;
 
     width: 0; 
     height: 0;
@@ -307,6 +330,111 @@ a#user-info {
     border-left: 7px solid #4d4d4d;
     /*border-right: 7px solid transparent;*/
 }
+
+
+#success-image {
+    width: 20px;
+    height: 20px;
+    float: left;
+    position: relative;
+    left: 50%;
+
+    -moz-border-radius: 20px; 
+   -webkit-border-radius: 20px; 
+   border-radius: 20px;
+
+    top: 10px;
+}
+
+.success-waiting {
+    background: rgba(0, 255, 0, 0.1);
+}
+
+.success-ready {
+  -moz-transition: background 1s; 
+  -webkit-transition: background 1s;  
+  -ms-transition: background 1s;  
+  -o-transition: background 1s;  
+  transition: background 1s;      
+  background: rgba(0, 255, 0, 0.8);
+}
+
+
+
+#play-stop-button-wrapper {
+    height: 30px;
+    width: 50px;
+    background: rgba(0, 65, 255, 1); /* #4d4d4d; /*rgb 77 77 77  */
+    position: relative;
+    left: 50%;
+    float: left;
+    top: 5px;
+    margin-left: 10px;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+/*#play-stop-button:hover {
+    border-color:transparent transparent transparent rgba(255, 255, 255, 0.8);
+    -webkit-transform: scale(2);
+}*/
+
+.play-button-hover {
+   -webkit-transform: scale(1.1);
+   -moz-transform: scale(1.1);
+   -ms-transform: scale(1.1);
+   -o-transform: scale(1.1);
+   transform: scale(1.1);
+
+     /*-moz-transition: all 1s; 
+  -webkit-transition: all 1s;  
+  -ms-transition: all 1s;  
+  -o-transition: all 1s;  
+  transition: all 1s; */ 
+}
+
+.play-button-click {
+    -webkit-transform: scale(0.9);
+   -moz-transform: scale(0.9);
+   -ms-transform: scale(0.9);
+   -o-transform: scale(0.9);
+   transform: scale(0.9);    
+}
+
+#play-stop-button {
+
+    width: 20px;
+    height: 20px;
+    float: left;
+    position: relative;
+    left: 50%;
+
+    top: 77px;
+
+    position: absolute;
+    margin-left: 268px;
+
+    border-color:transparent transparent transparent #FFFFFF;
+    border-style:solid;
+    border-width:8px 0 8px 18px;
+    float:left;
+    height:0;
+    text-indent:-9999px;
+    width:0;
+    cursor: pointer;
+}
+
+.play-stop-button-play {
+
+}
+
+.play-stop-button-stopped {
+
+}
+
+
 
 
 

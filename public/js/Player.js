@@ -23,6 +23,8 @@ var Player = function(app) {
 
     //User interface
     this.UI = new UI(this, this.track);
+
+    this._this = this;
 };
 
 
@@ -41,14 +43,15 @@ Player.prototype.getTrackFromURL = function(url, position) {
         } else {
             this.track = track;
             this.UI.updateInfo(this.track);
-            this.load(this.track); //this = player
+            this.load(this.track, this); //this = player
         }
     }.bind(this)); //binds Player to the value of this within the SC.get call
 };
 
-Player.prototype.load = function(track) {
+Player.prototype.load = function(track, player) {
     
     if (track.stream_url) {
+        // https://github.com/oampo/AmbientCloud
         // Load the track from our Node.js proxy, rather than straight from
         // SoundCloud because of
         // http://code.google.com/p/chromium/issues/detail?id=96136
@@ -58,9 +61,14 @@ Player.prototype.load = function(track) {
         this.loading = true;
 
         this.UI.loadingIndicator();
+        console.log('from player.load');
+        console.log(this);
+        
+        var player = this;
 
-        this.dancer.bind('loaded', function() {
-            app.player.onLoad();//too tightly coupled to app structure??
+        this.dancer.bind('loaded', function(player) {
+            //when the dancer is ready
+            app.player.onLoad();//TODO: too tightly coupled to app structure??
         });
 
     }
@@ -89,7 +97,7 @@ Player.prototype.onLoad = function() {
     app.createHighResponders();
     
     //fire the plugin set up in slinky
-    this.dancer.render();
+    this.dancer.ready();
 };
 
 Player.prototype.onError = function() {

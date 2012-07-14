@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title></title>
 
 <link rel="stylesheet" href="css/base.css" type="text/css">
@@ -15,6 +16,7 @@
 <script src="js/Three.js"></script>
 
 <!-- <script src="js/Track.js"></script> -->
+<script src="js/cmd.js"></script>
 <script src="js/UI.js"></script>
 <script src="js/dancer.js"></script>
 <script src="js/Slinky.js"></script>
@@ -23,8 +25,6 @@
 </head>
 <body>
 <header class="closed">
-	
-
 	<div id="track-info-container">
 		<div id="app-info">
 			<!-- modal window -->
@@ -55,6 +55,14 @@
 		<div id="suggestions">Or try these:
 			<p class="url">http://soundcloud.com/rob_booth/milanese-espantoso-freebie</p>
 			<p class="url">http://soundcloud.com/das-boy/aphex-twin-in-store-ambients-1995-sire-records</p>
+			<p class="url">http://soundcloud.com/nytransitauthority/off-the-traxx-catch-that-train>/p>
+				http://soundcloud.com/das-boy/eno-another-green-world-1975-polydor
+				http://soundcloud.com/radiohead/radiohead-good-evening-mrs
+				http://soundcloud.com/ruckspin/belong
+				http://soundcloud.com/omunit/ziro-oni-om-units-wrongspeed
+				http://soundcloud.com/omunit/fracture-bad-habit-om-unit-vip
+			/* write to here from app */
+			/* 
 		</div>
 		http://soundcloud.com/artist/track
 		-->
@@ -66,12 +74,15 @@
 		<form id="track-form" action="#" method="post">
 			<input name="track-url" type="text" placeholder="http://soundcloud.com/artist/track" value="http://soundcloud.com/rob_booth/milanese-espantoso-freebie"/>
 			
-			<!-- search button click to load - show spinner whilst loading -->
+			<!-- search button click to load - show spinner whilst loading? -->
 			<!-- change - -->
 		</form>
-		<div id="success-image"></div>
-		<div id="play-stop-button"></div>
-
+		<div id="success-image" class="success-waiting"></div>
+		
+		<div id="play-stop-button-wrapper"></div>
+			<div id="play-stop-button"></div>
+		</div>
+	
 	</div>
 	<div id="ui-pulldown" class="pulldown-triangle">
 
