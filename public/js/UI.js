@@ -49,7 +49,7 @@ UI.prototype.attachEvents = function(UI, player) {
         
         //player.dancer.stop();
         //user trigger
-        $('#play-stop-button').trigger('click'); //on stop button
+        //$('#play-stop-button').trigger('click'); //on stop button
 
         console.log('form search');
         console.log('is dancer playing');
@@ -59,6 +59,8 @@ UI.prototype.attachEvents = function(UI, player) {
         
         //app.player.dancer.stop();
         //app.renderer.clear();
+        //call setup functions form slinky - create renderer - remove currently appended dom element?
+        //create responders ?
 
         //clear canvas - get rid of geometries? just get written over when dancer loads - no need to unset
         ////remove click listeners
