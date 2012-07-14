@@ -344,6 +344,8 @@ a#user-info {
  *
  *
  * loading responses to events
+ *
+ * 
  */
 
 
@@ -386,7 +388,7 @@ a#user-info {
     top: 5px;
     margin-left: 10px;
     border-radius: 5px;
-    cursor: pointer;
+    
 }
 
 .play-stop-button-wrapper-waiting {
@@ -399,7 +401,8 @@ a#user-info {
   -ms-transition: background 1s;
   -o-transition: background 1s;
   transition: background 1s;
-    background: rgba(0, 120, 255, 1.0); /* #4d4d4d; /*rgb 77 77 77  */   
+    background: rgba(0, 120, 255, 1.0); /* #4d4d4d; /*rgb 77 77 77  */
+    cursor: pointer;
 }
 
 
@@ -429,8 +432,7 @@ a#user-info {
 
 #play-stop-button {
 
-    width: 20px;
-    height: 20px;
+    
     float: left;
     position: relative;
     left: 50%;
@@ -439,15 +441,27 @@ a#user-info {
 
     top: 7px;
     margin-left: -7px;
+    text-indent:-9999px;
+    
+}
 
+
+.play-stop-button-triangle {
+    background: transparent;
     border-style:solid;
     border-width:8px 0 8px 18px;
-    float:left;
     height:0;
-    text-indent:-9999px;
     width:0;
-    cursor: pointer;
 }
+
+.play-stop-button-square {
+    background: rgba(255, 255, 255, 1.0);
+    border-width:20px;
+    width: 20px;
+    height: 20px;
+}
+
+
 
 .play-stop-button-waiting {
     border-color:transparent transparent transparent rgba(255, 255, 255, 0.4);
@@ -455,6 +469,7 @@ a#user-info {
 
 .play-stop-button-ready {
     border-color:transparent transparent transparent rgba(255, 255, 255, 1.0);
+    cursor: pointer;
 }
 
 
