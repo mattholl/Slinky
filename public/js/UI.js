@@ -100,8 +100,8 @@ UI.prototype.playButtonClick = function() {
 	//need to change to a stop symbol - toggle header up and start dancer playing
 	//attach an event so that the next click stop dancer?
 	//on stop we need to clear the currently rendered canvas as dancer restarts when play is called again
-	$('#play-stop-button-wrapper').toggleClass('play-button-click play-button-hover');
-	$('#play-stop-button').toggleClass('play-button-click play-button-hover');
+	$('#play-stop-button-wrapper').toggleClass('play-button-click');
+	$('#play-stop-button').toggleClass('play-button-click');
 
 
 	//if ui visisble && if dancer is playing
@@ -145,8 +145,9 @@ UI.prototype.playReady = function(player) {
 	//
 	//
 
-	$('#play-stop-button-wrapper').on('hover', this.playButtonHover);
-	$('#play-stop-button-wrapper').on('click', this.playButtonClick);
+	$('header').on('hover', '#play-stop-button-wrapper', this.playButtonHover);
+	$('header').on('click', '#play-stop-button-wrapper', this.playButtonClick);
+	//$('#play-stop-button-wrapper').on('click', this.playButtonClick);
 
 	$('#play-stop-button-wrapper').removeClass('play-stop-button-wrapper-waiting').addClass('play-stop-button-wrapper-ready');
 
@@ -159,8 +160,8 @@ UI.prototype.playReady = function(player) {
 	// 	e.stopPropagation();
 	// });
 
-	$('#play-stop-button').on('hover', this.playButtonHover);
-	$('#play-stop-button').on('click', this.playButtonClick);
+	//$('#play-stop-button').on('hover', this.playButtonHover);
+	//$('#play-stop-button').on('click', this.playButtonClick);
 
 	$('#play-stop-button').removeClass('play-stop-button-waiting').addClass('play-stop-button-ready');
 
