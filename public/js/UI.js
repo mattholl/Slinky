@@ -46,8 +46,14 @@ UI.prototype.attachEvents = function(UI, player) {
         //this = form
         var trackUrl = (this.elements['track-url'].value);
         player.getTrackFromURL(trackUrl);
+        
         app.player.dancer.stop();
+        
+
         console.log('form search');
+        console.log('is dancer playing');
+
+        console.log(app.player.dancer.isPlaying());
         //app.renderer = new THREE.CanvasRenderer();
         
         app.player.dancer.stop();

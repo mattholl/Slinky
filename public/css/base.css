@@ -439,8 +439,7 @@ a#user-info {
 
     /*position: absolute;*/
 
-    top: 7px;
-    margin-left: -7px;
+    
     text-indent:-9999px;
     
 }
@@ -452,6 +451,9 @@ a#user-info {
     border-width:8px 0 8px 18px;
     height:0;
     width:0;
+
+    top: 7px;
+    margin-left: -7px;
 }
 
 .play-stop-button-square {
@@ -459,6 +461,9 @@ a#user-info {
     border-width:20px;
     width: 20px;
     height: 20px;
+
+    top: 5px;
+    margin-left: -9px;
 }
 
 
