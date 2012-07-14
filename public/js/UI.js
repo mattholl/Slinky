@@ -47,17 +47,18 @@ UI.prototype.attachEvents = function(UI, player) {
         var trackUrl = (this.elements['track-url'].value);
         player.getTrackFromURL(trackUrl);
         
-        app.player.dancer.stop();
-        
+        //player.dancer.stop();
+        //user trigger
+        $('#play-stop-button').trigger('click'); //on stop button
 
         console.log('form search');
         console.log('is dancer playing');
 
-        console.log(app.player.dancer.isPlaying());
+        //console.log(app.player.dancer.isPlaying());
         //app.renderer = new THREE.CanvasRenderer();
         
-        app.player.dancer.stop();
-        app.renderer.clear();
+        //app.player.dancer.stop();
+        //app.renderer.clear();
 
         //clear canvas - get rid of geometries? just get written over when dancer loads - no need to unset
         ////remove click listeners
