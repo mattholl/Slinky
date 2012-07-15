@@ -10,7 +10,13 @@ var UI = function(player, track, app) {
     
     this.attachEvents(this._this, this.player);
     
+    this.stats = new Stats();
+
+    
 };
+
+
+
 
 UI.prototype.attachEvents = function(UI, player) {
     //pulldown form

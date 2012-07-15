@@ -63,6 +63,14 @@ Slinky.prototype.init = function() {
 
     this.renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
 
+    this.stats = new Stats();
+
+    this.stats.domElement.style.position = 'absolute';
+    this.stats.domElement.style.right = '5px';
+    this.stats.domElement.style.top = '5px';
+
+    $('#stats').append( this.stats.domElement );
+
 };
 
 Slinky.prototype.removeRenderer = function() {
@@ -177,7 +185,7 @@ Dancer.addPlugin( 'ready', function() {
     this.bind( 'update', function() {
 
         //start stats
-
+        app.stats.begin();
         //TODO
         //put raf in here
         //same as putting in a timeut with set framerate
@@ -189,6 +197,7 @@ Dancer.addPlugin( 'ready', function() {
         app.renderer.render( app.scene, app.camera );
 
         //end stats
+        app.stats.end();
     });
 });
 
