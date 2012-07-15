@@ -167,6 +167,7 @@ Dancer.addPlugin( 'ready', function() {
     });
 });
 
+//move these off window?
 
 function onDocumentMouseDown( event ) {
     event.preventDefault();
