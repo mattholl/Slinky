@@ -41,7 +41,7 @@ UI.prototype.attachEvents = function(UI, player) {
         e.preventDefault();
 
         console.log('form submit responding');
-        console.log(UI);
+        //console.log(UI);
         
         //this = form
         var trackUrl = (this.elements['track-url'].value);
@@ -54,6 +54,13 @@ UI.prototype.attachEvents = function(UI, player) {
         console.log('form search');
         console.log('is dancer playing');
 
+        //remove play button event handlers - return to opaque - will get reattached when playReady fires
+        $('header').off('hover', '#play-stop-button-wrapper', this.playButtonHover);
+        $('header').off('click', '#play-stop-button-wrapper', this.playButtonClick);
+    
+
+        $('#play-stop-button-wrapper').removeClass('play-stop-button-wrapper-ready').addClass('play-stop-button-wrapper-waiting');
+        $('#play-stop-button').removeClass('play-stop-button-ready').addClass('play-stop-button-waiting');
         //console.log(app.player.dancer.isPlaying());
         //app.renderer = new THREE.CanvasRenderer();
         
@@ -84,7 +91,7 @@ UI.prototype.loadingIndicator = function() {
         
         if(loaded === true) {
             //hmmmm need UI to be available here so the throb object is available to call stop on... - or just kill the dom element
-            //although it returns true even if throbber.js 404s
+            //although cmd.js returns true even if throbber.js 404s....
             console.log('loaded from cmd.js callback');
             
             //console.log(this); //this = window
@@ -188,7 +195,7 @@ UI.prototype.playReady = function(player) {
     //assign events - remove with .off() when form get focus again?
     //
     //
-
+    //need to do this when new form submission sstarts
     $('header').on('hover', '#play-stop-button-wrapper', this.playButtonHover);
     $('header').on('click', '#play-stop-button-wrapper', this.playButtonClick);
     //$('#play-stop-button-wrapper').on('click', this.playButtonClick);

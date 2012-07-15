@@ -89,7 +89,7 @@ Player.prototype.onLoad = function() {
 
     console.log('player.onload fired');
     
-    //call three renderer setup function on slinky
+    //remove remderer and create a new one
     
     if(app.rendererSetup === true) {
         app.removeRenderer();
