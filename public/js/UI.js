@@ -1,5 +1,5 @@
 //UI object 
-//responds to interactions from the user and deals with visual changes in the 
+//responds to interactions from the user and deals with visual changes to indicate states
 //
 //
 //
@@ -9,14 +9,7 @@ var UI = function(player, track, app) {
     this._this = this;
     
     this.attachEvents(this._this, this.player);
-    
-    this.stats = new Stats();
-
-    
 };
-
-
-
 
 UI.prototype.attachEvents = function(UI, player) {
     //pulldown form
@@ -27,16 +20,11 @@ UI.prototype.attachEvents = function(UI, player) {
         e.preventDefault();
 
         console.log('form submit responding');
-        //console.log(UI);
         
         //this = form
         var trackUrl = (this.elements['track-url'].value);
         player.getTrackFromURL(trackUrl);
         
-        //player.dancer.stop();
-        //user trigger
-        //$('#play-stop-button').trigger('click'); //on stop button
-
         console.log('form search');
         console.log('is dancer playing');
 
@@ -50,21 +38,6 @@ UI.prototype.attachEvents = function(UI, player) {
         $('#success-image').removeClass('success-ready').addClass('success-waiting');
         $('#play-stop-button-wrapper').removeClass('play-stop-button-wrapper-ready').addClass('play-stop-button-wrapper-waiting');
         $('#play-stop-button').removeClass('play-stop-button-ready').addClass('play-stop-button-waiting');
-        //console.log(app.player.dancer.isPlaying());
-        //app.renderer = new THREE.CanvasRenderer();
-        
-        //app.player.dancer.stop();
-        //app.renderer.clear();
-        //call setup functions form slinky - create renderer - remove currently appended dom element?
-        //create responders ?
-
-        //clear canvas - get rid of geometries? just get written over when dancer loads - no need to unset
-        ////remove click listeners
-        //on clicking play change the event handerler to a stop - 
-        
-        //$('')
-        //app.renderer -> //this.renderer = new THREE.CanvasRenderer();
-        
     });
 
 };
@@ -92,7 +65,7 @@ UI.prototype.loadingIndicator = function() {
                     fade: 200,
                     clockwise: false
                 }).appendTo(document.getElementById('track-image'));
-
+ 
             $(throb.elem).css({
                 'position' : 'absolute',
                 'top' : '15px',

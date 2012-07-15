@@ -32,15 +32,9 @@ var Slinky  = function() {
 };
 
 //called from the onLoad function in Player
-//TODO: make sure that the UI doesn't allow playing until all is loaded
 //
 Slinky.prototype.init = function() {
-    //Player + Dancer
-    //TODO : should Dancer be on the app rather than the player?
-    //this.player = new Player(this, this.ui);
     
-    
-
     //Three.js
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 10000 );
@@ -50,8 +44,6 @@ Slinky.prototype.init = function() {
     
     this.renderer = new THREE.CanvasRenderer();
     this.renderer.setSize( window.innerWidth, window.innerHeight );
-
-    //TODO remove dom element will we end up with two if form is submitted again
 
     document.body.appendChild( this.renderer.domElement );
     this.rendererSetup = true;
@@ -72,11 +64,6 @@ Slinky.prototype.init = function() {
     $('#stats').append( this.stats.domElement );
 
 };
-
-Slinky.prototype.removeRenderer = function() {
-    document.body.removeChild( this.renderer.domElement );
-
-}
 
 Slinky.prototype.createLowResponders = function() {
     //roughly 0 - 2000Hz
@@ -171,6 +158,10 @@ Slinky.prototype.createHighResponders = function() {
     }
 };
 
+Slinky.prototype.removeRenderer = function() {
+    document.body.removeChild( this.renderer.domElement );
+}
+
 //fire it up
 window.onload = function() {
     window.app = new Slinky();
@@ -183,6 +174,10 @@ window.onload = function() {
 
 Dancer.addPlugin( 'ready', function() {
     this.bind( 'update', function() {
+
+        //console.log(this); dancer
+        //requestAnimationFrame(app.renderer.render);
+        //the function which does the updating
 
         //start stats
         app.stats.begin();
@@ -201,8 +196,11 @@ Dancer.addPlugin( 'ready', function() {
     });
 });
 
-//move these off window?
 
+
+
+
+//move these off window?
 function onDocumentMouseDown( event ) {
     event.preventDefault();
 

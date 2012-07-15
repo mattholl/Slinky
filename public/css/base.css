@@ -1,16 +1,11 @@
 @import url(http://fonts.googleapis.com/css?family=Oswald:400,300);
 
-/** {
-    margin: 0;
-    padding: 0;
-}*/
-
 html, body {
     width:100%;
     height:100%;
     padding: 0;
     margin: 0;
-} /* just to be sure these are full screen */
+}
 
 body {
     font-family: 'Oswald', arial, sans-serif;
@@ -24,7 +19,6 @@ canvas {
 header {
     background: #4d4d4d;
     position: absolute;
-    /*top: -100px;*/
     -webkit-transform: translateZ(0);
     -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden; 
@@ -43,7 +37,6 @@ header {
     margin: 0;
     padding: 0;
     z-index: 100;
-    /*height: 200px;*/
 }
 
 #app-info {
@@ -117,11 +110,6 @@ a#user-info {
     margin-top: 8px;
 }
 
-#user-info {
-    
-    /*float: left;*/
-}
-
 #user-info h2 {
     font-size: 10px;
     margin-top: 5px;
@@ -174,39 +162,6 @@ a#user-info {
     color: #555555;
 
     margin-top: 6px;
-    /*position: relative;
-    left: 50%;
-    margin-left: -400px;*/
-}
-
-
-
-
-/**
- *
- * stats
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- *
- * 
- */
-
-#stats {
-    /*margin-top: 20px;
-    position: absolute;
-    right: 0;
-    float: left;*/
 }
 
 /**
@@ -230,7 +185,6 @@ a#user-info {
     position: absolute;
     bottom: -30px;
     left: 80%;
-    /*background: #4d4d4d;*/
     cursor: pointer;
 
     width: 0; 
@@ -244,14 +198,10 @@ a#user-info {
     position: absolute;
     bottom: -30px;
     left: 80%;
-    /*background: #4d4d4d;*/
     cursor: pointer;
     background: #4d4d4d;
     width: 60px; 
     height: 30px;
-    /*border-top: 40px solid #4d4d4d;
-    border-left: 40px solid transparent; 
-    border-right: 40px solid transparent;*/
 }
 
 .ui-closed {
@@ -261,7 +211,7 @@ a#user-info {
     
     width:15px;
     height:15px;
-    border:2px solid #e00000 ;/*#e00000;*/
+    border:2px solid #e00000 ;
     -moz-border-radius:20px;
     -webkit-border-radius:20px;
     border-radius:20px;
@@ -310,7 +260,6 @@ a#user-info {
     border-bottom: 7px solid transparent;
     border-top: 7px solid transparent;
     border-right: 7px solid #4d4d4d;
-    /*border-right: 7px solid transparent;*/
 }
 
 
@@ -336,7 +285,6 @@ a#user-info {
     border-bottom: 7px solid transparent;
     border-top: 7px solid transparent;
     border-left: 7px solid #4d4d4d;
-    /*border-right: 7px solid transparent;*/
 }
 
 
@@ -400,7 +348,7 @@ a#user-info {
 }
 
 .play-stop-button-wrapper-waiting {
-    background: rgba(0, 120, 255, 0.5); /* #4d4d4d; /*rgb 77 77 77  */
+    background: rgba(0, 120, 255, 0.5); 
 }
 
 .play-stop-button-wrapper-ready {
@@ -409,18 +357,9 @@ a#user-info {
   -ms-transition: background 1s;
   -o-transition: background 1s;
   transition: background 1s;
-    background: rgba(0, 120, 255, 1.0); /* #4d4d4d; /*rgb 77 77 77  */
+    background: rgba(0, 120, 255, 1.0); 
     cursor: pointer;
 }
-
-
-/*#play-stop-button:hover {
-    border-color:transparent transparent transparent rgba(255, 255, 255, 0.8);
-    -webkit-transform: scale(2);
-}*/
-
-
-
 
 .play-button-hover {
    -webkit-transform: scale(1.1);
@@ -439,19 +378,11 @@ a#user-info {
 }
 
 #play-stop-button {
-
-    
     float: left;
     position: relative;
     left: 50%;
-
-    /*position: absolute;*/
-
-    
-    text-indent:-9999px;
-    
+    text-indent:-9999px;    
 }
-
 
 .play-stop-button-triangle {
     background: transparent;
@@ -459,7 +390,6 @@ a#user-info {
     border-width:8px 0 8px 18px;
     height:0;
     width:0;
-
     top: 7px;
     margin-left: -7px;
 }
@@ -469,12 +399,9 @@ a#user-info {
     border-width:20px;
     width: 20px;
     height: 20px;
-
     top: 5px;
     margin-left: -9px;
 }
-
-
 
 .play-stop-button-waiting {
     border-color:transparent transparent transparent rgba(255, 255, 255, 0.4);

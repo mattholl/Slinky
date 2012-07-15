@@ -8,20 +8,6 @@ var Player = function(app) {
     this.app = app;
     this.track = null;
     this.loading = false;
-
-    //url is passed in line 106
-    //this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
-    //should just load the url - same code on my SoundSource.js
-    //so calling play again will rebiuild the dancer beat and objects
-    //will need to rewrite how I interface with the player - instance of dancer becomes app.player?
-    //app.player.play(), app.player.stop()
-    //need to pass the call back events through to dancer...
-    //
-    //this.player = new Dancer();
-
-    //set up form handling
-
-    //User interface
     this.UI = new UI(this, this.track, this.app);
 
     this._this = this;
@@ -57,7 +43,7 @@ Player.prototype.load = function(track, player) {
         // http://code.google.com/p/chromium/issues/detail?id=96136
         var url = '/proxy?url=' + this.track.stream_url;
         this.dancer = new Dancer(url);
-        //this.player.load(url, this.onLoad.bind(this), this.onError.bind(this));
+        
         this.loading = true;
 
         this.UI.loadingIndicator();
@@ -68,7 +54,7 @@ Player.prototype.load = function(track, player) {
 
         this.dancer.bind('loaded', function(player) {
             //when the dancer is ready
-            app.player.onLoad();//TODO: too tightly coupled to app structure??
+            app.player.onLoad();
         });
 
     }
@@ -85,12 +71,10 @@ Player.prototype.onLoad = function() {
     //this.app.trackView.unsetLoading();
     this.loading = false;
     //pub / sub to subscribe creating dancer beats to player.onLoad firing
-    
 
     console.log('player.onload fired');
     
-    //remove remderer and create a new one
-    
+    //remove remderer and create a new on if the app was already playing
     if(app.rendererSetup === true) {
         app.removeRenderer();
     }
@@ -107,10 +91,3 @@ Player.prototype.onLoad = function() {
     //all ok so allow play
     this.UI.playReady();
 };
-
-Player.prototype.onError = function() {
-    //console.log('error');
-};
-
-
-
