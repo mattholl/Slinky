@@ -29,6 +29,14 @@ header {
     -webkit-perspective: 1000;
     -webkit-backface-visibility: hidden; 
     -webkit-transform: translateY(-100px);
+    -moz-transform: translateZ(0);
+    -moz-perspective: 1000;
+    -moz-backface-visibility: hidden; 
+    -moz-transform: translateY(-100px);
+    transform: translateZ(0);
+    perspective: 1000;
+    backface-visibility: hidden; 
+    transform: translateY(-100px);
     height: 105px;
     width: 100%;
     border-bottom: 1px solid black;
@@ -477,102 +485,3 @@ a#user-info {
     cursor: pointer;
 }
 
-
-
-
-/**
- * loading animation
- */
-/* http://cssload.net/ */
-/*
-#bowlG{
-position:relative;
-width:15px;
-height:15px;
-
-left: -8px;
-top: -29px;
-
-}
-
-#bowl_ringG{
-position:absolute;
-width:15px;
-height:15px;
-border:1px solid #e00000;
--moz-border-radius:15px;
--webkit-border-radius:15px;
-border-radius:15px;
-}
-
-.ball_holderG{
-position:absolute;
-width:4px;
-height:15px;
-left:6px;
-top:0px;
--webkit-animation-name:ball_moveG;
--webkit-animation-duration:0.7s;
--webkit-animation-iteration-count:infinite;
--webkit-animation-timing-function:linear;
--moz-animation-name:ball_moveG;
--moz-animation-duration:0.7s;
--moz-animation-iteration-count:infinite;
--moz-animation-timing-function:linear;
--o-animation-name:ball_moveG;
--o-animation-duration:0.7s;
--o-animation-iteration-count:infinite;
--o-animation-timing-function:linear;
--ms-animation-name:ball_moveG;
--ms-animation-duration:0.7s;
--ms-animation-iteration-count:infinite;
--ms-animation-timing-function:linear;
-}
-
-.ballG{
-position:absolute;
-left:0px;
-top:-4px;
-width:6px;
-height:6px;
-background:#e00000;
--moz-border-radius:5px;
--webkit-border-radius:5px;
-border-radius:5px;
-}
-
-@-webkit-keyframes ball_moveG{
-0%{
--webkit-transform:rotate(0deg)}
-
-100%{
--webkit-transform:rotate(360deg)}
-
-}
-
-@-moz-keyframes ball_moveG{
-0%{
--moz-transform:rotate(0deg)}
-
-100%{
--moz-transform:rotate(360deg)}
-
-}
-
-@-o-keyframes ball_moveG{
-0%{
--o-transform:rotate(0deg)}
-
-100%{
--o-transform:rotate(360deg)}
-
-}
-
-@-ms-keyframes ball_moveG{
-0%{
--ms-transform:rotate(0deg)}
-
-100%{
--ms-transform:rotate(360deg)}
-
-}*/

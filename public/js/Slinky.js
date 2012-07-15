@@ -175,6 +175,9 @@ window.onload = function() {
 
 Dancer.addPlugin( 'ready', function() {
     this.bind( 'update', function() {
+
+        //start stats
+
         //TODO
         //put raf in here
         //same as putting in a timeut with set framerate
@@ -184,6 +187,8 @@ Dancer.addPlugin( 'ready', function() {
         //use mouse / touch rotation around axis
         app.container.rotation.x = app.container.rotation.x += ( app.targetRotation - app.container.rotation.x ) * 0.05;
         app.renderer.render( app.scene, app.camera );
+
+        //end stats
     });
 });
 

@@ -1,33 +1,13 @@
+//UI object 
+//responds to interactions from the user and deals with visual changes in the 
+//
+//
+//
 var UI = function(player, track, app) {
     this.player = player;
     this.app = app;
     this._this = this;
-    //this.track = track;
     
-    
-
-    // $('#pulldown-button').on('click', function(e) {
-    //  $('header').css('top', '0');
-    // });
-    
-    // $('#pulldown-button').toggle(function(e) {
-    //  $('header').css('top', '0');
-    //  console.log('slide down');
-    //  e.preventDefault();
-        
-    // }, function(e) {
-    //  $('header').css('top', '-100px');
-    //  console.log('slide up');
-    //  e.preventDefault();
-    // })
-    
-
-    
-
-    // document.getElementById('track-form').addEventListener('submit', function(e) {
-        
-        
-    // });
     this.attachEvents(this._this, this.player);
     
 };
