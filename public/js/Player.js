@@ -64,7 +64,7 @@ Player.prototype.load = function(track, player) {
         console.log('from player.load');
         console.log(this);
         
-        var player = this;
+        //var player = this;
 
         this.dancer.bind('loaded', function(player) {
             //when the dancer is ready
@@ -89,15 +89,18 @@ Player.prototype.onLoad = function() {
 
     console.log('player.onload fired');
     
-    //all ok so allow play
-    this.UI.playReady();
+    //call three renderer setup function on slinky
+    app.init();
 
     app.createLowResponders();
     app.createMidResponders();
     app.createHighResponders();
-    
+
     //fire the plugin set up in slinky
     this.dancer.ready();
+
+    //all ok so allow play
+    this.UI.playReady();
 };
 
 Player.prototype.onError = function() {

@@ -13,11 +13,31 @@ var Slinky  = function() {
 		client_id : this.clientID
 	});
 
-    //Player + Dancer
-    //TODO : should Dancer be on the app rather than the player?
-	this.player = new Player(this, this.ui);
+    
+    this.windowHalfX = window.innerWidth / 2;
+    this.windowHalfY = window.innerHeight / 2;
+
+    this.targetRotation = 0;
+    this.targetRotationOnMouseDown = 0;
+    this.mouseYOnMouseDown = 0;
+    this.mouseY = 0;
+    
     this.beats = [];
     this.responders = [];
+
+    this.player = new Player(this, this.ui);
+    
+};
+
+//called from the onLoad function in Player
+//TODO: make sure that the UI doesn't allow playing until all is loaded
+//
+Slinky.prototype.init = function() {
+    //Player + Dancer
+    //TODO : should Dancer be on the app rather than the player?
+    //this.player = new Player(this, this.ui);
+    
+    
 
     //Three.js
     this.scene = new THREE.Scene();
@@ -29,6 +49,8 @@ var Slinky  = function() {
     this.renderer = new THREE.CanvasRenderer();
     this.renderer.setSize( window.innerWidth, window.innerHeight );
 
+    //TODO remove dom element will we end up with two if form is submitted again
+
     document.body.appendChild( this.renderer.domElement );
     
     this.container = new THREE.Object3D();
@@ -36,19 +58,9 @@ var Slinky  = function() {
 
     this.container.rotation.x = this.container.rotation.x += Math.PI/2;
 
-    this.windowHalfX = window.innerWidth / 2;
-    this.windowHalfY = window.innerHeight / 2;
-
-    this.targetRotation = 0;
-    this.targetRotationOnMouseDown = 0;
-    this.mouseYOnMouseDown = 0;
-    this.mouseY = 0;
-    
     this.renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
-};
 
-//called from the onLoad function in Player
-//TODO: make sure that the UI doesn't allow playing until all is loaded
+}
 
 Slinky.prototype.createLowResponders = function() {
     //roughly 0 - 2000Hz
@@ -146,7 +158,7 @@ Slinky.prototype.createHighResponders = function() {
 //fire it up
 window.onload = function() {
     window.app = new Slinky();
-    window.app.player.UI.toggleHeader();
+    //window.app.player.UI.toggleHeader();
 };
 
 /*
