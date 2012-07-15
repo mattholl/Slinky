@@ -54,6 +54,8 @@ UI.prototype.attachEvents = function(UI, player) {
         console.log('form search');
         console.log('is dancer playing');
 
+        $('#play-stop-button-wrapper').trigger('click');
+
         //remove play button event handlers - return to opaque - will get reattached when playReady fires
         $('header').off('hover', '#play-stop-button-wrapper', this.playButtonHover);
         $('header').off('click', '#play-stop-button-wrapper', this.playButtonClick);
