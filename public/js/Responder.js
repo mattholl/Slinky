@@ -20,7 +20,9 @@ function Responder(yPos) {
 	
 	//this.y = ;
 	this.line.position.y = 0 || yPos;
-	container.add(this.line);
+	
+	//referencing the global app object need to decouple
+	app.container.add(this.line);
 }
 
 Responder.prototype.createCircle = function() {
@@ -34,7 +36,7 @@ Responder.prototype.createCircle = function() {
 	}
 	geometry.vertices.push(new THREE.Vector3(Math.cos(0.0) * radius, 0, Math.sin(0.0) * radius));
 	return geometry;
-}
+};
 
 Responder.prototype.update = function() {
 	//scale constantly reducing on update - pass factor to scale scale by in to constructor - ie lower for lower freq
@@ -49,7 +51,7 @@ Responder.prototype.update = function() {
 	this.line.scale.z = this.line.scale.z += this.scaleVal;
 
 	this.dampScale();
-}
+};
 
 Responder.prototype.incScale = function() {
 	this.scaleVal = this.scaleVal += 1.5;
