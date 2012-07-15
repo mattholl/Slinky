@@ -1,16 +1,26 @@
+TODO find other tracks which look good
 
-Slinky
+Slinky / MushroomCloud
+
+A simple app which loads a track from Soundcloud via a node.js proxy and generates a 3d visualisation with webGL.
+
+In essence it is these projects plumbed together:
+
+Dancer.js
+Three.js
+AbientCloud https://github.com/oampo/AmbientCloud
+
+And some others....
+
+Copying and pasting any soundcloud track url should work to rebuild the visualiser without reloading.
 
 Or try these:
 
-<p class="url">http://soundcloud.com/rob_booth/milanese-espantoso-freebie</p>
-			<p class="url">http://soundcloud.com/das-boy/aphex-twin-in-store-ambients-1995-sire-records</p>
-			<p class="url">http://soundcloud.com/nytransitauthority/off-the-traxx-catch-that-train>/p>
-				http://soundcloud.com/das-boy/eno-another-green-world-1975-polydor
-				http://soundcloud.com/radiohead/radiohead-good-evening-mrs
-				http://soundcloud.com/ruckspin/belong
-				http://soundcloud.com/omunit/ziro-oni-om-units-wrongspeed
+http://soundcloud.com/rob_booth/milanese-espantoso-freebie
+http://soundcloud.com/das-boy/aphex-twin-in-store-ambients-1995-sire-records
+http://soundcloud.com/nytransitauthority/off-the-traxx-catch-that-train
+http://soundcloud.com/das-boy/eno-another-green-world-1975-polydor
+http://soundcloud.com/radiohead/radiohead-good-evening-mrs
+http://soundcloud.com/ruckspin/belong
+http://soundcloud.com/omunit/ziro-oni-om-units-wrongspeed
 
-				TODO find other tracks which look good
-
-				maybe it should be called mushroom cloud
