@@ -58,7 +58,8 @@ UI.prototype.attachEvents = function(UI, player) {
         $('header').off('hover', '#play-stop-button-wrapper', this.playButtonHover);
         $('header').off('click', '#play-stop-button-wrapper', this.playButtonClick);
     
-
+        //reset ui visuals
+        $('#success-image').removeClass('success-ready').addClass('success-waiting');
         $('#play-stop-button-wrapper').removeClass('play-stop-button-wrapper-ready').addClass('play-stop-button-wrapper-waiting');
         $('#play-stop-button').removeClass('play-stop-button-ready').addClass('play-stop-button-waiting');
         //console.log(app.player.dancer.isPlaying());
@@ -175,7 +176,7 @@ UI.prototype.playReady = function(player) {
     console.log('throbber removed');
     $('#track-image canvas').remove();
     //turn up opacity on green ready indicator
-    $('#success-image').removeClass('success-waiting').addClass('success-ready');
+    
     
     //////
     console.log('play ready');
@@ -199,7 +200,7 @@ UI.prototype.playReady = function(player) {
     $('header').on('hover', '#play-stop-button-wrapper', this.playButtonHover);
     $('header').on('click', '#play-stop-button-wrapper', this.playButtonClick);
     //$('#play-stop-button-wrapper').on('click', this.playButtonClick);
-
+    $('#success-image').removeClass('success-waiting').addClass('success-ready');
     $('#play-stop-button-wrapper').removeClass('play-stop-button-wrapper-waiting').addClass('play-stop-button-wrapper-ready');
     $('#play-stop-button').removeClass('play-stop-button-waiting').addClass('play-stop-button-ready');
     
