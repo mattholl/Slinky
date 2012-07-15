@@ -25,6 +25,8 @@ var Slinky  = function() {
     this.beats = [];
     this.responders = [];
 
+    this.rendererSetup = false;
+
     this.player = new Player(this, this.ui);
     
 };
@@ -52,6 +54,7 @@ Slinky.prototype.init = function() {
     //TODO remove dom element will we end up with two if form is submitted again
 
     document.body.appendChild( this.renderer.domElement );
+    this.rendererSetup = true;
     
     this.container = new THREE.Object3D();
     this.scene.add(this.container);
@@ -59,6 +62,11 @@ Slinky.prototype.init = function() {
     this.container.rotation.x = this.container.rotation.x += Math.PI/2;
 
     this.renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+
+};
+
+Slinky.prototype.removeRenderer = function() {
+    document.body.removeChild( this.renderer.domElement );
 
 }
 
@@ -158,7 +166,7 @@ Slinky.prototype.createHighResponders = function() {
 //fire it up
 window.onload = function() {
     window.app = new Slinky();
-    //window.app.player.UI.toggleHeader();
+    window.app.player.UI.toggleHeader();
 };
 
 /*

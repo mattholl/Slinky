@@ -90,6 +90,11 @@ Player.prototype.onLoad = function() {
     console.log('player.onload fired');
     
     //call three renderer setup function on slinky
+    
+    if(app.rendererSetup === true) {
+        app.removeRenderer();
+    }
+    
     app.init();
 
     app.createLowResponders();
