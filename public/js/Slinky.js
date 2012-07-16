@@ -13,7 +13,6 @@ var Slinky  = function() {
 		client_id : this.clientID
 	});
 
-    
     this.windowHalfX = window.innerWidth / 2;
     this.windowHalfY = window.innerHeight / 2;
 
@@ -31,8 +30,7 @@ var Slinky  = function() {
     
 };
 
-//called from the onLoad function in Player
-//
+// called from the onLoad function in Player
 Slinky.prototype.init = function() {
     
     //Three.js
@@ -176,7 +174,7 @@ Dancer.addPlugin( 'ready', function() {
     this.bind( 'update', function() {
 
         //console.log(this); dancer
-        //requestAnimationFrame(app.renderer.render);
+        //requestAnimationFrame(update);
         //the function which does the updating
 
         //start stats

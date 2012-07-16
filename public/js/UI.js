@@ -1,6 +1,6 @@
 //UI object 
-//responds to interactions from the user and deals with visual changes to indicate states
-//
+//responds to interactions from the user and deals with visual changes to indicate states:
+//play / stop events get bound/unbound as new track loads
 //
 //
 var UI = function(player, track, app) {
@@ -28,7 +28,16 @@ UI.prototype.attachEvents = function(UI, player) {
         console.log('form search');
         console.log('is dancer playing');
 
-        $('#play-stop-button-wrapper').trigger('click');
+        //TODO can't just trigger click cos it starts playing if its stopped
+        //
+
+        console.log('typeof');
+        console.log(typeof(app.player.dancer));
+
+        if((typeof(app.player.dancer) === 'object') && (app.player.dancer.isPlaying() === true)) {
+            $('#play-stop-button-wrapper').trigger('click');
+            console.log('stopping to load');
+        }
 
         //remove play button event handlers - return to opaque - will get reattached when playReady fires
         $('header').off('hover', '#play-stop-button-wrapper', this.playButtonHover);
@@ -41,8 +50,6 @@ UI.prototype.attachEvents = function(UI, player) {
     });
 
 };
-
-
 
 UI.prototype.loadingIndicator = function() {
     //so adda throbber
@@ -87,31 +94,13 @@ UI.prototype.playButtonHover = function() {
 };
 
 UI.prototype.playButtonClick = function() {
-    //e.stopPropagation();
-    //this depresses the button on click
-    //need to change to a stop symbol - toggle header up and start dancer playing
-    //attach an event so that the next click stop dancer?
-    //on stop we need to clear the currently rendered canvas as dancer restarts when play is called again
     $('#play-stop-button-wrapper').toggleClass('play-button-click');
     $('#play-stop-button').toggleClass('play-button-click');
-
-    //check for value of dancer playing
-
-    
-
-    //if ui visisble && if dancer is playing
-    var elHeader = $('header');
-    if(elHeader.hasClass('open')) {
-        
-    }
 
     var playing = app.player.dancer.isPlaying();
     console.log(playing);
     console.log('were playing');
-    //app.player.dancer.play();
-
     
-
     if(playing === false) {
         app.player.dancer.play();
         //push the header back up
@@ -122,57 +111,27 @@ UI.prototype.playButtonClick = function() {
         app.player.dancer.stop();
         console.log('dancer.isplaying true so stop');
         $('#play-stop-button').removeClass('play-stop-button-square').addClass('play-stop-button-triangle');
-        //clear canvas no - only clear on search
-        //
     }
     
 };
 
 
 UI.prototype.playReady = function(player) {
-    //attach play / stop events
-    //need to reset dancer after stop?
-    //or reset everything when a new track is searched for
-    //remove throbber from play button....
-    console.log('throbber removed');
-    $('#track-image canvas').remove();
-    //turn up opacity on green ready indicator
+    //remove throbber
+    $('#track-image canvas').remove();    
     
-    
-    //////
-    console.log('play ready');
-    //now add
-    ////TODO
-    //add click listener to play-stop-button
-    //add hover events as well
-    //change opacity on play
-    //
-    //TODO make this work with bubbling - not working as i'm expecting
-    //although won't work in this way when it is bound direct to object, shld be somthing like:
-    //$('#play-stop-button-wrapper').on('#play-stop-button', 'hover', this.playButtonHover);
-    //something in using height = 0 to get the triangle would a height other then 0 fix it?
-    //
-    //
-    //
-    //assign events - remove with .off() when form get focus again?
-    //
-    //
-    //need to do this when new form submission sstarts
+    //atach play events + ui display
     $('header').on('hover', '#play-stop-button-wrapper', this.playButtonHover);
     $('header').on('click', '#play-stop-button-wrapper', this.playButtonClick);
-    //$('#play-stop-button-wrapper').on('click', this.playButtonClick);
     $('#success-image').removeClass('success-waiting').addClass('success-ready');
     $('#play-stop-button-wrapper').removeClass('play-stop-button-wrapper-waiting').addClass('play-stop-button-wrapper-ready');
     $('#play-stop-button').removeClass('play-stop-button-waiting').addClass('play-stop-button-ready');
     
-
+    console.log('throbber removed');
+    console.log('play ready');
 };
 
 UI.prototype.updateInfo = function(track) {
-    //get dom elements
-    //variables should be in player.track
-    //javascript is like weaving simultaneous actions and reactions together - creating a web
-    //javascript apps - sitting between the server and the browser
     
     var info = {
         title : track.title,
@@ -184,8 +143,6 @@ UI.prototype.updateInfo = function(track) {
     $('#track-image img').attr('src', track.artwork_url);
     $('#track-url').attr('href', track.permalink_url);
     $('.user-url').attr('href', track.user.permalink_url);
-
-    //make the success tick not opaque
 };
 
 UI.prototype.toggleHeader = function() {
@@ -198,11 +155,11 @@ UI.prototype.toggleHeader = function() {
     if(elHeader.hasClass('open')) {
         //move header element up to close
         $(elHeader).transition({ y: '-100px' }, 200, 'snap');
-        //change shape of pulldown button
-        //$(elHeader).find('#ui-pulldown').toggleClass('pulldown-triangle pulldown-rectangle');
         
+        //change shape of pulldown button
         elDropDownCircle.toggleClass('ui-closed ui-open');
 
+        //remove dropdown close icon
         $('#dropdown-cross').css('display', 'none');
 
         elHeader.find('#ui-pulldown').css({
@@ -217,16 +174,13 @@ UI.prototype.toggleHeader = function() {
     } else if(elHeader.hasClass('closed')) {
         //move header element down to open
         $(elHeader).transition({ y: '0' }, 300, 'cubic-bezier(0.460, 0.045, 0.750, 0.150)' );
-        //change shape of pulldown button
-        //$(elHeader).find('#ui-pulldown').toggleClass('pulldown-triangle pulldown-rectangle');
         
+        //change shape of pulldown button
         elDropDownCircle.toggleClass('ui-closed ui-open');
         
-        //set dropdown-cross to display none
+        //display dropdown close icon
         $('#dropdown-cross').css('display', 'block');
 
-
-        //problem with position being reset for icon if a css class is toggled so change these values here
         $(elHeader).find('#ui-pulldown').css({
             'border-top' : 'none',
             'border-left' : 'none',
@@ -235,9 +189,7 @@ UI.prototype.toggleHeader = function() {
             'height' : '30px',
             'background' : '#4d4d4d'
         });
-
     }
-
     elHeader.toggleClass('open closed');
 };
 
@@ -248,10 +200,3 @@ UI.prototype.trackWarning = function() {
         user : "It needs to be a track url."
     });
 };
-
-UI.prototype.URLresolved = function() {
-    //change the background colour of the button
-};
-
-
-

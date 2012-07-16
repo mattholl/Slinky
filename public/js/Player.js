@@ -1,6 +1,5 @@
 /**
- * https://github.com/oampo/AmbientCloud
- * Player connects to the
+ * deals with the requests to node and posts back to UI
  *
  */
 
@@ -13,11 +12,6 @@ var Player = function(app) {
     this._this = this;
 };
 
-
-/**
- * Adds a track to the playlist after retreiving the data info from SoundCloud.
- * Asynchronous.
- */
 Player.prototype.getTrackFromURL = function(url, position) {
     SC.get('/resolve', {url: url}, function(track, error) {
         
@@ -49,14 +43,11 @@ Player.prototype.load = function(track, player) {
         this.UI.loadingIndicator();
         console.log('from player.load');
         console.log(this);
-        
-        //var player = this;
 
         this.dancer.bind('loaded', function(player) {
             //when the dancer is ready
             app.player.onLoad();
         });
-
     }
     else {
         //there's no stream url
@@ -68,13 +59,11 @@ Player.prototype.load = function(track, player) {
 Player.prototype.onLoad = function() {
     //need on load to fire and call //app.player.load(this.track);
     //in here - ensures that the dancer object is available
-    //this.app.trackView.unsetLoading();
     this.loading = false;
-    //pub / sub to subscribe creating dancer beats to player.onLoad firing
 
     console.log('player.onload fired');
     
-    //remove remderer and create a new on if the app was already playing
+    //remove remderer and create a new one if the app was already playing
     if(app.rendererSetup === true) {
         app.removeRenderer();
     }
