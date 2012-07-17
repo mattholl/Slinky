@@ -158,7 +158,7 @@ Slinky.prototype.createHighResponders = function() {
 
 Slinky.prototype.removeRenderer = function() {
     document.body.removeChild( this.renderer.domElement );
-}
+};
 
 //fire it up
 window.onload = function() {
@@ -169,7 +169,6 @@ window.onload = function() {
 /*
  * Plug in to the dancer objects update function
  */
-
 Dancer.addPlugin( 'ready', function() {
     this.bind( 'update', function() {
 
@@ -193,10 +192,6 @@ Dancer.addPlugin( 'ready', function() {
         app.stats.end();
     });
 });
-
-
-
-
 
 //move these off window?
 function onDocumentMouseDown( event ) {

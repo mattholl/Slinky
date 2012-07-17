@@ -1,4 +1,4 @@
-//UI object 
+//UI object
 //responds to interactions from the user and deals with visual changes to indicate states:
 //play / stop events get bound/unbound as new track loads
 //
@@ -118,7 +118,7 @@ UI.prototype.playButtonClick = function() {
 
 UI.prototype.playReady = function(player) {
     //remove throbber
-    $('#track-image canvas').remove();    
+    $('#track-image canvas').remove();
     
     //atach play events + ui display
     $('header').on('hover', '#play-stop-button-wrapper', this.playButtonHover);
