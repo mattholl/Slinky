@@ -2,7 +2,7 @@
 //responds to interactions from the user and deals with visual changes to indicate states:
 //play / stop events get bound/unbound as new track loads
 //
-//
+
 var UI = function(player, track, app) {
     this.player = player;
     this.app = app;

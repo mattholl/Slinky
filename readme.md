@@ -6,7 +6,6 @@ A simple app which loads a track from Soundcloud via a node.js proxy and generat
 
 In essence it is these projects plumbed together:
 
-
 Dancer.js
 Three.js
 AbientCloud https://github.com/oampo/AmbientCloud
