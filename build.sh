@@ -1,8 +1,7 @@
 #! /bin/bash
 
 # cat files into one js/build/app.js
-# run through lint
-# minify app.min.js
+# minify / uglify app.min.js
 
 cat public/js/jquery/jquery-1.7.2.min.js \
 	public/js/jquery/transparency.min.js \

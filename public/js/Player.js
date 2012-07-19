@@ -67,6 +67,12 @@ Player.prototype.onLoad = function() {
     if(app.rendererSetup === true) {
         app.removeRenderer();
     }
+
+    //remove old stats - it will get recreated in load function
+    //put this into function above - 
+    // if(stats === true) {
+    //     stats.remove
+    // }
     
     app.init();
 
