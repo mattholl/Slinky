@@ -14,6 +14,6 @@ cat public/js/jquery/jquery-1.7.2.min.js \
 	public/js/dancer.js \
 	public/js/Slinky.js \
 	public/js/Player.js \
->public/js/build/app.js
+>public/js/build/app.min.js
 
-uglifyjs --overwrite public/js/build/app.js
+uglifyjs --overwrite public/js/build/app.min.js

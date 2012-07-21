@@ -61,5 +61,5 @@ var app = http.createServer(function(requestToNode, responseToClient) {
     }
 });
 
-app.listen(8000);
-console.log('MP3 server on port 8000');
+app.listen(8081);
+console.log('MP3 server on port 8081');
