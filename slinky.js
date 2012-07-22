@@ -55,7 +55,7 @@ var app = http.createServer(function(requestToNode, responseToClient) {
             responseToClient.end();
         });
     } else {
-        requestToNode.on('end', function() {
+        requestToNode.addListener('end', function() {
             file.serve(requestToNode, responseToClient);
         });
     }
