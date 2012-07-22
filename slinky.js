@@ -61,19 +61,19 @@ var app = http.createServer(function(requestToNode, responseToClient) {
     }
 });
 
-//app.listen(9001);
+app.listen(9001);
 //
-var server = http.createServer(function(request, response) {
-    request.addListener('end', function() {
-        response.writeHead(200, {'Content-Type': 'text/plain'});
-        response.end('Hello slinky\n');
-        // fileServer.serve(request, response, function(err, result) {
-        //  if (err && (err.status === 404)) { // If the file wasn't found
-  //               fileServer.serveFile('/not-found.html', 404, {}, request, response);
-  //           }
-        // });
-    });
-});
+// var server = http.createServer(function(request, response) {
+//     request.addListener('end', function() {
+//         response.writeHead(200, {'Content-Type': 'text/plain'});
+//         response.end('Hello slinky\n');
+//         // fileServer.serve(request, response, function(err, result) {
+//         //  if (err && (err.status === 404)) { // If the file wasn't found
+//   //               fileServer.serveFile('/not-found.html', 404, {}, request, response);
+//   //           }
+//         // });
+//     });
+// });
 
-server.listen(9001);
+// server.listen(9001);
 console.log('MP3 server on port 9001');
