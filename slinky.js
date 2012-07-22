@@ -61,5 +61,5 @@ var app = http.createServer(function(requestToNode, responseToClient) {
     }
 });
 
-app.listen(9001);
+app.listen(9001, '127.0.0.1');
 console.log('MP3 server on port 9001');
