@@ -55,8 +55,14 @@ var app = http.createServer(function(requestToNode, responseToClient) {
             responseToClient.end();
         });
     } else {
+        //just server static files
+        //use fs?????
         requestToNode.addListener('end', function() {
-            file.serve(requestToNode, responseToClient);
+            //file.serve(requestToNode, responseToClient);
+            responseToClient.writeHead(200, {'Content-Type': 'text/plain'});
+            responseToClient.write('Hello slinky\n');
+            responseToClient.end();
+            
         });
     }
 });
