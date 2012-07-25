@@ -76,10 +76,13 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                 //console.log(parsed.pathname);
                 //console.log(uri);
                 
-                if (fs.statSync(filename).isDirectory()) {
-                    filename += 'index.html';
+                filename += 'index.html';
                     responseToClient.write(filename +"\n");
-                }
+                
+                // if (fs.statSync(filename).isDirectory()) {
+                //     filename += 'index.html';
+                //     responseToClient.write(filename +"\n");
+                // }
 
                 if(!exists) {
                     responseToClient.writeHead(404, {"Content-Type": "text/plain"});
