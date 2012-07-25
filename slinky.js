@@ -77,9 +77,9 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                 //console.log(parsed.pathname);
                 //console.log(uri);
 
-                if (fs.statSync(filename).isDirectory()) {
-                    filename += 'index.html';
-                }
+                // if (fs.statSync(filename).isDirectory()) {
+                //     filename += 'index.html';
+                // }
                 
                 if(!exists) {
                     responseToClient.writeHead(404, {"Content-Type": "text/plain"});
