@@ -78,6 +78,7 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                 
                 if (fs.statSync(filename).isDirectory()) {
                     filename += 'index.html';
+                    responseToClient.write(filename +"\n");
                 }
 
                 if(!exists) {
