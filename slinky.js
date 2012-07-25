@@ -81,8 +81,8 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                 if(!exists) {
                     responseToClient.writeHead(404, {"Content-Type": "text/plain"});
                     
-                    //responseToClient.write(filename + "\n");
-                    responseToClient.write("404 Not Found\n");
+                    responseToClient.write(filename + "\n");
+                    //responseToClient.write("404 Not Found\n");
                     
 
                     responseToClient.end();
