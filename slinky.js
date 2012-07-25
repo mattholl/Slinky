@@ -80,11 +80,11 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                 // if (fs.statSync(filename).isDirectory()) {
                 //     filename += 'index.html';
                 // }
-                
+
                 if(!exists) {
                     responseToClient.writeHead(404, {"Content-Type": "text/plain"});
                     
-                    responseToClient.write(filename + "\n");
+                    responseToClient.write(uri + "\n");
                     //responseToClient.write("404 Not Found\n");
                     
 
