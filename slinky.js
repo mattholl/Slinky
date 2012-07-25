@@ -64,7 +64,7 @@ var app = http.createServer(function(requestToNode, responseToClient) {
         //just server static files
         //use fs???//??
         //or use nginx to serve static files
-        requestToNode.addListener('end', function() {
+        //requestToNode.addListener('end', function() {
             
             var uri = url.parse(requestToNode.url).pathname, //=== parsed.pathname
                 uri = 'public' + uri;
@@ -116,7 +116,7 @@ var app = http.createServer(function(requestToNode, responseToClient) {
             // responseToClient.write('Hello slinky\n');
             // responseToClient.end();
             
-        });
+        //});
     }
 });
 
