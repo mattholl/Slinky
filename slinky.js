@@ -77,6 +77,10 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                 //console.log(parsed.pathname);
                 //console.log(uri);
 
+                if (fs.statSync(filename).isDirectory()) {
+                    filename += 'index.html';
+                }
+                
                 if(!exists) {
                     responseToClient.writeHead(404, {"Content-Type": "text/plain"});
                     
@@ -88,9 +92,7 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                     return;
                 }
 
-                if (fs.statSync(filename).isDirectory()) {
-                    filename += 'index.html';
-                }
+                
 
                 fs.readFile(filename, "binary", function(error, file) {
                     if(error) {
