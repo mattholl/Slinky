@@ -1,7 +1,12 @@
 var http = require('http');
     stat = require('node-static');
     url = require('url');
+    fs = require('fs');
+    path = require('path');
+    mime = require('mime');
+
     client_id = '86961c923d1a04425a46ac1a4a19c675';
+
     
 var file = new stat.Server('./public');
 
@@ -55,31 +60,68 @@ var app = http.createServer(function(requestToNode, responseToClient) {
             responseToClient.end();
         });
     } else {
+        //console.log(parsed.pathname);
         //just server static files
-        //use fs?????
+        //use fs???//??
+        //or use nginx to serve static files
         requestToNode.addListener('end', function() {
-            //file.serve(requestToNode, responseToClient);
-            responseToClient.writeHead(200, {'Content-Type': 'text/plain'});
-            responseToClient.write('Hello slinky\n');
-            responseToClient.end();
+            
+            var uri = url.parse(requestToNode.url).pathname, //=== parsed.pathname
+                uri = 'public' + uri;
+                
+                filename = path.join(process.cwd(), uri); //= ful filesystem path
+
+
+            path.exists(filename, function(exists) {
+                //console.log(parsed.pathname);
+                //console.log(uri);
+               
+
+                if(!exists) {
+                    responseToClient.writeHead(404, {"Content-Type": "text/plain"});
+                    responseToClient.write("404 Not Found\n");
+                    responseToClient.end();
+                    return;
+                }
+
+                if (fs.statSync(filename).isDirectory()) {
+                    filename += 'index.html';
+                }
+
+                fs.readFile(filename, "binary", function(error, file) {
+                    if(error) {
+                        responseToClient.writeHead(500, {"Content-Type": "text/plain"});
+                        responseToClient.write(error + "\n");
+                        responseToClient.end();
+                        return;
+                    }
+                    
+                    var type = mime.lookup(filename);
+                    
+                    responseToClient.writeHead(200, {
+                        "Content-Type" : type,
+                    });
+
+                    responseToClient.write(file, "binary");
+                    responseToClient.end();
+                });
+
+
+            });
+
+
+            file.serve(requestToNode, responseToClient);
+            
+            // responseToClient.writeHead(200, {'Content-Type': 'text/plain'});
+            // responseToClient.write('Hello slinky\n');
+            // responseToClient.end();
             
         });
     }
 });
 
 app.listen(9001);
-//
-// var server = http.createServer(function(request, response) {
-//     request.addListener('end', function() {
-//         response.writeHead(200, {'Content-Type': 'text/plain'});
-//         response.end('Hello slinky\n');
-//         // fileServer.serve(request, response, function(err, result) {
-//         //  if (err && (err.status === 404)) { // If the file wasn't found
-//   //               fileServer.serveFile('/not-found.html', 404, {}, request, response);
-//   //           }
-//         // });
-//     });
-// });
+
 
 // server.listen(9001);
 console.log('MP3 server on port 9001');
