@@ -71,7 +71,7 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                 
                 filename = path.join(process.cwd(), uri); //= ful filesystem path
 
-                filename = '/var/www/slinky/' + filename;
+                //filename = '/var/www/slinky/' + filename;
 
             path.exists(filename, function(exists) {
                 //console.log(parsed.pathname);
