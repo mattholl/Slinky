@@ -70,15 +70,15 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                 uri = 'public' + uri;
                 
                 filename = path.join(process.cwd(), uri); //= ful filesystem path
-
+                responseToClient.write(filename +"\n");
 
             path.exists(filename, function(exists) {
                 //console.log(parsed.pathname);
                 //console.log(uri);
                 
                 filename += 'index.html';
-                    responseToClient.write(filename +"\n");
                 
+
                 // if (fs.statSync(filename).isDirectory()) {
                 //     filename += 'index.html';
                 //     responseToClient.write(filename +"\n");
