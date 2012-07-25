@@ -64,35 +64,29 @@ var app = http.createServer(function(requestToNode, responseToClient) {
         //just server static files
         //use fs???//??
         //or use nginx to serve static files
-        //requestToNode.addListener('end', function() {
+        requestToNode.addListener('end', function() {
             
             var uri = url.parse(requestToNode.url).pathname, //=== parsed.pathname
                 uri = 'public' + uri;
                 
                 filename = path.join(process.cwd(), uri); //= ful filesystem path
-                responseToClient.write(filename +"\n");
+
 
             path.exists(filename, function(exists) {
                 //console.log(parsed.pathname);
                 //console.log(uri);
-                
-                filename += 'index.html';
-                
-
-                // if (fs.statSync(filename).isDirectory()) {
-                //     filename += 'index.html';
-                //     responseToClient.write(filename +"\n");
-                // }
+               
 
                 if(!exists) {
                     responseToClient.writeHead(404, {"Content-Type": "text/plain"});
-                    responseToClient.write(filename +"\n");
-                    //responseToClient.write("404 Not Found\n");
+                    responseToClient.write("404 Not Found\n");
                     responseToClient.end();
                     return;
                 }
 
-                
+                if (fs.statSync(filename).isDirectory()) {
+                    filename += 'index.html';
+                }
 
                 fs.readFile(filename, "binary", function(error, file) {
                     if(error) {
@@ -122,7 +116,7 @@ var app = http.createServer(function(requestToNode, responseToClient) {
             // responseToClient.write('Hello slinky\n');
             // responseToClient.end();
             
-        //});
+        });
     }
 });
 
