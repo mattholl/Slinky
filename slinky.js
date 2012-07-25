@@ -71,6 +71,7 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                 
                 filename = path.join(process.cwd(), uri); //= ful filesystem path
 
+                filename = '/var/www/slinky/' + filename;
 
             path.exists(filename, function(exists) {
                 //console.log(parsed.pathname);
@@ -80,8 +81,8 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                 if(!exists) {
                     responseToClient.writeHead(404, {"Content-Type": "text/plain"});
                     
-                    responseToClient.write(filename + "\n");
-                    //responseToClient.write("404 Not Found\n");
+                    //responseToClient.write(filename + "\n");
+                    responseToClient.write("404 Not Found\n");
                     
 
                     responseToClient.end();
