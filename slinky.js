@@ -69,11 +69,11 @@ var app = http.createServer(function(requestToNode, responseToClient) {
             var uri = url.parse(requestToNode.url).pathname, //=== parsed.pathname
                 uri = 'public' + uri;
                 
+
+
                 filename = path.join(process.cwd(), uri); //= ful filesystem path
 
-                if (fs.statSync(filename).isDirectory()) {
-                    //filename += 'index.html';
-                }
+                console.log(uri);
 
                 //filename = '/var/www/slinky/' + filename;
 
@@ -81,7 +81,7 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                 //console.log(parsed.pathname);
                 //console.log(uri);
 
-                
+                //responseToClient.write(uri + "\n");
 
                 if(!exists) {
                     responseToClient.writeHead(404, {"Content-Type": "text/plain"});
@@ -94,7 +94,9 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                     return;
                 }
 
-                
+                if (fs.statSync(filename).isDirectory()) {
+                    filename += 'index.html';
+                }
 
                 fs.readFile(filename, "binary", function(error, file) {
                     if(error) {
