@@ -108,6 +108,8 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                     
                     var type = mime.lookup(filename);
                     
+                    console.log(type);
+                    
                     responseToClient.writeHead(200, {
                         "Content-Type" : type,
                     });
