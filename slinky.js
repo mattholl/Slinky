@@ -60,36 +60,19 @@ var app = http.createServer(function(requestToNode, responseToClient) {
             responseToClient.end();
         });
     } else {
-        //console.log(parsed.pathname);
-        //just server static files
-        //use fs???//??
-        //or use nginx to serve static files
+        //send the static files
         requestToNode.addListener('end', function() {
             
-            var uri = url.parse(requestToNode.url).pathname, //=== parsed.pathname
+            var uri = url.parse(requestToNode.url).pathname, //= parsed.pathname
                 uri = 'public' + uri;
-                
-
-
-                filename = path.join(process.cwd(), uri); //= ful filesystem path
-
-                //console.log(uri);
-
-                //filename = '/var/www/slinky/' + filename;
+                filename = path.join(process.cwd(), uri); //= full filesystem path
 
             path.exists(filename, function(exists) {
-                //console.log(parsed.pathname);
-                //console.log(uri);
-
-                //responseToClient.write(uri + "\n");
 
                 if(!exists) {
                     responseToClient.writeHead(404, {"Content-Type": "text/plain"});
-                    
                     responseToClient.write(filename + "\n");
-                    //responseToClient.write("404 Not Found\n");
-                    
-
+                    responseToClient.write("404 Not Found\n");
                     responseToClient.end();
                     return;
                 }
@@ -108,8 +91,6 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                     
                     var type = mime.lookup(filename);
                     
-                    //console.log(type);
-                    
                     responseToClient.writeHead(200, {
                         "Content-Type" : type,
                     });
@@ -120,20 +101,9 @@ var app = http.createServer(function(requestToNode, responseToClient) {
 
 
             });
-
-
-            //file.serve(requestToNode, responseToClient);
-            
-            // responseToClient.writeHead(200, {'Content-Type': 'text/plain'});
-            // responseToClient.write('Hello slinky\n');
-            // responseToClient.end();
-            
         });
     }
 });
 
 app.listen(9001);
-
-
-// server.listen(9001);
 console.log('MP3 server on port 9001');

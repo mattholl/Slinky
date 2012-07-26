@@ -16,8 +16,8 @@ Copying and pasting any soundcloud track url should work to rebuild the visualis
 
 Or try these:
 
+http://soundcloud.com/gtastrings/mozart-figaro-ouverture
 http://soundcloud.com/rob_booth/milanese-espantoso-freebie
-http://soundcloud.com/das-boy/aphex-twin-in-store-ambients-1995-sire-records
 http://soundcloud.com/nytransitauthority/off-the-traxx-catch-that-train
 http://soundcloud.com/das-boy/eno-another-green-world-1975-polydor
 http://soundcloud.com/radiohead/radiohead-good-evening-mrs
