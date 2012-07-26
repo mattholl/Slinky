@@ -73,7 +73,7 @@ var app = http.createServer(function(requestToNode, responseToClient) {
 
                 filename = path.join(process.cwd(), uri); //= ful filesystem path
 
-                console.log(uri);
+                //console.log(uri);
 
                 //filename = '/var/www/slinky/' + filename;
 
@@ -108,7 +108,7 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                     
                     var type = mime.lookup(filename);
                     
-                    console.log(type);
+                    //console.log(type);
                     
                     responseToClient.writeHead(200, {
                         "Content-Type" : type,
