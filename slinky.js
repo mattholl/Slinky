@@ -72,7 +72,7 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                 filename = path.join(process.cwd(), uri); //= ful filesystem path
 
                 if (fs.statSync(filename).isDirectory()) {
-                    filename += 'index.html';
+                    //filename += 'index.html';
                 }
 
                 //filename = '/var/www/slinky/' + filename;
@@ -118,7 +118,7 @@ var app = http.createServer(function(requestToNode, responseToClient) {
             });
 
 
-            file.serve(requestToNode, responseToClient);
+            //file.serve(requestToNode, responseToClient);
             
             // responseToClient.writeHead(200, {'Content-Type': 'text/plain'});
             // responseToClient.write('Hello slinky\n');
