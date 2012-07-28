@@ -1,7 +1,7 @@
-//UI object
-//responds to interactions from the user and deals with visual changes to indicate states:
-//play / stop events get bound/unbound as new track loads
-//
+/**
+ * UI object
+ * responds to interactions from the user and deals with visual changes to indicate states:
+ */
 
 var UI = function(player, track, app) {
     this.player = player;
@@ -18,25 +18,13 @@ UI.prototype.attachEvents = function(UI, player) {
     //form sumission
     $('header').on('submit', '#track-form', function(e) {
         e.preventDefault();
-
-        console.log('form submit responding');
         
         //this = form
         var trackUrl = (this.elements['track-url'].value);
         player.getTrackFromURL(trackUrl);
         
-        console.log('form search');
-        console.log('is dancer playing');
-
-        //TODO can't just trigger click cos it starts playing if its stopped
-        //
-
-        console.log('typeof');
-        console.log(typeof(app.player.dancer));
-
         if((typeof(app.player.dancer) === 'object') && (app.player.dancer.isPlaying() === true)) {
             $('#play-stop-button-wrapper').trigger('click');
-            console.log('stopping to load');
         }
 
         //remove play button event handlers - return to opaque - will get reattached when playReady fires
@@ -52,26 +40,19 @@ UI.prototype.attachEvents = function(UI, player) {
 };
 
 UI.prototype.loadingIndicator = function() {
-    //so adda throbber
-    console.log('throbber added');
+    //so add a throbber
     cmd("js/throbber.js", function(loaded) {
-        
-        console.log('success: ' + loaded);
         
         if(loaded === true) {
             //hmmmm need UI to be available here so the throb object is available to call stop on... - or just kill the dom element
             //although cmd.js returns true even if throbber.js 404s....
-            console.log('loaded from cmd.js callback');
-            
-            //console.log(this); //this = window
-
             var throb = new Throbber({
-                    color: 'yellow',
-                    padding: 30,
-                    size: 40,
-                    fade: 200,
-                    clockwise: false
-                }).appendTo(document.getElementById('track-image'));
+                color: 'yellow',
+                padding: 30,
+                size: 40,
+                fade: 200,
+                clockwise: false
+            }).appendTo(document.getElementById('track-image'));
  
             $(throb.elem).css({
                 'position' : 'absolute',
@@ -80,8 +61,6 @@ UI.prototype.loadingIndicator = function() {
             });
 
             throb.start();
-
-            console.log('throb started');
         }
     });
 };
@@ -98,21 +77,17 @@ UI.prototype.playButtonClick = function() {
     $('#play-stop-button').toggleClass('play-button-click');
 
     var playing = app.player.dancer.isPlaying();
-    console.log(playing);
-    console.log('were playing');
     
     if(playing === false) {
         app.player.dancer.play();
         //push the header back up
         app.player.UI.toggleHeader();
-        console.log('dancer.isplaying false so play');
         $('#play-stop-button').removeClass('play-stop-button-triangle').addClass('play-stop-button-square');
     } else if(playing === true) {
         app.player.dancer.stop();
         console.log('dancer.isplaying true so stop');
         $('#play-stop-button').removeClass('play-stop-button-square').addClass('play-stop-button-triangle');
     }
-    
 };
 
 
@@ -126,9 +101,6 @@ UI.prototype.playReady = function(player) {
     $('#success-image').removeClass('success-waiting').addClass('success-ready');
     $('#play-stop-button-wrapper').removeClass('play-stop-button-wrapper-waiting').addClass('play-stop-button-wrapper-ready');
     $('#play-stop-button').removeClass('play-stop-button-waiting').addClass('play-stop-button-ready');
-    
-    console.log('throbber removed');
-    console.log('play ready');
 };
 
 UI.prototype.updateInfo = function(track) {
@@ -196,7 +168,7 @@ UI.prototype.toggleHeader = function() {
 UI.prototype.trackWarning = function() {
     //post warning
     $('header').render({
-        title : "Looks like that's a link to a user page or a set",
+        title : "Looks like that's not a direct link to a SoundCloud track",
         user : "It needs to be a track url."
     });
 };

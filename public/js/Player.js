@@ -36,14 +36,10 @@ Player.prototype.load = function(track, player) {
         // SoundCloud because of
         // http://code.google.com/p/chromium/issues/detail?id=96136
         var url = '/proxy?url=' + this.track.stream_url;
-        this.dancer = new Dancer(url);
         
+        this.dancer = new Dancer(url);
         this.loading = true;
-
         this.UI.loadingIndicator();
-        console.log('from player.load');
-        console.log(this);
-
         this.dancer.bind('loaded', function(player) {
             //when the dancer is ready
             app.player.onLoad();
@@ -60,19 +56,11 @@ Player.prototype.onLoad = function() {
     //need on load to fire and call //app.player.load(this.track);
     //in here - ensures that the dancer object is available
     this.loading = false;
-
-    console.log('player.onload fired');
     
     //remove remderer and create a new one if the app was already playing
     if(app.rendererSetup === true) {
         app.removeRenderer();
     }
-
-    //remove old stats - it will get recreated in load function
-    //put this into function above - 
-    // if(stats === true) {
-    //     stats.remove
-    // }
     
     app.init();
 

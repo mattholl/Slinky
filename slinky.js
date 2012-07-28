@@ -63,8 +63,7 @@ var app = http.createServer(function(requestToNode, responseToClient) {
         //send the static files
         requestToNode.addListener('end', function() {
             
-            var uri = url.parse(requestToNode.url).pathname, //= parsed.pathname
-                uri = 'public' + uri;
+            var uri = 'public' + url.parse(requestToNode.url).pathname, //= parsed.pathname
                 filename = path.join(process.cwd(), uri); //= full filesystem path
 
             path.exists(filename, function(exists) {
@@ -92,14 +91,12 @@ var app = http.createServer(function(requestToNode, responseToClient) {
                     var type = mime.lookup(filename);
                     
                     responseToClient.writeHead(200, {
-                        "Content-Type" : type,
+                        "Content-Type" : type
                     });
 
                     responseToClient.write(file, "binary");
                     responseToClient.end();
                 });
-
-
             });
         });
     }
