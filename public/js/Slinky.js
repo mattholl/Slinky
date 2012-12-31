@@ -38,7 +38,7 @@ Slinky.prototype.init = function() {
     
     this.scene.add( this.camera );
     
-    this.renderer = new THREE.CanvasRenderer();
+    this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize( window.innerWidth, window.innerHeight );
 
     document.body.appendChild( this.renderer.domElement );
