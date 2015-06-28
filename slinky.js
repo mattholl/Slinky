@@ -1,33 +1,25 @@
+// Soundcloud client ID
 var CLIENT_ID = '86961c923d1a04425a46ac1a4a19c675';
-// client_id
 
 var express = require('express'),
     fs = require('fs'),
     compression = require('compression'),
-    // hbs = require('hbs'),
+    hbs = require('hbs'),
     url = require('url'),
     path = require('path'),
     mime = require('mime');
 
 app = express();
-app.use(express.static(__dirname + '/public'));
 app.use(compression());
 
 var router = express.Router();
-router.use(function(req, res, next) {
-    // continue doing what we were doing and go to the route
+router.use('/proxy', function(req, res, next) {
+    console.log(req);
     next();
 });
-// eg.
-router.get('/', function(req, res) {
-    var data = {
-        title : 'Three.js PLY file viewer',
-        description : 'A small express.js server for viewing PLY files in Three.js. @mattholl',
-        list : plyList
-    };
-    // res.render('index', data);
-});
 
+app.use(router);
+app.use(express.static(__dirname + '/public'));
 
 // var app = http.createServer(function(requestToNode, responseToClient) {
 
@@ -124,4 +116,4 @@ router.get('/', function(req, res) {
 // });
 
 app.listen(9001);
-console.log('MP3 server on port 9001');
+console.log('slinky server on port 9001');
