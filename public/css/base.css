@@ -22,15 +22,15 @@ header {
     position: absolute;
     -webkit-transform: translateZ(0);
     -webkit-perspective: 1000;
-    -webkit-backface-visibility: hidden; 
-    -webkit-transform: translateY(-100px);
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateY(0px);
     -moz-transform: translateZ(0);
     -moz-perspective: 1000;
-    -moz-backface-visibility: hidden; 
+    -moz-backface-visibility: hidden;
     -moz-transform: translateY(-100px);
     transform: translateZ(0);
     perspective: 1000;
-    backface-visibility: hidden; 
+    backface-visibility: hidden;
     transform: translateY(-100px);
     height: 105px;
     width: 100%;
@@ -62,7 +62,7 @@ a#track-image {
     margin-top: 10px;
     width: 6%;
     float: left;
-    
+
 }
 
 #track-info {
@@ -80,7 +80,7 @@ a#track-image {
 a#track-url {
     float: left;
     width: 90%;
-    overflow: hidden;   
+    overflow: hidden;
 }
 
 a#user-info {
@@ -143,7 +143,7 @@ a#user-info {
  *
  *
  *
- * 
+ *
  */
 
 #track-form-container form {
@@ -179,7 +179,7 @@ a#user-info {
  *
  *
  *
- * 
+ *
  */
 
 .pulldown-triangle {
@@ -188,11 +188,11 @@ a#user-info {
     left: 80%;
     cursor: pointer;
 
-    width: 0; 
+    width: 0;
     height: 0;
     border-top: 30px solid #4d4d4d;
-    border-left: 30px solid transparent; 
-    border-right: 30px solid transparent; 
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
 }
 
 .pulldown-rectangle {
@@ -201,7 +201,7 @@ a#user-info {
     left: 80%;
     cursor: pointer;
     background: #4d4d4d;
-    width: 60px; 
+    width: 60px;
     height: 30px;
 }
 
@@ -209,7 +209,7 @@ a#user-info {
     position: absolute;
     left: -9px;
     top: -30px;
-    
+
     width:15px;
     height:15px;
     border:2px solid #e00000 ;
@@ -302,7 +302,7 @@ a#user-info {
  *
  * loading responses to events
  *
- * 
+ *
  */
 
 
@@ -314,8 +314,8 @@ a#user-info {
     position: relative;
     left: 50%;
 
-    -moz-border-radius: 20px; 
-   -webkit-border-radius: 20px; 
+    -moz-border-radius: 20px;
+   -webkit-border-radius: 20px;
    border-radius: 20px;
 
     top: 10px;
@@ -345,11 +345,11 @@ a#user-info {
     top: 5px;
     margin-left: 10px;
     border-radius: 5px;
-    
+
 }
 
 .play-stop-button-wrapper-waiting {
-    background: rgba(0, 120, 255, 0.5); 
+    background: rgba(0, 120, 255, 0.5);
 }
 
 .play-stop-button-wrapper-ready {
@@ -358,7 +358,7 @@ a#user-info {
   -ms-transition: background 1s;
   -o-transition: background 1s;
   transition: background 1s;
-    background: rgba(0, 120, 255, 1.0); 
+    background: rgba(0, 120, 255, 1.0);
     cursor: pointer;
 }
 
@@ -375,14 +375,14 @@ a#user-info {
    -moz-transform: scale(0.9);
    -ms-transform: scale(0.9);
    -o-transform: scale(0.9);
-   transform: scale(0.9);    
+   transform: scale(0.9);
 }
 
 #play-stop-button {
     float: left;
     position: relative;
     left: 50%;
-    text-indent:-9999px;    
+    text-indent:-9999px;
 }
 
 .play-stop-button-triangle {
