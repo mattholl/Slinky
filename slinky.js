@@ -7,7 +7,8 @@ var express = require('express'),
     hbs = require('hbs'),
     url = require('url'),
     path = require('path'),
-    mime = require('mime');
+    mime = require('mime'),
+    http = require('http');
 
 app = express();
 app.use(compression());
@@ -15,11 +16,56 @@ app.use(compression());
 var router = express.Router();
 router.use('/proxy', function(req, res, next) {
 
-    var url_parts = url.parse(req.url, true);
-    var query = url_parts.query;
+    var urlParts = url.parse(req.url, true);
+    var query = urlParts.query.url;
 
-    console.log(query);
-    next();
+    var scURL = url.parse(query);
+
+    var requestOptions = {
+        host : scURL.host, //'api.soundcloud.com'
+        port : 80,
+        path : scURL.pathname + '.json?client_id=' + CLIENT_ID //'/tracks/49593184/stream?client_id86961c923d1a04425a46ac1a4a19c675'
+    };
+
+    // Get media url from sc
+    var requestToSC = http.get(requestOptions, function(responseFromSC) {
+
+        if(responseFromSC.statusCode == 302) {
+            var mediaLocation = responseFromSC.headers.location;
+
+            // Parse media url and compile options for another request
+            var parsedMediaURL = url.parse(mediaLocation);
+
+            var scMedia = {
+                host : parsedMediaURL.host,
+                port : 80,
+                path : parsedMediaURL.pathname + parsedMediaURL.search
+            };
+
+            // Do the media request and pipe back to the client
+            var requestForMedia = http.get(scMedia, function(responseFromMedia) {
+                responseFromMedia.pipe(res);
+            });
+
+            // requestForMedia.on('error', function(error) {
+            //     // res.writeHead(404);
+            //     // res.end();
+            //     next();
+            // });
+
+        } else {
+            // res.writeHead(404);
+            // res.end();
+            // next();
+        }
+    });
+
+    // requestToSC.on('error', function(error) {
+    //     res.writeHead(404);
+    //     res.end();
+    // });
+
+    // next();
 });
 
 app.use(router);
