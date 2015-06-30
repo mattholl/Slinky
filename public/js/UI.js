@@ -60,7 +60,7 @@ UI.prototype.loadingIndicator = function() {
                 'left' : '5px'
             });
 
-            // throb.start();
+            throb.start();
         }
     });
 };
@@ -167,7 +167,7 @@ UI.prototype.toggleHeader = function() {
 UI.prototype.trackWarning = function() {
     //post warning
     $('header').render({
-        title : "Looks like that's not a direct link to a SoundCloud track",
+        title : "That SoundCloud URL doesn't work. Is it still there?",
         user : "It needs to be a track url."
     });
 };
