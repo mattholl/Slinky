@@ -17,7 +17,7 @@ function Responder(yPos) {
 
 Responder.prototype.createCircle = function() {
     var radius = 100,
-        angleInc = 0.3,
+        angleInc = 0.1,
         geometry = new THREE.Geometry();
 
     for(var angle = 0.0; angle < 2*Math.PI; angle += angleInc) {
@@ -33,7 +33,7 @@ Responder.prototype.update = function() {
     if(this.doScale === true) {
         this.incScale();
     }
-    
+
     //do the mesh scaling
     this.line.scale.x = this.line.scale.x += this.scaleVal;
     this.line.scale.z = this.line.scale.z += this.scaleVal;
