@@ -3,7 +3,7 @@ Slinky
 
 Slinky is a Three.js webapp which visualises music from SoundCloud. A node server proxys an audio stream from Soundcloud to the webapp.
 
-Please see [the demo](http://www.slinky.thingsbymatt.com).
+<!-- Please see [the demo](http://www.slinky.thingsbymatt.com). -->
 
 This project uses an express server with [Dancer.js](https://github.com/jsantell/dancer.js) for audio analysis and [Three.js](https://github.com/mrdoob/three.js/) to render with WebGL.
 
