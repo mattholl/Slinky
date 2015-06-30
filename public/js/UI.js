@@ -7,7 +7,7 @@ var UI = function(player, track, app) {
     this.player = player;
     this.app = app;
     this._this = this;
-    
+
     this.attachEvents(this._this, this.player);
 };
 
@@ -18,11 +18,11 @@ UI.prototype.attachEvents = function(UI, player) {
     //form sumission
     $('header').on('submit', '#track-form', function(e) {
         e.preventDefault();
-        
+
         //this = form
         var trackUrl = (this.elements['track-url'].value);
         player.getTrackFromURL(trackUrl);
-        
+
         if((typeof(app.player.dancer) === 'object') && (app.player.dancer.isPlaying() === true)) {
             $('#play-stop-button-wrapper').trigger('click');
         }
@@ -30,7 +30,7 @@ UI.prototype.attachEvents = function(UI, player) {
         //remove play button event handlers - return to opaque - will get reattached when playReady fires
         $('header').off('hover', '#play-stop-button-wrapper', this.playButtonHover);
         $('header').off('click', '#play-stop-button-wrapper', this.playButtonClick);
-    
+
         //reset ui visuals
         $('#success-image').removeClass('success-ready').addClass('success-waiting');
         $('#play-stop-button-wrapper').removeClass('play-stop-button-wrapper-ready').addClass('play-stop-button-wrapper-waiting');
@@ -42,7 +42,7 @@ UI.prototype.attachEvents = function(UI, player) {
 UI.prototype.loadingIndicator = function() {
     //so add a throbber
     cmd("js/throbber.js", function(loaded) {
-        
+
         if(loaded === true) {
             //hmmmm need UI to be available here so the throb object is available to call stop on... - or just kill the dom element
             //although cmd.js returns true even if throbber.js 404s....
@@ -53,14 +53,14 @@ UI.prototype.loadingIndicator = function() {
                 fade: 200,
                 clockwise: false
             }).appendTo(document.getElementById('track-image'));
- 
+
             $(throb.elem).css({
                 'position' : 'absolute',
                 'top' : '15px',
                 'left' : '5px'
             });
 
-            throb.start();
+            // throb.start();
         }
     });
 };
@@ -77,15 +77,14 @@ UI.prototype.playButtonClick = function() {
     $('#play-stop-button').toggleClass('play-button-click');
 
     var playing = app.player.dancer.isPlaying();
-    
-    if(playing === false) {
+
+    if(playing === false || typeof playing === 'undefined') {
         app.player.dancer.play();
         //push the header back up
         app.player.UI.toggleHeader();
         $('#play-stop-button').removeClass('play-stop-button-triangle').addClass('play-stop-button-square');
     } else if(playing === true) {
-        app.player.dancer.stop();
-        console.log('dancer.isplaying true so stop');
+        app.player.dancer.pause();
         $('#play-stop-button').removeClass('play-stop-button-square').addClass('play-stop-button-triangle');
     }
 };
@@ -94,7 +93,7 @@ UI.prototype.playButtonClick = function() {
 UI.prototype.playReady = function(player) {
     //remove throbber
     $('#track-image canvas').remove();
-    
+
     //atach play events + ui display
     $('header').on('hover', '#play-stop-button-wrapper', this.playButtonHover);
     $('header').on('click', '#play-stop-button-wrapper', this.playButtonClick);
@@ -104,7 +103,7 @@ UI.prototype.playReady = function(player) {
 };
 
 UI.prototype.updateInfo = function(track) {
-    
+
     var info = {
         title : track.title,
         user : track.user.username
@@ -127,7 +126,7 @@ UI.prototype.toggleHeader = function() {
     if(elHeader.hasClass('open')) {
         //move header element up to close
         $(elHeader).transition({ y: '-100px' }, 200, 'snap');
-        
+
         //change shape of pulldown button
         elDropDownCircle.toggleClass('ui-closed ui-open');
 
@@ -146,10 +145,10 @@ UI.prototype.toggleHeader = function() {
     } else if(elHeader.hasClass('closed')) {
         //move header element down to open
         $(elHeader).transition({ y: '0' }, 300, 'cubic-bezier(0.460, 0.045, 0.750, 0.150)' );
-        
+
         //change shape of pulldown button
         elDropDownCircle.toggleClass('ui-closed ui-open');
-        
+
         //display dropdown close icon
         $('#dropdown-cross').css('display', 'block');
 

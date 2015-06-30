@@ -18,32 +18,32 @@ var Slinky  = function() {
     this.targetRotationOnMouseDown = 0;
     this.mouseYOnMouseDown = 0;
     this.mouseY = 0;
-    
+
     this.beats = [];
     this.responders = [];
 
     this.rendererSetup = false;
 
     this.player = new Player(this, this.ui);
-    
+
 };
 
 // called from the onLoad function in Player
 Slinky.prototype.init = function() {
-    
+
     //Three.js
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 10000 );
     this.camera.position.z = 1000;
-    
+
     this.scene.add( this.camera );
-    
+
     this.renderer = new THREE.WebGLRenderer();
     this.renderer.setSize( window.innerWidth, window.innerHeight );
 
     document.body.appendChild( this.renderer.domElement );
     this.rendererSetup = true;
-    
+
     this.container = new THREE.Object3D();
     this.scene.add(this.container);
 
@@ -70,21 +70,21 @@ Slinky.prototype.createLowResponders = function() {
     for(var i = 0; i < 15; i++) {
         (function(i) {
             app.responders[i] = new Responder(startY + yInc*10);
-            app.beats[i] = app.player.dancer.createBeat({
+            app.beats[i] = app.player.dancer.createKick({
                 frequency : [freqLow, freqHigh],
                 threshold : 0.08,
-                onBeat : function() {
+                onKick : function() {
                     //start increasing the scale transform on the Responder object for this beat frequency
                     app.responders[i].doScale = true;
                 },
-                offBeat : function() {
+                offKick : function() {
                     //stop increasing scale, allow damping to take effect
                     app.responders[i].doScale = false;
                 }
             });
             app.beats[i].on();
         }(i));
-        
+
         freqLow += 3;
         freqHigh += 3;
         yInc += 1;
@@ -101,21 +101,21 @@ Slinky.prototype.createMidResponders = function() {
     for(var i = 15; i < 30; i++) {
         (function(i) {
             app.responders[i] = new Responder(startY + yInc*10);
-            app.beats[i] = app.player.dancer.createBeat({
+            app.beats[i] = app.player.dancer.createKick({
                 frequency : [freqLow, freqHigh],
                 threshold : 0.015,
-                onBeat : function() {
+                onKick : function() {
                     //start increasing the scale transform on the Responder object for this beat frequency
                     app.responders[i].doScale = true;
                 },
-                offBeat : function() {
+                offKick : function() {
                     //stop increasing scale, allow damping to take effect
                     app.responders[i].doScale = false;
                 }
             });
             app.beats[i].on();
         }(i));
-        
+
         freqLow += 5;
         freqHigh += 5;
         yInc += 1;
@@ -132,21 +132,21 @@ Slinky.prototype.createHighResponders = function() {
     for(var i = 30; i < 45; i++) {
         (function(i) {
             app.responders[i] = new Responder(startY + yInc*10);
-            app.beats[i] = app.player.dancer.createBeat({
+            app.beats[i] = app.player.dancer.createKick({
                 frequency : [freqLow, freqHigh],
                 threshold : 0.009,
-                onBeat : function() {
+                onKick : function() {
                     //start increasing the scale transform on the Responder object for this beat frequency
                     app.responders[i].doScale = true;
                 },
-                offBeat : function() {
+                offKick : function() {
                     //stop increasing scale, allow damping to take effect
                     app.responders[i].doScale = false;
                 }
             });
             app.beats[i].on();
         }(i));
-        
+
         freqLow += 3;
         freqHigh += 3;
         yInc += 1;
@@ -160,7 +160,7 @@ Slinky.prototype.removeRenderer = function() {
 //fire it up
 window.onload = function() {
     window.app = new Slinky();
-    window.app.player.UI.toggleHeader();
+    // window.app.player.UI.toggleHeader();
 };
 
 /*
