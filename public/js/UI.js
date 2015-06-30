@@ -9,6 +9,7 @@ var UI = function(player, track, app) {
     this._this = this;
 
     this.attachEvents(this._this, this.player);
+    this.toggleHeader();
 };
 
 UI.prototype.attachEvents = function(UI, player) {
