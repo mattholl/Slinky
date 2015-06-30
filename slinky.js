@@ -21,17 +21,17 @@ router.use('/proxy', function(req, res, next) {
 
     var scURL = url.parse(query);
 
-    var requestOptions = {
+    var scReq = {
         host : scURL.host, //'api.soundcloud.com'
         port : 80,
         path : scURL.pathname + '.json?client_id=' + CLIENT_ID //'/tracks/49593184/stream?client_id86961c923d1a04425a46ac1a4a19c675'
     };
 
     // Get media url from sc
-    var requestToSC = http.get(requestOptions, function(responseFromSC) {
+    var requestToSC = http.get(scReq, function(scRes) {
 
-        if(responseFromSC.statusCode == 302) {
-            var mediaLocation = responseFromSC.headers.location;
+        if(scRes.statusCode == 302) {
+            var mediaLocation = scRes.headers.location;
 
             // Parse media url and compile options for another request
             var parsedMediaURL = url.parse(mediaLocation);
@@ -121,46 +121,6 @@ app.use(express.static(__dirname + '/public'));
 //         requestToSC.on('error', function(error) {
 //             responseToClient.writeHead(404);
 //             responseToClient.end();
-//         });
-//     } else {
-//         //send the static files
-//         requestToNode.addListener('end', function() {
-
-//             var uri = 'public' + url.parse(requestToNode.url).pathname, //= parsed.pathname
-//                 filename = path.join(process.cwd(), uri); //= full filesystem path
-//             console.log(uri);
-//             path.exists(filename, function(exists) {
-
-//                 if(!exists) {
-//                     responseToClient.writeHead(404, {"Content-Type": "text/plain"});
-//                     responseToClient.write(filename + "\n");
-//                     responseToClient.write("404 Not Found\n");
-//                     responseToClient.end();
-//                     return;
-//                 }
-
-//                 if (fs.statSync(filename).isDirectory()) {
-//                     filename += 'index.html';
-//                 }
-
-//                 fs.readFile(filename, "binary", function(error, file) {
-//                     if(error) {
-//                         responseToClient.writeHead(500, {"Content-Type": "text/plain"});
-//                         responseToClient.write(error + "\n");
-//                         responseToClient.end();
-//                         return;
-//                     }
-
-//                     var type = mime.lookup(filename);
-
-//                     responseToClient.writeHead(200, {
-//                         "Content-Type" : type
-//                     });
-
-//                     responseToClient.write(file, "binary");
-//                     responseToClient.end();
-//                 });
-//             });
 //         });
 //     }
 // });
