@@ -44,6 +44,7 @@ router.use('/proxy', function(req, res, next) {
 
             // Do the media request and pipe back to the client
             var requestForMedia = http.get(scMedia, function(responseFromMedia) {
+                // console.log(responseFromMedia);
                 responseFromMedia.pipe(res);
             });
 
